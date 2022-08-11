@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Linq;
-using DAL;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UI.Models;
@@ -8,7 +6,7 @@ using UI.Models;
 namespace UI.Areas.Public.Controllers
 {
 	[Area("Public")]
-	public class HomeController : Controller
+	public class HomeController : BaseController
 	{
 		private readonly ILogger<HomeController> _logger;
 
@@ -19,11 +17,6 @@ namespace UI.Areas.Public.Controllers
 
 		public IActionResult Index()
 		{
-			using (var dbContext = new ApplicationDbContext())
-			{
-				var user = dbContext.Users.Where(item => item.Id == "1");
-
-			}
 			return View();
 		}
 
