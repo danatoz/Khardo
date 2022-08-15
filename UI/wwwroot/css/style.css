@@ -11688,7 +11688,7 @@
  }
 
  .choice-city-link span::before {
-     content: url("~/images/arrow-down.png");
+     content: url("../images/arrow-down.png");
      position: absolute;
      right: 0;
      top: 0
@@ -11696,7 +11696,7 @@
 
     .choice-city-link::before {
         position: absolute;
-        content: url("~/images/location.png");
+        content: url("../images/location.png");
         left: 0;
         top: 0
     }
@@ -12022,7 +12022,7 @@
  }
 
     .nav-item-dropdown::before {
-        content: url("~/images/arrow-down.png");
+        content: url("../images/arrow-down.png");
         position: absolute;
         right: 0;
         top: 15px;
@@ -12400,7 +12400,7 @@
 
     .tpl23-reccomendation-slider .tpl23-btn-cart::before {
         position: absolute;
-        content: url("~/images/cart-orange.png");
+        content: url("../images/cart-orange.png");
         right: 20px;
         bottom: 42px
     }
@@ -13268,7 +13268,7 @@
 
     .b-btn-search::after {
         position: absolute;
-        content: url("~/images/search.png");
+        content: url("../images/search.png");
         right: 20px;
         top: 65%;
         -webkit-transform: translateY(-50%);
@@ -13450,7 +13450,7 @@
     height: 13px;
     top: 31px;
     right: 22px;
-    background-image: url("~/images/close.png");
+    background-image: url("../images/close.png");
     background-size: cover
 }
 
@@ -13460,7 +13460,7 @@
     height: 13px;
     top: 31px;
     right: 22px;
-    background-image: url("~/images/close.png");
+    background-image: url("../images/close.png");
     background-size: cover
 }
 
@@ -13700,7 +13700,7 @@
 
         .tpl23-catalog-title.has-child::before {
             position: absolute;
-            content: url("~/images/arrow-down.png");
+            content: url("../images/arrow-down.png");
             right: 0;
             top: 0;
             -webkit-transform: rotate(0);

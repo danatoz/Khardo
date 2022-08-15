@@ -1,4 +1,7 @@
 ﻿
+@{
+	var catalogs = new List<Catalog>();
+}
 
 <header class="tpl23-header tpl23-header-mobile">
 	<div class="tpl23-container">
@@ -6,13 +9,13 @@
 			<div class="tpl23-header-mobile-wrapper">
 				<div class="tpl23-header-mobile-menu">
 					<div class="tpl23-header-mobile-menu-icon">
-						<img src="images/menu.png">
+						<img src="~/images/menu.png" alt="" />
 					</div>
 				</div>
-				<a href class="tpl23-logo">
+				<a asp-action="Index" asp-area="Public" asp-controller="Home" class="tpl23-logo">
 
-					<img data-src="/system/site_template_files/system-template-23/logo.png?1659111115"
-						 alt class="img-fluid ps-sub-lazy">
+					<img src="~/images/logo.png"
+						 alt="" class="img-fluid ps-sub-lazy">
 
 				</a>
 
@@ -21,13 +24,13 @@
 				<div class="tpl23-header-mobile-menu
               tpl23-header-mobile-menu-sticky">
 					<div class="tpl23-header-mobile-menu-icon">
-						<img src="images/menu.png">
+						<img src="~/images/menu.png">
 					</div>
 				</div>
 				<div class="tpl23-search">
 					<div class="b-col-search">
 						<div class="b-ths-search tpl23-b-search" id>
-							<form action="https://system-template-23.demo.parts-soft.ru/price_items/search"
+							<form action="#price_items/search"
 								  class="b-ths-search-ins">
 								<div class="b-ths-search-wrap">
 									<input type="text" class="b-input-search" name id
@@ -52,14 +55,13 @@
 
 			<div class="tpl23-header-top">
 
-				<a href="/contacts" data-objectid="1" class="choice-city-link">
+				<a asp-action="Index" asp-area="Public" asp-controller="Contacts" data-objectid="1" class="choice-city-link">
 					г. Саратов
 				</a>
 
 				<div class="tpl23-callback">
 					<a class="tpl23-callback-phone" href="tel:+7 (8452) 00-00-00">
-						+7
-						(495) 128-95-60
+						+7 (8452) 00-00-00
 					</a>
 
 				</div>
@@ -149,17 +151,16 @@
 
 			<div class="tpl23-header-bottom">
 
-				<a href class="tpl23-logo">
+				<a asp-action="Index" asp-area="Public" asp-controller="Home" class="tpl23-logo">
 
 					<img src="~/images/logo.png"
-						 alt class="img-fluid ps-sub-lazy">
+						 alt="" class="img-fluid ps-sub-lazy">
 
 				</a>
 
 				<div class="tpl23-callback tpl23-callback-mobile">
 					<a class="tpl23-callback-phone" href="tel:+7 (8452) 00-00-00">
-						+7
-						(495) 128-95-60
+						+7 (8452) 00-00-00
 					</a>
 
 				</div>
@@ -170,7 +171,7 @@
 					<div class="tpl23-search">
 						<div class="b-col-search">
 							<div class="b-ths-search tpl23-b-search" id>
-								<form action="https://system-template-23.demo.parts-soft.ru/price_items/search"
+								<form action="#price_items/search"
 									  class="b-ths-search-ins">
 									<div class="b-ths-search-wrap">
 										<input type="text" class="b-input-search" name id
@@ -195,7 +196,7 @@
 
 					<a class="tpl23-user-block-item tpl23-user-block-cart ajax-bask"
 					   href="/baskets">
-						<img src="images/cart.png" alt="Корзина" class="ps-sub-lazy">
+						<img src="~/images/cart.png" alt="Корзина" class="ps-sub-lazy">
 						<span>Корзина</span>
 						<p><vc:basket-amount /></p>
 					</a>
@@ -203,9 +204,9 @@
 
 				</div>
 				<link rel="stylesheet" media="screen, projection"
-					  href="~/css/application_system-e31910dfb55f99fcbe5f33f1dad6002f36412846473116628b7e8f97b2e92e8a.css"
+					  href="~/css/application_system.min.css"
 					  async="async">
-				<script src="~/js/script.js"></script>
+				@*<script src="~/js/script.js"></script>*@
 			</div>
 		</div>
 
@@ -237,7 +238,7 @@
 				<a href="/il_catalogs" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/1_original.png" alt="Оригинальные">
+						<img src="~/images/1_original.png" alt="Оригинальные">
 					</div>
 
 					<p>Оригинальные</p>
@@ -246,7 +247,7 @@
 				<a href="/car_base.html" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/2_original.png" alt="Каталог TecDoc">
+						<img src="~/images/2_original.png" alt="Каталог TecDoc">
 					</div>
 
 					<p>Каталог TecDoc</p>
@@ -255,7 +256,7 @@
 				<a href="/catalog/to.html" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/3_original.png" alt="Каталог ТО">
+						<img src="~/images/3_original.png" alt="Каталог ТО">
 					</div>
 
 					<p>Каталог ТО</p>
@@ -265,7 +266,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/4_original.png" alt="Кузовные запчасти">
+						<img src="~/images/4_original.png" alt="Кузовные запчасти">
 					</div>
 
 					<p>Кузовные запчасти</p>
@@ -273,7 +274,7 @@
 
 				<a href="/catalogs/lampnew.html" class="tpl23-catalog-menu-item">
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/5_original.png" alt="Лампы">
+						<img src="~/images/5_original.png" alt="Лампы">
 					</div>
 
 					<p>Лампы</p>
@@ -283,7 +284,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/6_original.png" alt="Щетки стеклоочистителя">
+						<img src="~/images/6_original.png" alt="Щетки стеклоочистителя">
 					</div>
 
 					<p>Щетки стеклоочистителя</p>
@@ -300,7 +301,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/7_original.png" alt="Моторное масло">
+						<img src="~/images/7_original.png" alt="Моторное масло">
 					</div>
 
 					<p>Моторное масло</p>
@@ -310,7 +311,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/8_original.png" alt="Трансмиссионные масла и
+						<img src="~/images/8_original.png" alt="Трансмиссионные масла и
                   ГУР">
 					</div>
 
@@ -321,7 +322,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/9_original.png" alt="Жидкости тормозные">
+						<img src="~/images/9_original.png" alt="Жидкости тормозные">
 					</div>
 
 					<p>Жидкости тормозные</p>
@@ -331,7 +332,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/10_original.png" alt="Антифриз">
+						<img src="~/images/10_original.png" alt="Антифриз">
 					</div>
 
 					<p>Антифриз</p>
@@ -341,7 +342,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/11_original.png" alt="Жидкости омывателя">
+						<img src="~/images/11_original.png" alt="Жидкости омывателя">
 					</div>
 
 					<p>Жидкости омывателя</p>
@@ -358,7 +359,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/12_original.png" alt="Смазки">
+						<img src="~/images/12_original.png" alt="Смазки">
 					</div>
 
 					<p>Смазки</p>
@@ -368,7 +369,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/13_original.png" alt="Присадки">
+						<img src="~/images/13_original.png" alt="Присадки">
 					</div>
 
 					<p>Присадки</p>
@@ -376,7 +377,7 @@
 
 				<a href="/catalogs/germetiki.html" class="tpl23-catalog-menu-item">
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/14_original.png" alt="Герметики">
+						<img src="~/images/14_original.png" alt="Герметики">
 					</div>
 
 					<p>Герметики</p>
@@ -386,7 +387,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/15_original.png" alt="Клеи">
+						<img src="~/images/15_original.png" alt="Клеи">
 					</div>
 
 					<p>Клеи</p>
@@ -395,7 +396,7 @@
 				<a href="/catalogs/smell.html" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/16_original.png" alt="Ароматизаторы">
+						<img src="~/images/16_original.png" alt="Ароматизаторы">
 					</div>
 
 					<p>Ароматизаторы</p>
@@ -411,7 +412,7 @@
 				<a href="/catalogs/shiny.html" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/17_original.png" alt="Шины">
+						<img src="~/images/17_original.png" alt="Шины">
 					</div>
 
 					<p>Шины</p>
@@ -420,7 +421,7 @@
 				<a href="/catalogs/diski.html" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/18_original.png" alt="Диски">
+						<img src="~/images/18_original.png" alt="Диски">
 					</div>
 
 					<p>Диски</p>
@@ -435,7 +436,7 @@
 
 			<a href="/catalogs/kovriki.html" class="tpl23-catalog-menu-item">
 				<div class="tpl23-catalog-menu-icon">
-					<img src="images/19_original.png" alt="Коврики">
+					<img src="~/images/19_original.png" alt="Коврики">
 				</div>
 
 				<p>Коврики</p>
@@ -445,7 +446,7 @@
 			   class="tpl23-catalog-menu-item">
 
 				<div class="tpl23-catalog-menu-icon">
-					<img src="images/20_original.png" alt="Аккумуляторные батареи">
+					<img src="~/images/20_original.png" alt="Аккумуляторные батареи">
 				</div>
 
 				<p>Аккумуляторные батареи</p>
@@ -455,7 +456,7 @@
 			   class="tpl23-catalog-menu-item">
 
 				<div class="tpl23-catalog-menu-icon">
-					<img src="images/21_original.png" alt="Защита картера и КПП">
+					<img src="~/images/21_original.png" alt="Защита картера и КПП">
 				</div>
 
 				<p>Защита картера и КПП</p>
@@ -463,7 +464,7 @@
 
 			<a href="/catalogs/chekhly.html" class="tpl23-catalog-menu-item">
 				<div class="tpl23-catalog-menu-icon">
-					<img src="images/22_original.png" alt="Чехлы автомобильные">
+					<img src="~/images/22_original.png" alt="Чехлы автомобильные">
 				</div>
 
 				<p>Чехлы автомобильные</p>
@@ -471,7 +472,7 @@
 
 			<a href="/catalogs/farkop.html" class="tpl23-catalog-menu-item">
 				<div class="tpl23-catalog-menu-icon">
-					<img src="images/23_original.png" alt="Фаркопы">
+					<img src="~/images/23_original.png" alt="Фаркопы">
 				</div>
 
 				<p>Фаркопы</p>
@@ -479,7 +480,7 @@
 
 			<a href="/catalogs/lampnew.html" class="tpl23-catalog-menu-item">
 				<div class="tpl23-catalog-menu-icon">
-					<img src="images/24_original.png" alt="Системы выпуска">
+					<img src="~/images/24_original.png" alt="Системы выпуска">
 				</div>
 
 				<p>Системы выпуска</p>
@@ -495,7 +496,7 @@
 			<div class="tpl23-search">
 				<div class="b-col-search">
 					<div class="b-ths-search tpl23-b-search" id>
-						<form action="https://system-template-23.demo.parts-soft.ru/price_items/search"
+						<form action="#price_items/search"
 							  class="b-ths-search-ins">
 							<div class="b-ths-search-wrap">
 								<input type="text" class="b-input-search" name id
@@ -515,8 +516,19 @@
 
 					<div class="tpl23-catalog-menu" data-tpl23-cat-block="881">
 
+						@foreach (var item in catalogs)
+						{
+							<a href="@item.Url" class="tpl23-catalog-menu-item">
 
-						<a href="/il_catalogs" class="tpl23-catalog-menu-item">
+								<div class="tpl23-catalog-menu-icon">
+									<img src="@item.IconUrl"
+									     class="ps-sub-lazy" alt=">@item.Name">
+								</div>
+
+								<p>@item.Name</p>
+							</a>
+						}
+						@*<a href="/il_catalogs" class="tpl23-catalog-menu-item">
 
 							<div class="tpl23-catalog-menu-icon">
 								<img data-src="/system/menu_item_icons/882/1_original.png?1657622605"
@@ -577,7 +589,7 @@
 							</div>
 
 							<p>Щетки стеклоочистителя</p>
-						</a>
+						</a>*@
 
 
 					</div>
@@ -842,7 +854,7 @@
 				<a href="/il_catalogs" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/1_original.png" alt="Оригинальные">
+						<img src="~/images/1_original.png" alt="Оригинальные">
 					</div>
 
 					<p>Оригинальные</p>
@@ -851,7 +863,7 @@
 				<a href="/car_base.html" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/2_original.png" alt="Каталог TecDoc">
+						<img src="~/images/2_original.png" alt="Каталог TecDoc">
 					</div>
 
 					<p>Каталог TecDoc</p>
@@ -860,7 +872,7 @@
 				<a href="/catalog/to.html" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/3_original.png" alt="Каталог ТО">
+						<img src="~/images/3_original.png" alt="Каталог ТО">
 					</div>
 
 					<p>Каталог ТО</p>
@@ -870,7 +882,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/4_original.png" alt="Кузовные запчасти">
+						<img src="~/images/4_original.png" alt="Кузовные запчасти">
 					</div>
 
 					<p>Кузовные запчасти</p>
@@ -878,7 +890,7 @@
 
 				<a href="/catalogs/lampnew.html" class="tpl23-catalog-menu-item">
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/5_original.png" alt="Лампы">
+						<img src="~/images/5_original.png" alt="Лампы">
 					</div>
 
 					<p>Лампы</p>
@@ -888,7 +900,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/6_original.png" alt="Щетки стеклоочистителя">
+						<img src="~/images/6_original.png" alt="Щетки стеклоочистителя">
 					</div>
 
 					<p>Щетки стеклоочистителя</p>
@@ -911,7 +923,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/7_original.png" alt="Моторное масло">
+						<img src="~/images/7_original.png" alt="Моторное масло">
 					</div>
 
 					<p>Моторное масло</p>
@@ -921,7 +933,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/8_original.png" alt="Трансмиссионные масла и
+						<img src="~/images/8_original.png" alt="Трансмиссионные масла и
                   ГУР">
 					</div>
 
@@ -932,7 +944,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/9_original.png" alt="Жидкости тормозные">
+						<img src="~/images/9_original.png" alt="Жидкости тормозные">
 					</div>
 
 					<p>Жидкости тормозные</p>
@@ -942,7 +954,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/10_original.png" alt="Антифриз">
+						<img src="~/images/10_original.png" alt="Антифриз">
 					</div>
 
 					<p>Антифриз</p>
@@ -952,7 +964,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/11_original.png" alt="Жидкости омывателя">
+						<img src="~/images/11_original.png" alt="Жидкости омывателя">
 					</div>
 
 					<p>Жидкости омывателя</p>
@@ -975,7 +987,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/12_original.png" alt="Смазки">
+						<img src="~/images/12_original.png" alt="Смазки">
 					</div>
 
 					<p>Смазки</p>
@@ -985,7 +997,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/13_original.png" alt="Присадки">
+						<img src="~/images/13_original.png" alt="Присадки">
 					</div>
 
 					<p>Присадки</p>
@@ -993,7 +1005,7 @@
 
 				<a href="/catalogs/germetiki.html" class="tpl23-catalog-menu-item">
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/14_original.png" alt="Герметики">
+						<img src="~/images/14_original.png" alt="Герметики">
 					</div>
 
 					<p>Герметики</p>
@@ -1003,7 +1015,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/15_original.png" alt="Клеи">
+						<img src="~/images/15_original.png" alt="Клеи">
 					</div>
 
 					<p>Клеи</p>
@@ -1012,7 +1024,7 @@
 				<a href="/catalogs/smell.html" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/16_original.png" alt="Ароматизаторы">
+						<img src="~/images/16_original.png" alt="Ароматизаторы">
 					</div>
 
 					<p>Ароматизаторы</p>
@@ -1034,7 +1046,7 @@
 				<a href="/catalogs/shiny.html" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/17_original.png" alt="Шины">
+						<img src="~/images/17_original.png" alt="Шины">
 					</div>
 
 					<p>Шины</p>
@@ -1043,7 +1055,7 @@
 				<a href="/catalogs/diski.html" class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/18_original.png" alt="Диски">
+						<img src="~/images/18_original.png" alt="Диски">
 					</div>
 
 					<p>Диски</p>
@@ -1060,7 +1072,7 @@
 
 				<a href="/catalogs/kovriki.html" class="tpl23-catalog-menu-item">
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/19_original.png" alt="Коврики">
+						<img src="~/images/19_original.png" alt="Коврики">
 					</div>
 
 					<p>Коврики</p>
@@ -1070,7 +1082,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/20_original.png" alt="Аккумуляторные батареи">
+						<img src="~/images/20_original.png" alt="Аккумуляторные батареи">
 					</div>
 
 					<p>Аккумуляторные батареи</p>
@@ -1080,7 +1092,7 @@
 				   class="tpl23-catalog-menu-item">
 
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/21_original.png" alt="Защита картера и КПП">
+						<img src="~/images/21_original.png" alt="Защита картера и КПП">
 					</div>
 
 					<p>Защита картера и КПП</p>
@@ -1088,7 +1100,7 @@
 
 				<a href="/catalogs/chekhly.html" class="tpl23-catalog-menu-item">
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/22_original.png" alt="Чехлы автомобильные">
+						<img src="~/images/22_original.png" alt="Чехлы автомобильные">
 					</div>
 
 					<p>Чехлы автомобильные</p>
@@ -1096,7 +1108,7 @@
 
 				<a href="/catalogs/farkop.html" class="tpl23-catalog-menu-item">
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/23_original.png" alt="Фаркопы">
+						<img src="~/images/23_original.png" alt="Фаркопы">
 					</div>
 
 					<p>Фаркопы</p>
@@ -1104,17 +1116,13 @@
 
 				<a href="/catalogs/lampnew.html" class="tpl23-catalog-menu-item">
 					<div class="tpl23-catalog-menu-icon">
-						<img src="images/24_original.png" alt="Системы выпуска">
+						<img src="~/images/24_original.png" alt="Системы выпуска">
 					</div>
 
 					<p>Системы выпуска</p>
 				</a>
 
-
 			</div>
-
-
 		</div>
 	</div>
-
 </div>
