@@ -1,16 +1,18 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
+using DAL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using UI.Enums;
 using UI.Models;
 
-namespace UI.Areas.Public.Controllers
+namespace UI.Areas.Client.Controllers
 {
-	[Area("Public")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Public))]
-	public class HomeController : BaseController
+	[Area("Client")]
+	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Client))]
+	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
 
@@ -19,7 +21,6 @@ namespace UI.Areas.Public.Controllers
 			_logger = logger;
 		}
 
-		[AllowAnonymous]
 		public IActionResult Index()
 		{
 			return View();
@@ -39,7 +40,7 @@ namespace UI.Areas.Public.Controllers
 		public async Task<IActionResult> Login()
 		{
 
-			return RedirectToAction("Index", "Home", new {Area = "Public"});
+			return RedirectToAction("Index", "Home", new { Area = "Public" });
 		}
 
 		public async Task<IActionResult> Logout()

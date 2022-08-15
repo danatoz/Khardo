@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+using System.Net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +9,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DAL;
+using DAL.DbModels;
+using DAL.Mocks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Logging;
+using UI.Enums;
 
 namespace UI
 {
@@ -18,19 +28,45 @@ namespace UI
 
 		public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddDbContext<ApplicationDbContext>(options =>
-				options.UseSqlServer(
-					Configuration.GetConnectionString("DefaultConnection")));
-			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-				.AddEntityFrameworkStores<ApplicationDbContext>();
-			services.AddControllersWithViews();
+			//services.AddDbContext<ApplicationDbContext>(options =>
+			//	options.UseSqlServer(
+			//		Configuration.GetConnectionString("DefaultConnection")));
+			services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "Default"));
+			services.AddMvc();
+			//services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+			//	.AddEntityFrameworkStores<ApplicationDbContext>();
+			services.AddIdentity<IdentityUser, IdentityRole>(options =>
+			{
+				options.User.RequireUniqueEmail = false;
+			})
+				.AddEntityFrameworkStores<ApplicationDbContext>()
+				.AddDefaultTokenProviders();
+
+			services.AddAuthentication()
+				//.AddCookie(nameof(AuthScheme.Admin),options =>
+				//{
+				//	options.LoginPath = new PathString("/Admin/Login");
+				//	options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
+
+			//})
+			//.AddCookie(nameof(AuthScheme.Client), options =>
+			//{
+			//	options.LoginPath = new PathString("/Client/Login");
+			//	options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
+
+			//})
+			.AddCookie(nameof(AuthScheme.Public), options =>
+			{
+				options.LoginPath = new PathString("/Public/Login");
+				options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
+
+			});
+			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			services.AddRazorPages();
 		}
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
@@ -41,7 +77,6 @@ namespace UI
 			else
 			{
 				app.UseExceptionHandler("/Home/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
 			app.UseHttpsRedirection();
@@ -52,28 +87,40 @@ namespace UI
 			app.UseAuthentication();
 			app.UseAuthorization();
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllerRoute(
-					name: "AdminDefaultRoute",
-					pattern: "Admin/{controller=Home}/{action=Index}/{id?}",
-					new { area = "Admin" });
+			app.UseEndpoints(ConfigureEndPoints);
+		}
 
-				endpoints.MapControllerRoute(
-					name: "AdminErrorRoute",
-					pattern: "Admin/{controller=Error}/{code:int}",
-					defaults: new { area = "Admin", action = "Index" });
+		private void ConfigureEndPoints(IEndpointRouteBuilder endpoints)
+		{
+			endpoints.MapControllerRoute(
+				name: "AdminDefaultRoute",
+				pattern: "Admin/{controller=Home}/{action=Index}/{id?}",
+				new { area = "Admin" });
 
-				endpoints.MapControllerRoute(
-					name: "PublicDefaultRoute",
-					pattern: "{controller=Home}/{action=Index}/{id?}",
-					new { area = "Public" });
+			endpoints.MapControllerRoute(
+				name: "AdminErrorRoute",
+				pattern: "Admin/{controller=Error}/{code:int}",
+				defaults: new { area = "Admin", action = "Index" });
 
-				endpoints.MapControllerRoute(
-					name: "PublicErrorRoute",
-					pattern: "{controller=Error}/{code:int}",
-					defaults: new { area = "Public", action = "Index" });
-			});
+			endpoints.MapControllerRoute(
+				name: "ClientDefaultRoute",
+				pattern: "Client/{controller=Home}/{action=Index}/{id?}",
+				new { area = "Client" });
+
+			endpoints.MapControllerRoute(
+				name: "ClientErrorRoute",
+				pattern: "Client/{controller=Error}/{code:int}",
+				defaults: new { area = "Client", action = "Index" });
+
+			endpoints.MapControllerRoute(
+				name: "PublicDefaultRoute",
+				pattern: "{controller=Home}/{action=Index}/{id?}",
+				new { area = "Public" });
+
+			endpoints.MapControllerRoute(
+				name: "PublicErrorRoute",
+				pattern: "{controller=Error}/{code:int}",
+				defaults: new { area = "Public", action = "Index" });
 		}
 	}
 }

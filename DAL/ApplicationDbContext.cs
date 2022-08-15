@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using DAL.DbModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using DAL.Mocks;
 
 namespace DAL
 {
@@ -7,15 +9,25 @@ namespace DAL
 	{
 		public ApplicationDbContext()
 		{
+			//Database.EnsureDeleted();
+			//Database.EnsureCreated();
 		}
 
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options)
 		{
-			options = new DbContextOptionsBuilder<ApplicationDbContext>()
-				.UseInMemoryDatabase(databaseName: "Test")
-				.Options;
 		}
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			base.OnConfiguring(optionsBuilder);
+		}
+
+		public DbSet<User> Users { get; set; }
+		public DbSet<Catalog> Catalogs{ get; set; }
+		public DbSet<Part> Parts { get; set; }
+		public DbSet<City> Cities { get; set; }
+
 
 	}
 }

@@ -8,19 +8,30 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DAL.Mocks
 {
-    public class Mocks
+    public static class Mocks
     {
-	    public List<User> Users { get; set; }
-	    public Task Initialize()
+	    //public static List<User> Users = new List<User>();
+
+	    public static void AddTestData(ApplicationDbContext context)
 	    {
-			Users.Add(new User()
-			{
-				Id = "1",
-				Email = "admin@admin.ru",
-				EmailConfirmed = true,
-				//PasswordHash = 
-			});
-			return new Task(() => {});
+		    var testUser1 = new User
+		    {
+			    Email = "admin@admin.ru",
+			    EmailConfirmed = true,
+				UserName = "admin",
+			    PasswordHash = "123"
+			};
+		    var testRole1 = new IdentityRole("admin");
+		    //context.Roles.Add(testRole1);
+		    context.Users.Add(testUser1);
+
+		    context.SaveChanges();
+
+		   // var admin = context.Users.FirstOrDefault(item => item.UserName == "admin");
+		    //var role = context.Roles.FirstOrDefault();
+		   // context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = role.Id, UserId = admin.Id });
+
+		    //context.SaveChanges();
 	    }
-    }
+	}
 }

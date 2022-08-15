@@ -2,25 +2,28 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Public" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Public" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Public" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Public" asp-page="/Account/Login">Login</a>
-    </li>
-}
-</ul>
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="text-center">
+					<form class="form-signin" asp-antiforgery="true">
+						<img class="mb-4" src="~/images/logo.png" alt="" height="72">
+						<h1 class="h3 mb-3 font-weight-normal">Авторизация</h1>
+						<label for="inputEmail" class="sr-only">Email</label>
+						<input type="email" id="inputEmail" class="form-control" placeholder="Электронная почта" required autofocus>
+						<label for="inputPassword" class="sr-only">Пароль</label>
+						<input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
+						<div class="checkbox mb-3">
+							<label>
+								<input type="checkbox" value="remember-me"> Запомнить меня
+							</label>
+						</div>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -57,7 +57,7 @@
 				</a>
 
 				<div class="tpl23-callback">
-					<a class="tpl23-callback-phone" href="tel:+7 (495) 128-95-60">
+					<a class="tpl23-callback-phone" href="tel:+7 (8452) 00-00-00">
 						+7
 						(495) 128-95-60
 					</a>
@@ -75,21 +75,21 @@
 							<ul class="dropdown-menu">
 
 								<li>
-									<a href="/about" target="_self" style
+									<a asp-area="Public" asp-controller="About" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										Пользователям
 									</a>
 								</li>
 
 								<li>
-									<a href="/about" target="_self" style
+									<a asp-area="Public" asp-controller="About" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										О компании
 									</a>
 								</li>
 
 								<li>
-									<a href="/contacts" target="_self" style
+									<a asp-area="Public" asp-controller="Contacts" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										Контакты
 									</a>
@@ -105,7 +105,7 @@
 							<ul class="dropdown-menu">
 
 								<li>
-									<a href="/delivery" target="_self" style
+									<a asp-area="Public" asp-controller="Delivery" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										Доставка и оплата
 									</a>
@@ -118,14 +118,14 @@
 								</li>
 
 								<li>
-									<a href="/about" target="_self" style
+									<a asp-area="Public" asp-controller="About" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										О компании
 									</a>
 								</li>
 
 								<li>
-									<a href="/payments" target="_self" style
+									<a asp-area="Public" asp-controller="Payments" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										Оплата
 									</a>
@@ -140,7 +140,7 @@
 						</li>
 
 						<li class="nav-item">
-							<a href="/contacts" class="nav-link" target="_self" style>Контакты</a>
+							<a asp-area="Public" asp-controller="Contacts" asp-action="Index" class="nav-link" target="_self" style>Контакты</a>
 						</li>
 
 					</ul>
@@ -157,7 +157,7 @@
 				</a>
 
 				<div class="tpl23-callback tpl23-callback-mobile">
-					<a class="tpl23-callback-phone" href="tel:+7 (495) 128-95-60">
+					<a class="tpl23-callback-phone" href="tel:+7 (8452) 00-00-00">
 						+7
 						(495) 128-95-60
 					</a>
@@ -187,11 +187,11 @@
 
 				<div class="tpl23-user-block">
 
-					<a class="tpl23-user-block-item" href="/login">
+					<button class="tpl23-user-block-item" data-toggle="modal" data-target="#loginModal">
 						<img src="~/images/login.webp"
 							 alt="Войти" class="ps-sub-lazy">
 						<span>Войти</span>
-					</a>
+					</button>
 
 					<a class="tpl23-user-block-item tpl23-user-block-cart ajax-bask"
 					   href="/baskets">
@@ -206,67 +206,6 @@
 					  href="~/css/application_system-e31910dfb55f99fcbe5f33f1dad6002f36412846473116628b7e8f97b2e92e8a.css"
 					  async="async">
 				<script src="~/js/script.js"></script>
-
-				<script>
-					//window._I18n =
-
-					try {
-						window.v2CurrencyHashTable = JSON.parse("{\"USD\":\"\$\"}")
-					} catch (err) {
-						window.v2CurrencyHashTable = {}
-						console.log(err)
-					}
-					window.toxicWords = []
-					window.searchResultSetting = { "search_result_groups": [{ "name": "top_original_prices", "position": 1, "group_count_of_showing_elemets": 5, "group_custom": false, "filters": [{ "key": "art_type_id", "value": 1, "operator": "==" }, { "key": "selected_item", "value": true, "operator": "==" }], "title": "В наличии запрашиваемый номер", "hide_group_title": false, "comment": null, "group_participates_in_hiding_analogues": false, "group_make_names_list_for_hiding": {}, "group_hide_crosses_of_requested_make_name": false, "group_hide_if_requested_make_name_in_list": {}, "group_for_fulltext_search": false, "exclude_offers_if_no_offers_in_other_price_lists": [], "exclude_offers_mode": null, "group_roll_up_rows": false }, { "name": "top_original_cross_prices", "position": 2, "group_count_of_showing_elemets": 5, "group_custom": false, "filters": [{ "key": "art_type_id", "value": 5, "operator": "==" }, { "key": "selected_item", "value": true, "operator": "==" }], "title": "Оригинальные замены в наличии", "hide_group_title": false, "comment": null, "group_participates_in_hiding_analogues": false, "group_make_names_list_for_hiding": {}, "group_hide_crosses_of_requested_make_name": false, "group_hide_if_requested_make_name_in_list": {}, "group_for_fulltext_search": false, "exclude_offers_if_no_offers_in_other_price_lists": [], "exclude_offers_mode": null, "group_roll_up_rows": false }, { "name": "top_analog_prices", "position": 3, "group_count_of_showing_elemets": 5, "group_custom": false, "filters": [{ "key": "art_type_id", "value": 2, "operator": "==" }, { "key": "selected_item", "value": true, "operator": "==" }], "title": "В наличии аналоги", "hide_group_title": false, "comment": "", "group_participates_in_hiding_analogues": false, "group_make_names_list_for_hiding": { "BPW": true }, "group_hide_crosses_of_requested_make_name": false, "group_hide_if_requested_make_name_in_list": { "JOST": true }, "group_for_fulltext_search": false, "exclude_offers_if_no_offers_in_other_price_lists": [], "exclude_offers_mode": null, "group_roll_up_rows": false }, { "name": "original_prices", "position": 4, "group_count_of_showing_elemets": 5, "group_custom": false, "filters": [{ "key": "art_type_id", "value": 1, "operator": "==" }, { "key": "selected_item", "value": false, "operator": "==" }], "title": "Искомый номер", "hide_group_title": false, "comment": null, "group_participates_in_hiding_analogues": false, "group_make_names_list_for_hiding": {}, "group_hide_crosses_of_requested_make_name": false, "group_hide_if_requested_make_name_in_list": {}, "group_for_fulltext_search": false, "exclude_offers_if_no_offers_in_other_price_lists": [], "exclude_offers_mode": null, "group_roll_up_rows": false }, { "name": "original_cross_prices", "position": 5, "group_count_of_showing_elemets": 5, "group_custom": false, "filters": [{ "key": "art_type_id", "value": 5, "operator": "==" }, { "key": "selected_item", "value": false, "operator": "==" }], "title": "Оригинальные замены", "hide_group_title": false, "comment": null, "group_participates_in_hiding_analogues": false, "group_make_names_list_for_hiding": {}, "group_hide_crosses_of_requested_make_name": false, "group_hide_if_requested_make_name_in_list": {}, "group_for_fulltext_search": false, "exclude_offers_if_no_offers_in_other_price_lists": [], "exclude_offers_mode": null, "group_roll_up_rows": false }, { "name": "cross_prices", "position": 6, "group_count_of_showing_elemets": 5, "group_custom": false, "filters": [{ "key": "art_type_id", "value": 2, "operator": "==" }, { "key": "selected_item", "value": false, "operator": "==" }], "title": "Аналоги", "hide_group_title": false, "comment": "", "group_participates_in_hiding_analogues": false, "group_make_names_list_for_hiding": { "BPW": true }, "group_hide_crosses_of_requested_make_name": false, "group_hide_if_requested_make_name_in_list": { "JOST": true }, "group_for_fulltext_search": false, "exclude_offers_if_no_offers_in_other_price_lists": [], "exclude_offers_mode": null, "group_roll_up_rows": false }, { "name": "fulltext_search", "position": 7, "group_count_of_showing_elemets": 5, "group_custom": false, "filters": [{ "key": "art_type_id", "value": 1, "operator": "==" }], "title": "Результаты поиска по названию", "hide_group_title": false, "comment": null, "group_participates_in_hiding_analogues": false, "group_make_names_list_for_hiding": {}, "group_hide_crosses_of_requested_make_name": false, "group_hide_if_requested_make_name_in_list": {}, "group_for_fulltext_search": true, "exclude_offers_if_no_offers_in_other_price_lists": [], "exclude_offers_mode": null, "group_roll_up_rows": false }], "hidden_brand_list_for_guests": {}, "sort_field_inside_price_groups": "", "sort_field_inside_price_fulltext_group": "" }
-					window.siteConfigOptions = { "dontShowCents": false, "selectFirstBrandAndSwitchToSearch": false };
-
-					window.currencyI18nPath = "number.currency.types.rub";
-					window.rollupRowsHash = {}
-					window.currentRegion = {
-						id: 1,
-						contact: {},
-						paid_delivery: "0",
-						min_sum_order: 0.0
-					}
-					window.basketSum = 0;
-
-					window.v2TemplateVisualSettings = { "v2_search_page_show_goods_image": "1", "v2_search_page_show_brand_image_if_no_goods_image": "0", "v2_search_page_show_characteristic_info": "1", "v2_search_page_show_oem_as_characteristic_info": false, "v2_search_page_show_packing_info": "1", "v2_search_page_show_characteristic_show_more": "1", "v2_search_page_show_advantages_info": "0", "v2_search_page_show_best_price_block": "1", "v2_search_page_turnoff_best_price_block_collapse": "0", "v2_search_page_image_info_block_show_setting": "", "v2_search_page_turnoff_best_price_block_up_text": "Свернуть", "v2_search_page_turnoff_best_price_block_down_text": "Раскрыть", "v2_search_page_show_photos_in_search": "1", "v2_search_page_show_photos_from_price_in_search": "1", "v2_search_page_show_text_block_over_search_table": "1", "v2_search_page_title_text_block_over_search_table": "Информация для покупателей", "v2_search_page_body_text_block_over_search_table": "Просим вас быть бдительными при переводе денежных средств третьим лицам", "v2_search_page_show_text_block_over_search_table_for_guest": "0", "v2_search_page_title_text_block_over_search_table_for_guest": "Информация для покупателей", "v2_search_page_body_text_block_over_search_table_for_guest": "Просим вас быть бдительными при переводе денежных средств третьим лицам.", "v2_search_page_show_text_block_under_search_table": "0", "v2_search_page_title_text_block_under_search_table": "Информация для покупателей", "v2_search_page_body_text_block_under_search_table": "Просим вас быть бдительными при переводе денежных средств третьим лицам", "v2_search_page_show_text_block_under_search_table_for_guest": "0", "v2_search_page_title_text_block_under_search_table_for_guest": "Информация для покупателей", "v2_search_page_body_text_block_under_search_table_for_guest": "Просим вас быть бдительными при переводе денежных средств третьим лицам.", "v2_search_page_show_search_filters": "1", "v2_search_page_show_left_filter": "1", "v2_search_page_disclose_search_filters_mobile": "1", "v2_search_page_price_selection_mode": "", "v2_search_page_alternative_variant_render_search_result": "", "v2_search_page_show_btn_of_popup_to_check_price": "0", "v2_search_page_btn_text_of_popup_to_check_price": "Цена", "v2_search_page_btn_of_popup_to_check_price_name": "Уточнить цену", "v2_search_page_btn_check_price_column_width": "50", "v2_search_page_hide_cost_from_unregistred_users": "0", "v2_search_page_old_price_font_size": "14px", "v2_search_page_old_price_font_color": "#4a4a4a", "v2_search_page_sale_price_font_size": "14px", "v2_search_page_sale_price_font_color": "#4a4a4a", "v2_search_page_show_stock_column": "1", "v2_search_page_show_weight_column": "0", "v2_search_page_show_stock_comment_without_name": "0", "v2_search_page_hide_stock_name": "0", "v2_search_page_show_stat_column": "1", "v2_search_page_show_qnt_column": "1", "v2_search_page_show_delivery_column": "1", "v2_search_page_search_photos_in_google": "1", "v2_search_page_show_goods_info_icon": "1", "v2_search_page_show_only_best_cross_offer": "1", "v2_search_page_grouped_cross_group_count": "4", "v2_search_page_show_n_cross": "0", "v2_search_page_show_only_n_cross_btn": "0", "v2_search_page_without_rows_grouping": "0", "v2_search_page_disable_grouping_detail_names": "0", "v2_search_page_show_search_mode_icons": "1", "v2_search_page_default_search_mode": "with", "v2_search_page_detail_name_column_title": "Деталь", "v2_search_page_stock_column_title": "Склад", "v2_search_page_stat_column_title": "Стат.", "v2_search_page_qnt_column_title": "Кол.", "v2_search_page_delivery_column_title": "Доставка", "v2_search_page_cost_column_title": "Цена", "v2_search_page_wait_result_image": "/images/preloader.gif", "v2_search_page_supplier_info_icon": "/images/supplier_info.png", "v2_search_page_price_return_without_problem_icon": "/images/return-without-problem.svg", "v2_search_page_price_partial_unreturn_icon": "/images/partial-unreturn.svg", "v2_search_page_price_unreturn_icon": "/images/unreturn.svg", "v2_search_page_original_prices_title_fulltext": "Результат поиска по названию", "v2_search_page_original_prices_comment_fulltext": "", "v2_search_page_search_group_comment_color": "#4a4a4a", "v2_search_page_search_group_comment_font_size": "12px", "v2_search_page_delivery_day_show_mode": "", "v2_search_page_delivery_day_formats": "dd MM", "v2_search_page_delivery_day_eq_zero": "На складе", "v2_search_page_delivery_day_eq_one": "24 часа", "v2_search_page_delivery_day_sign_text": "дн.", "v2_search_page_qnt_sign_text": "", "v2_search_page_unknown_qnt_text": "", "v2_search_page_price_sign_text": " р.", "v2_search_page_rrp_title": "РРЦ", "v2_search_page_rrp_under_detail_name": "РРЦ rrp_cost", "v2_search_page_currency_hash": "USD;$", "v2_search_page_unreturn_goods_confirm": "0", "v2_search_page_unreturn_goods_confirm_text": "Товар возврату не подлежит, продолжить?", "v2_search_page_quick_order_off": "0", "v2_search_page_quick_order_add_customer_form": "0", "v2_search_page_search_row_separator_use": "0", "v2_search_page_check_tecdoc_cross": "1", "v2_search_page_search_row_separator_border_color": "#CCC", "v2_search_page_search_hide_brand_lists_for_guest": "", "v2_search_page_sort_field_inside_price_groups": "", "v2_search_page_sort_field_inside_price_groups_fulltext": "", "v2_search_page_detail_name_as_link_to_goods_card_in_fulltext": "0", "v2_search_page_search_page_coloring_enable": "0", "v2_search_page_search_page_coloring_brands": "", "v2_search_page_search_page_coloring_html_content": "", "v2_search_page_search_page_coloring_logo": "", "v2_search_page_search_page_coloring_logo_selector": "", "v2_search_page_one_price_more_items_btn_text": "Показать еще предложения", "v2_search_page_one_price_more_items_btn_background_color": "#4caf50", "v2_search_page_one_price_more_items_btn_hover_color": "#4caf50", "v2_search_page_label_1": "Защищенная покупка", "v2_search_page_label_1_image": "i-nep-shield.svg", "v2_search_page_label_2": "Вернуть товар надлежащего качества можно в течение 7 дней после покупки", "v2_search_page_label_2_image": "i-nep-clock-2.svg", "v2_search_page_label_3": "Собственная служба доставки", "v2_search_page_label_3_image": "i-nep-truck.svg", "v2_search_page_instead_of_advantage_show": "0", "v2_search_page_instead_of_advantage_mode_of_showing": "standart_banner", "v2_search_page_instead_of_advantage_image_url": "i-nep-shield.svg", "v2_search_page_instead_of_advantage_link": "", "v2_search_page_instead_of_advantage_banner_dot_background_color": "#f6f6f6", "v2_search_page_instead_of_advantage_banner_active_dot_background_color": "#084098", "v2_search_page_old_best_price_block_instead_of_advantage_show": "0", "v2_search_page_old_best_price_block_instead_of_advantage_header1": "Фирма", "v2_search_page_old_best_price_block_instead_of_advantage_header2": "Цена", "v2_search_page_old_best_price_block_instead_of_advantage_scrolling_height": "0", "v2_search_page_old_best_price_block_instead_of_advantage_header_font_size": "12px", "v2_search_page_old_best_price_block_instead_of_advantage_header_color": "#818181", "v2_search_page_old_best_price_block_instead_of_advantage_content_background_color": "#eee", "v2_search_page_old_best_price_block_instead_of_advantage_links_color": "#1b75b4", "v2_search_page_old_best_price_block_instead_of_advantage_scroll_background_color": "#fff", "v2_search_page_old_best_price_block_instead_of_advantage_scroll_color": "#a7a7a7", "v2_search_page_html_content_instead_of_advantage_show": "0", "v2_search_page_html_content_instead_of_advantage_content": "", "v2_search_page_recommended_goods_instead_of_advantage": "1", "v2_search_page_check_price_form_title": "УТОЧНИТЬ НАЛИЧИЕ", "v2_search_page_check_price_send_btn_text": "Отправить", "v2_search_page_check_price_success_text": "Заявка для уточнения цены успешно отправлена. Мы свяжемся с вами в ближайшее время.", "v2_search_page_check_price_text_under_detail_name": "Товар есть на складе! Купи сейчас!", "v2_search_page_check_price_comment_text": "Примечание: отправка заявки не обязывает вас покупать данный товар", "v2_search_page_reset_filter_btn_text": "Сбросить", "v2_search_page_reset_filter_btn_text_color": "#fff", "v2_search_page_reset_filter_btn_text_color_hover": "#fff", "v2_search_page_reset_filter_btn_background_color": "#8ab1dc", "v2_search_page_reset_filter_btn_background_color_hover": "#5fa4f1", "v2_search_page_apply_filter_btn_text_color": "#fff", "v2_search_page_apply_filter_btn_text_color_hover": "#fff", "v2_search_page_apply_filter_btn_background_color": "#8ab1dc", "v2_search_page_apply_filter_btn_background_color_hover": "#5fa4f1", "v2_search_page_basket_btn_text": "В корзину", "v2_search_page_basket_btn_text_modal": "В корзину", "v2_search_page_basket_modal_show_goods_image": "1", "v2_search_page_basket_modal_hide_after_basket_create": "0", "v2_search_page_basket_modal_allow_edit_detail_name": "0", "v2_search_page_order_btn_url_inside_basket_modal": "/orders/new", "v2_search_page_basket_btn_text_color": "#fff", "v2_search_page_basket_btn_text_color_hover": "#fff", "v2_search_page_basket_btn_background_color": "#8ab1dc", "v2_search_page_basket_btn_background_color_hover": "#5fa4f1", "v2_search_page_basket_btn_icon": "/images/v2_basket_icon.png", "v2_search_page_quick_order_btn_text": "Быстрый заказ", "v2_search_page_quick_order_ask_email": "0", "v2_search_page_quick_order_unique_email": "0", "v2_search_page_quick_order_unique_phone": "0", "v2_search_page_quick_order_btn_text_color": "#fff", "v2_search_page_quick_order_btn_text_color_hover": "#fff", "v2_search_page_quick_order_btn_background_color": "#b0cf7f", "v2_search_page_quick_order_btn_background_color_hover": "#a5c76f", "v2_search_page_make_quick_order_btn_text": "Оформить заказ", "v2_search_page_make_quick_order_btn_text_color": "#fff", "v2_search_page_make_quick_order_btn_text_color_hover": "#fff", "v2_search_page_make_quick_order_btn_background_color": "#b0cf7f", "v2_search_page_make_quick_order_btn_background_color_hover": "#a5c76f", "v2_search_page_continue_buying_btn_text": "Продолжить покупки", "v2_search_page_continue_buying_btn_text_color": "#fff", "v2_search_page_continue_buying_btn_text_color_hover": "#fff", "v2_search_page_continue_buying_btn_background_color": "#8ab1dc", "v2_search_page_continue_buying_btn_background_color_hover": "#5fa4f1", "v2_search_page_after_order_action": "", "v2_search_page_after_order_create_redirect_url": "", "v2_search_page_show_n_cross_btn_text": "Еще аналоги", "v2_search_page_show_n_cross_btn_text_color": "#fff", "v2_search_page_show_n_cross_btn_background_color": "#47a447", "v2_search_page_show_n_goods_btn_font_size_rev2": "11px", "v2_search_page_show_n_goods_btn_color_rev2": "#a7a7a7", "v2_search_page_show_n_goods_btn_background_color_rev2": "#ffffff", "v2_search_page_show_n_goods_btn_background_color_on_hover_rev2": "#ffffff", "v2_search_page_show_n_goods_btn_symbol_rev2": "'⋁'", "v2_search_page_show_n_goods_btn_symbol_close_rev2": "'⋀'", "v2_search_page_show_n_goods_btn_after_symbol_rev2": "#a7a7a7", "v2_search_page_show_n_goods_btn_after_symbol_on_hover_rev2": "#c54141", "v2_search_page_show_n_goods_btn_symbol_font_size_rev2": "13px", "v2_search_page_show_breakline": "1", "v2_search_page_show_breakline_color": "#e4e4e4", "v2_search_page_best_price_title_color": "#64a073", "v2_search_page_best_price_content_background_color": "#fff", "v2_search_page_best_price_content_border_color": "#e2e0e0", "v2_search_page_best_price_label_color": "#acb1ac", "v2_search_page_best_price_label_background_color": "#efefef", "v2_search_page_best_price_1_title": "САМАЯ НИЗКАЯ ЦЕНА", "v2_search_page_best_price_1_label_text": "Оригинал", "v2_search_page_best_price_2_title": "САМАЯ НИЗКАЯ ЦЕНА", "v2_search_page_best_price_2_label_text": "Аналог", "v2_search_page_best_price_3_title": "НАИМЕНЬШИЙ СРОК ДОСТАВКИ", "v2_search_page_best_price_qnt_sign_text": " шт.", "v2_search_page_brand_selection_go_to_search_only_by_link": "0", "v2_search_page_brand_selection_do_not_show_oem": "0", "v2_search_page_brand_selection_show_goods_picture": "0", "v2_search_page_brand_selection_column_detail_name_title": "Наименование", "v2_search_page_brand_selection_column_make_name_title": "Производитель", "v2_search_page_brand_selection_column_oem_title": "Артикул", "v2_search_page_brand_selection_additional_column_1": "", "v2_search_page_brand_selection_row_separator_show": "1", "v2_search_page_brand_selection_row_separator_color": "#CCC", "v2_search_page_order_items_sort_condition": "updated_at", "v2_search_page_order_payment_type": "1", "v2_search_page_order_apiship_delivery": false, "v2_search_page_baskets_show_client_coefficient": "0", "v2_search_page_baskets_index_show_remove_selected_position_btn": "1", "v2_search_page_baskets_index_background_color_remove_selected_position_btn": "#f0454b", "v2_search_page_baskets_index_font_color_remove_selected_position_btn": "#fff", "v2_search_page_baskets_index_background_color_make_order_btn": "#5e5e5e", "v2_search_page_baskets_index_font_color_make_order_btn": "#fff", "v2_search_page_show_price_items_qnt_in_baskets": "0", "v2_search_page_baskets_index_show_weight_column": "1", "v2_search_page_baskets_index_show_payment_column": false, "v2_search_page_baskets_index_show_recommended_products_source": "with_cost", "v2_search_page_catalogs_run_bulk_price_search": "1", "v2_search_page_catalogs_product_find_btn_url": "", "v2_search_page_redirect_to_fulltext_if_oem_search_blank": "0", "v2_search_page_catalogs_show_buble_switcher": "1", "v2_search_page_catalogs_show_non_buble_switcher": "1", "v2_search_page_catalogs_show_short_list_switcher": "1", "v2_search_page_catalogs_show_category_tree": "0", "v2_search_page_catalogs_do_not_show_category_tree_for_api": "1", "v2_search_page_catalogs_mode_search_cost": "3", "v2_search_page_catalogs_default_sort_field": "cost_asc", "v2_search_page_catalogs_show_more_link": "1", "v2_search_page_catalogs_characteristics_link": false, "v2_search_page_catalogs_buy_btn_background_color": "#ed141f", "v2_search_page_catalogs_buy_btn_background_color_on_hover": "#c62828", "v2_search_page_catalogs_buy_btn_font_color": "#fff", "v2_search_page_catalogs_buy_btn_font_color_on_hover": "#fff", "v2_search_page_catalogs_find_btn_background_color": "#2b74b9", "v2_search_page_catalogs_find_btn_background_color_on_hover": "#125ba0", "v2_search_page_catalogs_find_btn_font_color": "#fff", "v2_search_page_catalogs_find_btn_font_color_on_hover": "#fff", "v2_search_page_catalogs_show_goods_btn_background_color": "#ed141f", "v2_search_page_catalogs_show_goods_btn_background_color_on_hover": "#c62828", "v2_search_page_catalogs_show_goods_btn_font_color": "#fff", "v2_search_page_catalogs_show_goods_btn_font_color_on_hover": "#fff", "v2_search_page_catalogs_reset_btn_background_color": "none", "v2_search_page_catalogs_reset_btn_background_color_on_hover": "none", "v2_search_page_catalogs_reset_btn_font_color": "#c4c4c4", "v2_search_page_catalogs_reset_btn_font_color_on_hover": "#2b2829", "v2_search_page_enable_favorite_function": "1", "v2_search_page_acat_catalog_show_goods_images": "0", "v2_search_page_acat_catalog_goods_image_stub_option": "noimage-v2.jpg", "v2_search_page_acat_catalog_main_page_tab_hover_font_color": "#000000", "v2_search_page_acat_catalog_main_page_active_tab_font_color": "#000000", "v2_search_page_acat_catalog_main_page_mark_card_border_color": "#e7e9ed", "v2_search_page_acat_catalog_main_page_mark_card_border_color_on_hover": "#eaeaea", "v2_search_page_acat_catalog_catalog_tile_border_color": "#e7e9ed", "v2_search_page_acat_catalog_catalog_tile_border_color_on_hover": "#eaeaea", "v2_search_page_acat_catalog_search_btn_background_color": "#93c584", "v2_search_page_acat_catalog_search_btn_background_color_on_hover": "#eaeaea", "v2_search_page_acat_catalog_table_head_background_color": "#eaeaea", "v2_search_page_acat_catalog_table_head_font_color": "#828282", "v2_search_page_acat_catalog_next_image_btn_icon": "acat_online/right-arrow.png", "v2_search_page_acat_catalog_prev_image_btn_icon": "acat_online/left-arrow.png", "v2_search_page_acat_catalog_dropdown_background_color": "#fff", "v2_search_page_acat_catalog_active_dropdown_background_color": "#dff3d7", "v2_search_page_acat_catalog_active_dropdown_background_2_lev_color": "#dff3d7", "v2_search_page_acat_catalog_active_dropdown_background_3_lev_color": "#eefce9", "v2_search_page_acat_catalog_dropdown_link_color": "#007ec5", "v2_search_page_acat_catalog_enable_add_to_basket": "0", "v2_search_page_laximo_redirect_url_when_vin_not_found": "", "v2_search_page_avtocat_catalog_no_image": "missing.png" }
-					window.jsOrderPath = "/customers/short"
-
-					window.systemPageUrls = {}
-					window.systemPageUrls["term"] = "https://system-template-23.demo.parts-soft.ru/polzovatelyam/dogovor-postavki.html"
-					window.systemPageUrls["152FZ"] = "https://system-template-23.demo.parts-soft.ru/polzovatelyam/personalnye-dannye.html"
-
-
-					window.currentRegion.contact.phone = "+7 (495) 128-95-60"
-
-					if ($("input[type=submit][rel='#basket-form-dialog']").length > 0) {
-						$.each($("input[type=submit][rel='#basket-form-dialog']"),
-							function () {
-								$(this).attr('rel', '#basket-form-dialog-v2')
-							})
-					}
-
-					function psInitV2BasketDialogForm() {
-						if ($("input[type=submit][rel='#basket-form-dialog-v2']").length > 0) {
-							$.each($("input[type=submit][rel='#basket-form-dialog-v2']"),
-								function () {
-									$(this).on("click",
-										function (e) {
-											e.preventDefault();
-											item = $(this).data().item;
-											var basket = new BasketV2();
-											basket.checkQntWhenOrdering = false
-											basket.renderCatalogBasketForm(item)
-										})
-								});
-						}
-					};
-
-					$(document).ready(function () {
-						psInitV2BasketDialogForm();
-					});
-				</script>
 			</div>
 		</div>
 

@@ -6,13 +6,13 @@
 			<div class="tpl23-header-mobile-wrapper">
 				<div class="tpl23-header-mobile-menu">
 					<div class="tpl23-header-mobile-menu-icon">
-						<img src="images/menu.png">
+						<img src="images/menu.png" alt="" />
 					</div>
 				</div>
-				<a href class="tpl23-logo">
+				<a asp-area="Public" asp-controller="Home" asp-action="Index" class="tpl23-logo">
 
 					<img data-src="/system/site_template_files/system-template-23/logo.png?1659111115"
-						 alt class="img-fluid ps-sub-lazy">
+						 alt="" class="img-fluid ps-sub-lazy">
 
 				</a>
 
@@ -21,7 +21,7 @@
 				<div class="tpl23-header-mobile-menu
               tpl23-header-mobile-menu-sticky">
 					<div class="tpl23-header-mobile-menu-icon">
-						<img src="images/menu.png">
+						<img src="images/menu.png" alt=""/>
 					</div>
 				</div>
 				<div class="tpl23-search">
@@ -52,12 +52,12 @@
 			<div class="tpl23-header-top">
 
 
-				<a href="/contacts" data-objectid="1" class="choice-city-link">
+				<a asp-area="Public" asp-controller="Contacts" asp-action="Index" data-objectid="1" class="choice-city-link">
 					г. Саратов
 				</a>
 
 				<div class="tpl23-callback">
-					<a class="tpl23-callback-phone" href="tel:+7 (495) 128-95-60">
+					<a class="tpl23-callback-phone" href="tel:+7 (8452) 00-00-00">
 						+7
 						(495) 128-95-60
 					</a>
@@ -76,21 +76,21 @@
 							<ul class="dropdown-menu">
 
 								<li>
-									<a href="/about" target="_self" style
+									<a asp-area="Public" asp-controller="About" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										Пользователям
 									</a>
 								</li>
 
 								<li>
-									<a href="/about" target="_self" style
+									<a asp-area="Public" asp-controller="About" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										О компании
 									</a>
 								</li>
 
 								<li>
-									<a href="/contacts" target="_self" style
+									<a asp-area="Public" asp-controller="Contacts" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										Контакты
 									</a>
@@ -108,7 +108,7 @@
 							<ul class="dropdown-menu">
 
 								<li>
-									<a href="/delivery" target="_self" style
+									<a asp-area="Public" asp-controller="Delivery" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										Доставка и оплата
 									</a>
@@ -121,14 +121,14 @@
 								</li>
 
 								<li>
-									<a href="/about" target="_self" style
+									<a asp-area="Public" asp-controller="About" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										О компании
 									</a>
 								</li>
 
 								<li>
-									<a href="/payments" target="_self" style
+									<a asp-area="Public" asp-controller="Payments" asp-action="Index" target="_self" style
 									   class="dropdown-item">
 										Оплата
 									</a>
@@ -147,7 +147,7 @@
 
 
 						<li class="nav-item">
-							<a href="/contacts" class="nav-link" target="_self" style>Контакты</a>
+							<a asp-area="Public" asp-controller="Contacts" asp-action="Index" class="nav-link" target="_self" style>Контакты</a>
 						</li>
 
 
@@ -157,23 +157,23 @@
 
 			<div class="tpl23-header-bottom">
 
-				<a href class="tpl23-logo">
+				<a asp-area="Public" asp-controller="Home" asp-action="Index" class="tpl23-logo">
 
 					<img data-src="images/logo.png"
-						 alt class="img-fluid ps-sub-lazy">
+						 alt="" class="img-fluid ps-sub-lazy">
 
 				</a>
 
 				<div class="tpl23-callback tpl23-callback-mobile">
-					<a class="tpl23-callback-phone" href="tel:+7 (495) 128-95-60">
-						+7
-						(495) 128-95-60
+					<a class="tpl23-callback-phone" href="tel:+7 (8452) 00-00-00">
+						+7 (8452) 00-00-00
 					</a>
 
 				</div>
 				<div class="tpl23-catalog-wrapper">
-					<div class="tpl23-btn-catalog tpl23-btn-catalog-desktop
-                tpl23-btn">Каталог</div>
+					<div class="tpl23-btn-catalog tpl23-btn-catalog-desktop tpl23-btn">
+						Каталог
+					</div>
 					<div class="tpl23-search">
 						<div class="b-col-search">
 							<div class="b-ths-search tpl23-b-search" id>
@@ -204,7 +204,7 @@
 					   href="/baskets">
 						<img src="images/cart.png" alt="Корзина" class="ps-sub-lazy">
 						<span>Корзина</span>
-						<p>0</p>
+						<p><vc:basket-amount></vc:basket-amount></p>
 					</a>
 
 
