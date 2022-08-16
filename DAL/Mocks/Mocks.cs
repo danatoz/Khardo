@@ -14,24 +14,31 @@ namespace DAL.Mocks
 
 	    public static void AddTestData(ApplicationDbContext context)
 	    {
-		    var testUser1 = new User
+		    try
 		    {
-			    Email = "admin@admin.ru",
-			    EmailConfirmed = true,
-				UserName = "admin",
-			    PasswordHash = "123"
-			};
-		    var testRole1 = new IdentityRole("admin");
-		    //context.Roles.Add(testRole1);
-		    context.Users.Add(testUser1);
+			    var testUser1 = new User
+			    {
+				    Email = "admin@admin.ru",
+				    EmailConfirmed = true,
+				    UserName = "admin",
+				    PasswordHash = "123"
+			    };
+			    var testRole1 = new IdentityRole("admin");
+			    context.Roles.Add(testRole1);
+			    context.Users.Add(testUser1);
 
-		    context.SaveChanges();
+			    context.SaveChanges();
 
-		   // var admin = context.Users.FirstOrDefault(item => item.UserName == "admin");
-		    //var role = context.Roles.FirstOrDefault();
-		   // context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = role.Id, UserId = admin.Id });
+			    var admin = context.Users.FirstOrDefault(item => item.UserName == testUser1.UserName);
+			    var role = context.Roles.FirstOrDefault();
+			    context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = role.Id, UserId = admin.Id });
+			    context.SaveChanges();
+			}
+			catch (Exception ex)
+		    {
+			    Console.WriteLine(ex);
+		    }
 
-		    //context.SaveChanges();
 	    }
 	}
 }

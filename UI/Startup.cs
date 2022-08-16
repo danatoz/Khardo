@@ -30,39 +30,38 @@ namespace UI
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			//services.AddDbContext<ApplicationDbContext>(options =>
-			//	options.UseSqlServer(
-			//		Configuration.GetConnectionString("DefaultConnection")));
 			services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "Default"));
 			services.AddMvc();
 			//services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
 			//	.AddEntityFrameworkStores<ApplicationDbContext>();
-			services.AddIdentity<IdentityUser, IdentityRole>(options =>
+			services.AddIdentity<User, IdentityRole>(options =>
 			{
 				options.User.RequireUniqueEmail = false;
 			})
 				.AddEntityFrameworkStores<ApplicationDbContext>()
+				.AddDefaultUI()
 				.AddDefaultTokenProviders();
 
 			services.AddAuthentication()
-				//.AddCookie(nameof(AuthScheme.Admin),options =>
-				//{
-				//	options.LoginPath = new PathString("/Admin/Login");
-				//	options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
+				.AddCookie(nameof(AuthScheme.Admin), options =>
+				 {
+					 options.LoginPath = new PathString("/Admin/Login");
+					 options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
 
-			//})
-			//.AddCookie(nameof(AuthScheme.Client), options =>
-			//{
-			//	options.LoginPath = new PathString("/Client/Login");
-			//	options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
+				 })
+				.AddCookie(nameof(AuthScheme.Client), options =>
+				{
+					options.LoginPath = new PathString("/Client/Login");
+					options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
 
-			//})
-			.AddCookie(nameof(AuthScheme.Public), options =>
-			{
-				options.LoginPath = new PathString("/Public/Login");
-				options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
+				})
+				.AddCookie(nameof(AuthScheme.Public), options =>
+				{
+					options.LoginPath = new PathString("/Public/Login");
+					options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
 
-			});
+				});
+
 			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			services.AddRazorPages();
 		}

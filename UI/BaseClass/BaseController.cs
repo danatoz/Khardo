@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace UI.Areas.Public.Controllers
+namespace UI
 {
 	public class BaseController : Controller
 	{

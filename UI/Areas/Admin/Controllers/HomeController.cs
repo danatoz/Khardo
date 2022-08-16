@@ -19,16 +19,16 @@ namespace UI.Areas.Admin.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private ApplicationDbContext _context;
-		private readonly UserManager<IdentityUser> _userManager;
-		private readonly SignInManager<IdentityUser> _signInManager;
-		public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+		private readonly UserManager<User> _userManager;
+		private readonly SignInManager<User> _signInManager;
+		public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<User> userManager, SignInManager<User> signInManager)
 		{
 			_logger = logger;
 			_context = context;
 			_userManager = userManager;
 			_signInManager = signInManager;
 		}
-
+		[AllowAnonymous]
 		public IActionResult Index()
 		{
 			return View();
@@ -44,39 +44,6 @@ namespace UI.Areas.Admin.Controllers
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Login(LoginModel model)
-		{
 
-			if (ModelState.IsValid)
-			{
-				var user = _context.Users.FirstOrDefaultAsync(item => item.UserName == model.Login).Result;
-				var result =
-					await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
-
-				if (result.Succeeded)
-				{
-					if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-					{
-						return Redirect(model.ReturnUrl);
-					}
-					else
-					{
-						return RedirectToAction("Index", "Home");
-					}
-				}
-			}
-
-			ModelState.AddModelError("", "Неправильный логин и (или) пароль");
-
-			return RedirectToAction("Index", "Home", new { Area = "Admin" });
-		}
-
-		public async Task<IActionResult> Logout()
-		{
-
-			return RedirectToAction("Index", "Home", new { Area = "Public" });
-		}
 	}
 }

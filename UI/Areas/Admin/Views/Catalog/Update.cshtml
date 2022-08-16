@@ -1,0 +1,31 @@
+﻿@model CatalogModel
+@{
+
+}
+
+<form asp-area="Admin" asp-controller="Catalogs" asp-action="Update" method="post">
+	<div class="row">
+		<input type="hidden" asp-for="Id" />
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Name"></label>
+				<input type="text" asp-for="Name" class="form-control" autocomplete="off"/>
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Name"></label>
+				<input type="text" asp-for="Name" class="form-control" autocomplete="off"/>
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Name"></label>
+				<input type="text" asp-for="Name" class="form-control" autocomplete="off"/>
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+</form>
