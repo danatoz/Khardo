@@ -13,7 +13,7 @@ namespace DAL.DbModels
 		public string Name { get; set; }
 		public string Url { get; set; }
 		public string IconUrl { get; set; }
-		public int ParentId { get; set; }
+		public int? ParentId { get; set; }
 		[ForeignKey("ParentId")]
 		public Catalog ParentCatalog { get; set; }
 		public List<Part> Parts { get; set; }

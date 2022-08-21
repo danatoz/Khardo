@@ -1,30 +1,5 @@
 ﻿@model LoginModel
 
-@*<ul class="navbar-nav">
-	@if (SignInManager.IsSignedIn(User))
-	{
-		<li class="nav-item">
-			<a class="nav-link text-dark" asp-area="Admin" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-		</li>
-		<li class="nav-item">
-			<form class="form-inline" asp-area="Admin" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-				<button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-			</form>
-		</li>
-	}
-	else
-	{
-		<li class="nav-item">
-			<a class="nav-link text-dark" asp-area="Admin" asp-page="/Account/Register">Register</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link text-dark" asp-area="Admin" asp-page="/Account/Login">Login</a>
-		</li>
-	}
-</ul>*@
-
-
-
 <link rel="stylesheet" href="css/signin.css" asp-append-version="true" type="text/css" />
 
 <div class="text-center">
@@ -32,15 +7,14 @@
 		<img class="mb-4" src="~/images/logo.png" alt="" height="72">
 		<h1 class="h3 mb-3 font-weight-normal">Авторизация</h1>
 		<label for="inputEmail" class="sr-only">Email</label>
-		<input type="email" asp-for="Email" id="inputEmail" class="form-control" placeholder="Электронная почта" required autofocus>
+		<input type="text" asp-for="Login" id="inputEmail" class="form-control" placeholder="Электронная почта" required autofocus>
 		<label for="inputPassword" class="sr-only">Пароль</label>
 		<input type="password" asp-for="Password" id="inputPassword" class="form-control" placeholder="Пароль" required>
 		<div class="checkbox mb-3">
 			<label>
-				<input type="checkbox" asp-for="RememberMe" value="remember-me"> Запомнить меня
+				<input type="checkbox" asp-for="RememberMe"> Запомнить меня
 			</label>
 		</div>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-		<p class="mt-5 mb-3 text-muted">&copy; @DateTime.Now.Year</p>
 	</form>
 </div>

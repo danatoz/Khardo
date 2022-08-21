@@ -28,9 +28,13 @@ namespace UI.Areas.Admin.Controllers
 			_userManager = userManager;
 			_signInManager = signInManager;
 		}
-		[AllowAnonymous]
-		public IActionResult Index()
+		
+		public async Task<IActionResult> Index()
 		{
+			//if (!User.Identity.IsAuthenticated)
+			//{
+			//	return RedirectToAction("Login", "Users", new {Area = "Admin", returnUrl = Url.Action("Index", "Home", new { Area = "Admin" })});
+			//}
 			return View();
 		}
 

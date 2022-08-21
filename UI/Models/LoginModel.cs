@@ -16,7 +16,7 @@ namespace UI.Models
     public class LoginModel
     {
 	    [Required(ErrorMessage = "Не указан Email")]
-	    public string Email { get; set; }
+	    public string Login { get; set; }
 
 	    [Required(ErrorMessage = "Не указан пароль")]
 	    [DataType(DataType.Password)]
@@ -32,7 +32,7 @@ namespace UI.Models
 		    {
 				//var passwordHash = HashPassword()
 			    user = await context.Users.FirstOrDefaultAsync(item =>
-				    item.UserName == model.Email && item.PasswordHash == model.Password);
+				    item.UserName == model.Login && item.PasswordHash == model.Password);
 
 		    }
 		    catch (Exception ex)

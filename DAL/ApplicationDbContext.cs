@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DAL
 {
-	public class ApplicationDbContext : IdentityDbContext<User>
+	public class ApplicationDbContext : IdentityDbContext<User, IdentityRole, string>
 	{
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options)
@@ -19,6 +19,7 @@ namespace DAL
 		{
 			base.OnConfiguring(optionsBuilder);
 			optionsBuilder.UseInMemoryDatabase("Default");
+			//optionsBuilder.UseSqlServer("Server=localhost;Database=Khardo;Trusted_Connection=True;MultipleActiveResultSets=true");
 		}
 
 		protected override void OnModelCreating(ModelBuilder builder)
@@ -53,9 +54,9 @@ namespace DAL
 			{
 				entity.ToTable("UserTokens");
 			});
-        }
+		}
 
-		public DbSet<User> Users { get; set; }
+		public override DbSet<User> Users { get; set; }
 		public DbSet<Catalog> Catalogs { get; set; }
 		public DbSet<Part> Parts { get; set; }
 		public DbSet<City> Cities { get; set; }

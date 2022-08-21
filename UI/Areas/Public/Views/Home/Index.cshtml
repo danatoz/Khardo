@@ -1,8 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Интернет магазин авто запчастей - ";
+	ViewData["Title"] = "Интернет магазин авто запчастей - ";
 }
+<div class="content clearfix">
+	<partial name="Partials/_Carousel" />
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<partial name="Partials/_SearchVin"/>
+
+	<partial name="Partials/_CatalogBox"/>
 </div>
+<partial name="Partials/_PopularCategories" />
+
+<partial name="Partials/_SpecialOffers" />
+
+<partial name="Partials/_NewsAndPromotions" />

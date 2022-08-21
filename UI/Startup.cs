@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -11,11 +12,13 @@ using Microsoft.Extensions.Hosting;
 using DAL;
 using DAL.DbModels;
 using DAL.Mocks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using UI.Enums;
+using UI.Models;
 
 namespace UI
 {
@@ -27,13 +30,12 @@ namespace UI
 		}
 
 		public IConfiguration Configuration { get; }
-
+		private readonly ApplicationDbContext _context;
 		public void ConfigureServices(IServiceCollection services)
 		{
+			//services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Server=localhost;Database=Khardo;Trusted_Connection=True;MultipleActiveResultSets=true"));
 			services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "Default"));
 			services.AddMvc();
-			//services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
-			//	.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddIdentity<User, IdentityRole>(options =>
 			{
 				options.User.RequireUniqueEmail = false;
@@ -42,11 +44,30 @@ namespace UI
 				.AddDefaultUI()
 				.AddDefaultTokenProviders();
 
-			services.AddAuthentication()
+			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 				.AddCookie(nameof(AuthScheme.Admin), options =>
 				 {
-					 options.LoginPath = new PathString("/Admin/Login");
+					 options.LoginPath = new PathString("/Admin/Users/Login");
+					 options.AccessDeniedPath = new PathString("/Admin/Users/Login");
 					 options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
+					 options.Events.OnValidatePrincipal += async context =>
+					 {
+						 if (!context.Principal.Identity.IsAuthenticated)
+						 {
+							 return;
+						 }
+
+						 var user = _context.Users.FirstOrDefaultAsync(item =>
+							 item.UserName == context.Principal.Identity.Name).Result;
+						 if (user == null)
+						 {
+							 context.RejectPrincipal();
+							 await context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+							 return;
+						 }
+						 context.ReplacePrincipal(new ClaimsPrincipal(new CustomUserIdentity(user)));
+
+					 };
 
 				 })
 				.AddCookie(nameof(AuthScheme.Client), options =>
@@ -64,6 +85,7 @@ namespace UI
 
 			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			services.AddRazorPages();
+			services.AddScoped<PasswordHasher<User>>();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

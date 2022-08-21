@@ -22,7 +22,7 @@ namespace UI.Areas.Admin.Controllers
 	public class UsersController : BaseController
     {
 		private readonly ILogger<HomeController> _logger;
-		private ApplicationDbContext _context;
+		private readonly ApplicationDbContext _context;
 		private readonly UserManager<User> _userManager;
 		private readonly SignInManager<User> _signInManager;
 		public UsersController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<User> userManager, SignInManager<User> signInManager)
@@ -33,6 +33,12 @@ namespace UI.Areas.Admin.Controllers
 			_signInManager = signInManager;
 		}
 
+		[AllowAnonymous]
+		public IActionResult Login(string returnUrl)
+		{
+			return View(new LoginModel { ReturnUrl = returnUrl });
+		}
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[AllowAnonymous]
@@ -40,31 +46,34 @@ namespace UI.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var user = await _userManager.FindByEmailAsync(model.Email);
-				var password = await _userManager.CheckPasswordAsync(user, model.Password);
+				var result =
+					await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
 
-				if (password)
+				if (result.Succeeded)
 				{
 					if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
 					{
-						await _signInManager.SignInAsync(user, false, nameof(AuthScheme.Admin));
+						//await _signInManager.SignInAsync(user, false, nameof(AuthScheme.Admin));
+						return RedirectToAction("Index", "Home", new { Area = "Admin" });
+
 						return Redirect(model.ReturnUrl);
 					}
 					else
 					{
-						return RedirectToAction("Index", "Home");
+						return RedirectToAction("Index", "Home", new { Area = "Admin" });
 					}
 				}
 			}
 
 			ModelState.AddModelError("", "Неправильный логин и (или) пароль");
 
-			return RedirectToAction("Index", "Home", new { Area = "Admin" });
+			return RedirectToAction("Login", "Home", new { Area = "Admin" });
 		}
-
+		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Logout()
 		{
-
+			await _signInManager.SignOutAsync();
 			return RedirectToAction("Index", "Home", new { Area = "Public" });
 		}
 	}
