@@ -8,7 +8,8 @@ using Microsoft.Extensions.Logging;
 
 namespace UI.Areas.Public.Controllers
 {
-    public class BasketController : BaseController
+	[Area("Public")]
+	public class BasketController : BaseController
     {
 	    private readonly ILogger<BaseController> _logger;
 
@@ -17,11 +18,11 @@ namespace UI.Areas.Public.Controllers
 		    _logger = logger;
 	    }
 
-	    public async Task<JsonResult> Index()
+	    public async Task<IActionResult> Index()
 	    {
 		    var parts = new List<string>();
 
-		    return Json(new { parts });
+		    return View();
 	    }
     }
 }

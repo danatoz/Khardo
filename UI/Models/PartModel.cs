@@ -11,6 +11,8 @@ namespace UI.Models
     {
 		public int Id { get; set; }
 		public string Name { get; set; }
+		public string Alias { get; set; }
+
 		public string UrlImage { get; set; }
 		public string Description { get; set; }
 		public int Amount { get; set; }
@@ -23,6 +25,7 @@ namespace UI.Models
 			{
 				Id = model.Id,
 				Name = model.Name,
+				Alias = model.Alias,
 				Amount = model.Amount,
 				CatalogId = model.CatalogId,
 				Description = model.Description,

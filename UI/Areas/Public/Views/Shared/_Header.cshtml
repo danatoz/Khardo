@@ -194,8 +194,7 @@
 						<span>Войти</span>
 					</button>
 
-					<a class="tpl23-user-block-item tpl23-user-block-cart ajax-bask"
-					   href="/baskets">
+					<a class="tpl23-user-block-item tpl23-user-block-cart ajax-bask" asp-area="Public" asp-controller="Basket" asp-action="Index">
 						<img src="~/images/cart.png" alt="Корзина" class="ps-sub-lazy">
 						<span>Корзина</span>
 						<p><vc:basket-amount /></p>
@@ -518,7 +517,7 @@
 
 						@foreach (var item in catalogs)
 						{
-							<a href="@item.Url" class="tpl23-catalog-menu-item">
+							<a href="@item.Alias" class="tpl23-catalog-menu-item">
 
 								<div class="tpl23-catalog-menu-icon">
 									<img src="@item.IconUrl"

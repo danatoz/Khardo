@@ -60,6 +60,7 @@ namespace DAL
 		public DbSet<Catalog> Catalogs { get; set; }
 		public DbSet<Part> Parts { get; set; }
 		public DbSet<City> Cities { get; set; }
+		public DbSet<News> News { get; set; }
 
 
 	}

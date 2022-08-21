@@ -6,18 +6,18 @@
 	<title>@ViewData["Title"] - Khardo</title>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="~/css/site.css" />
+	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true"/>
 </head>
 <body>
 	@if (User.Identity.IsAuthenticated)
 	{
 		<partial name="_Header" />
-
 	}
-	<div class="container">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
-	</div>
+
+	<main role="main" class="pb-3">
+		@RenderBody()
+	</main>
+
 
 	<footer class="border-top footer text-muted">
 		<div class="container">

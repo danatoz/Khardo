@@ -11,7 +11,8 @@ namespace UI.Models
     {
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public string Url { get; set; }
+		public string Alias { get; set; }
+
 		public string IconUrl { get; set; }
 		public int ParentId { get; set; }
 		public CatalogModel ParentCatalog { get; set; }
@@ -23,7 +24,7 @@ namespace UI.Models
 			{
 				Id = model.Id,
 				Name = model.Name,
-				Url = model.Url,
+				Alias = model.Alias,
 				IconUrl = model.IconUrl,
 				ParentId = model.ParentId,
 				Parts = PartModel.ConvertListToDal(model.Parts),

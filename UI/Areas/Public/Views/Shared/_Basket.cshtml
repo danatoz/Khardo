@@ -1,0 +1,200 @@
+﻿
+
+<div class="tpl23-container">
+	<script type="text/javascript">
+		var checkedBasketItems = []
+
+		$(document).ready(function () {
+			new BonusBasket();
+			checkDeleteButton();
+			$('#activate_all').on('change', function () {
+				checkedBasketItems = []
+				if (this.checked) {
+					$('.active-price-item').each(function () {
+						$(this).prop('checked', true);
+						getCheckedBasketItems(true, $(this).prop('id'));
+					});
+					$.post("/baskets/change_activations?value=true&all_items=true");
+				}
+				else {
+					$('.active-price-item').each(function () {
+						$(this).prop('checked', false);
+					});
+					$.post("/baskets/change_activations?value=false&all_items=true");
+				}
+				replaceCurrentBasketSum();
+				checkDeleteButton();
+			});
+
+			$('.active-price-item').on('change', function () {
+				getCheckedBasketItems(this.checked, $(this).prop('id'));
+				$.post("/baskets/" + $(this).attr("id") + "/change_activation");
+				checkDeleteButton();
+				replaceCurrentBasketSum();
+			});
+
+			replaceCurrentBasketSum();
+
+			$("#delete_selected").click(function () {
+				if (confirm('Удалить выбранные позиции?')) {
+					$.post('/baskets/destroy_selected_items');
+					location.reload();
+				}
+			});
+			window.commonFunctions.get_price_description_form();
+			onChangeQntTextField();
+			$('[role=make-order-btn]').on('click', function (e) {
+				if (window.basketSum < window.currentRegion.min_sum_order) {
+					e.preventDefault();
+					e.stopPropagation();
+					basketComponent = new BasketV2();
+					basketComponent.renderMinOrderNotify($(e.currentTarget).data('method'));
+				}
+			});
+		});
+
+		function checkDeleteButton() {
+			if ($(".active-price-item[type=checkbox]:checked").length > 0) {
+				$('.delete-selected').show();
+				$('.c-order').show();
+			} else {
+				$('.delete-selected').hide();
+				$('.c-order').hide();
+			}
+		}
+
+		function replaceCurrentBasketSum() {
+			var currentBasketSum = 0;
+			var currentBasketWeight = 0;
+			var currentBasketQnt = 0;
+			$('.active-price-item').each(function () {
+				if (this.checked) {
+					getCheckedBasketItems(this.checked, $(this).prop('id'));
+					qnt = parseInt($(this).data('basket-qnt'));
+					cost = parseFloat($(this).data('basket-cost'));
+					weight = parseFloat($(this).data('basket-weight'));
+					currentBasketSum = currentBasketSum + (qnt * cost);
+					currentBasketWeight = currentBasketWeight + (qnt * weight);
+					currentBasketQnt = currentBasketQnt + qnt
+				}
+			})
+			window.basketSum = currentBasketSum;
+			$('.basket-sum').html("<b>" + Handlebars.helpers.money(currentBasketSum) + " р.</b>")
+			$('.total-basket-count').html(currentBasketQnt)
+			$('.basket-weight').html("<b>" + currentBasketWeight.toFixed(2) + "</b>")
+		}
+
+		function getCheckedBasketItems(checked, id) {
+			//Remind: For now we will use cookies. In cookie with name 'checked_basket_items', we will store id of
+			//        selected basket items
+			id_ = parseInt(id)
+			if (checked) {
+				if (checkedBasketItems.indexOf(id_) == -1) {
+					checkedBasketItems.push(id_);
+				}
+			} else {
+				if (checkedBasketItems.filter(function (e) { e == id_ }).length == 0) {
+					checkedBasketItems = _.without(checkedBasketItems, id_);
+				}
+			}
+			if (checkedBasketItems.length > 0) {
+				$.cookie('checked_basket_items', checkedBasketItems.join(','));
+			} else {
+				$.cookie('checked_basket_items', null);
+			}
+
+		}
+
+		function onChangeQntTextField() {
+			$('table [role=basket-qnt-input]').on('change', function (e) {
+				$el = $(e.currentTarget)
+				elParent = $el.closest('tr')
+				activeRow = elParent.find('.active-price-item')
+				if (activeRow.length > 0) {
+					$.post('/api/v2/baskets/' + $el.data('basket-id') + '/change_qnt', { qnt: $el.val() }, function (response) {
+						if (response.status == 'OK') {
+							elParent.find('.active-price-item').data('basket-qnt', response.basket.qnt)
+							elParent.find('td.price').html('<span>' + (response.basket.qnt * response.basket.cost) + '</span>')
+							replaceCurrentBasketSum();
+						} else {
+							show_notify(response.error.description, 'error', 3000)
+						}
+					})
+				}
+			})
+		}
+	</script>
+
+	<ul class="path" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope="itemscope"><a href="https://system-template-23.demo.parts-soft.ru/" itemprop="item" title="Главная"><span itemprop="name">Главная</span><meta itemprop="position" content="0"></a> / </li><li itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope="itemscope"><span itemprop="name"></span><meta itemprop="position" content="1"></li><li itemprop="itemListElement" itemtype="http://schema.org/ListItem" itemscope="itemscope"><span itemprop="name">Корзина</span><meta itemprop="position" content="2"></li></ul><h1 class="main-title">Корзина</h1>
+
+	<table class="tab-bask c-tab-resp footable footable-1 breakpoint-lg" data-empty="Нет результатов" style="display: table;">
+		<thead>
+			<tr class="footable-header">
+
+				<th data-type="html" style="display: table-cell;">
+					<input type="checkbox" name="activate_all" id="activate_all" value="1">
+				</th>
+				<th class="" data-type="html" style="display: table-cell;">Артикул</th>
+				<th class="text-left" data-breakpoints="xs" data-type="html" style="display: table-cell;">Наименование</th>
+				<th class="" data-breakpoints="xs" data-type="html" style="display: table-cell;">
+
+					Склад
+
+				</th>
+				<th class="" data-breakpoints="xs" data-type="html" style="display: table-cell;"></th>
+				<th class="" data-breakpoints="xs" data-type="html" style="display: table-cell;">
+					Срок
+				</th>
+				<th class="" data-breakpoints="xs" data-type="html" style="display: table-cell;">Цена</th>
+				<th class="" data-type="html" style="display: table-cell;">Кол-во</th>
+				<th class="" data-type="html" data-breakpoints="xs" style="display: table-cell;">
+
+					Вес
+
+				</th>
+				<th class="" data-type="html" style="display: table-cell;">Сумма</th>
+				<th class="" data-type="html" style="display: table-cell;"></th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr class="footable-empty"><td colspan="11">Нет результатов</td></tr>
+		</tbody>
+	</table>
+	<div class="total-summ overflow-initial">
+		Итого
+		<span class="basket-count">
+			<span class="total-basket-count notranslate">0</span>
+
+			позиций
+		</span>
+		на сумму:
+		<span class="basket-sum"><b>0.00 р.</b></span>
+
+		Общий вес:
+		<span class="basket-weight"><b>0.00</b></span>
+
+		<a class="c-order to-right" href="/customers/short" style="display: none;">Оформить</a>
+
+		<span class="b-mob-delete-btn-helper">
+			<a data-method="post" data-confirm="Удалить выбранные позиции?" class="delete-selected" href="/baskets/destroy_selected_items" style="display: none;">
+				Удалить выбранные позиции
+			</a>
+		</span>
+
+
+	</div>
+	<div class="cl"></div>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			param = {
+				'min_sum_order': 0,
+				'diff': 0,
+				'paid_delivery': 0
+			}
+			$('body').append(HandlebarsTemplates['catalogs/v2/min_order_notify_modal'](param))
+		});
+	</script>
+
+</div>

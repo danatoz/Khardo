@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using UI.Enums;
 using UI.Models;
+using UI.Tools;
 
 namespace UI
 {
@@ -30,7 +31,7 @@ namespace UI
 		}
 
 		public IConfiguration Configuration { get; }
-		private readonly ApplicationDbContext _context;
+		private ApplicationDbContext _context;
 		public void ConfigureServices(IServiceCollection services)
 		{
 			//services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Server=localhost;Database=Khardo;Trusted_Connection=True;MultipleActiveResultSets=true"));
@@ -86,6 +87,8 @@ namespace UI
 			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			services.AddRazorPages();
 			services.AddScoped<PasswordHasher<User>>();
+			services.AddTransient<IBreadCrumbDataProvider, BreadCrumbDataProvider>();
+			_context = services.BuildServiceProvider().GetService<ApplicationDbContext>();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

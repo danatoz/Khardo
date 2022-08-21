@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Home\Partials\" />
     <Folder Include="FilterModel\" />
   </ItemGroup>
 
