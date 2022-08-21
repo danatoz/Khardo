@@ -58,7 +58,7 @@ namespace DAL
 
 		public override DbSet<User> Users { get; set; }
 		public DbSet<Catalog> Catalogs { get; set; }
-		public DbSet<Part> Parts { get; set; }
+		public DbSet<Product> Products { get; set; }
 		public DbSet<City> Cities { get; set; }
 		public DbSet<News> News { get; set; }
 

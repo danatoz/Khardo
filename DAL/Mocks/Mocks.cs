@@ -40,7 +40,32 @@ namespace DAL.Mocks
 			    var role = context.Roles.FirstOrDefault();
 			    context.UserRoles.Add(new IdentityUserRole<string>() { RoleId = role.Id, UserId = admin.Id });
 			    context.SaveChanges();
-			}
+
+			    var catalogs = new List<Catalog>()
+			    {
+				    new Catalog() { Id = 1 ,Name = "Шины", Alias = "shini", IconUrl = ""},
+					new Catalog() { Id = 2 ,Name = "Технические жидкости", Alias = "techshidkosti", IconUrl = "" },
+				    new Catalog() { Id = 3 ,Name = "Масла", Alias = "maslo", IconUrl = "", ParentId = 2 },
+				    new Catalog() { Id = 4 ,Name = "Масло моторное", Alias = "maslomotornoe", IconUrl = "", ParentId = 3 },
+				    new Catalog() { Id = 5 ,Name = "Свечи зажигания", Alias = "plug", IconUrl = ""},
+				    new Catalog() { Id = 6 ,Name = "Охлаждающие жидкости", Alias = "ohlashdaushieshidkosti", IconUrl = "", ParentId = 2 },
+				    new Catalog() { Id = 7 ,Name = "Трансмиссионные масла", Alias = "transmissionnoemaslo", IconUrl = "", ParentId = 3 },
+			    };
+
+				context.Catalogs.AddRange(catalogs);
+				context.SaveChanges();
+
+				var products = new List<Product>()
+				{
+					new Product() { Id = 1, Name = "Шина R18/215 65", CatalogId = 1, Amount = 4, Description = "Шина классная, резиновая", UrlImage = "", Alias = ""},
+					new Product() { Id = 2, Name = "Масло моторное 5W40", CatalogId = 4, Amount = 12, Description = "Shell", UrlImage = "", Alias = "" },
+					new Product() { Id = 3, Name = "Масло моторное 5W30", CatalogId = 4, Amount = 4, Description = "Nissan", UrlImage = "", Alias = ""},
+					new Product() { Id = 4, Name = "Свеча зажигания", CatalogId = 5, Amount = 4, Description = "оригенал", UrlImage = "", Alias = ""},
+					new Product() { Id = 5, Name = "Свеча зажигания NGK", CatalogId = 5, Amount = 20, Description = "Гарантия качества", UrlImage = "", Alias = ""},
+				};
+				context.Products.AddRange(products);
+				context.SaveChanges();
+		    }
 			catch (Exception ex)
 		    {
 			    Console.WriteLine(ex);

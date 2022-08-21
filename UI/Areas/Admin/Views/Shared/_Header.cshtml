@@ -1,10 +1,27 @@
-﻿<header>
+﻿@{
+	ViewBag.Typeahead = new Typeahead
+	{
+		ShowSearch = true,
+		EngineUrl = Url.ActionLink("FindDeals", "Deals", new { Area = "Atom" }),
+		ResultUrl = Url.ActionLink("Update", "Deals", new { Area = "Atom" }),
+		DisplayKey = "Title"
+	};
+	var typeahead = ViewBag.Typeahead as Typeahead;
+	var showSearch = (typeahead?.ShowSearch as bool?).GetValueOrDefault();
+
+}
+<header>
 	<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-		
+
 		<a class="navbar-brand col-sm-3 col-md-2 mr-0" asp-area="Admin" asp-controller="Home" asp-action="Index">
-			<img src="~/images/logo.png" alt="Logo" height="50" class="pr-3"/>
+			<img src="~/images/logo.png" alt="Logo" height="40" />
 		</a>
-		<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+
+		@if (showSearch)
+		{
+			<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+		}
+
 		<ul class="navbar-nav px-3">
 			<li class="nav-item text-nowrap">
 				<a class="nav-link" asp-area="Admin" asp-controller="Users" asp-action="Logout">Выход</a>

@@ -17,6 +17,8 @@ namespace DAL.DbModels
 		public int? ParentId { get; set; }
 		[ForeignKey("ParentId")]
 		public Catalog ParentCatalog { get; set; }
-		public List<Part> Parts { get; set; }
+
+		public List<Catalog> Catalogs { get; set; }
+		public List<Product> Products { get; set; }
 	}
 }

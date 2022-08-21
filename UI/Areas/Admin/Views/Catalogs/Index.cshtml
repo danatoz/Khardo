@@ -1,0 +1,9 @@
+﻿@model SearchResultViewModel<CatalogModel>
+@{
+	ViewData["Title"] = "Каталоги";
+}
+
+@foreach (var item in Model.Objects)
+{
+	<p>@item.Name</p>
+}

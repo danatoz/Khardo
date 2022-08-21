@@ -33,7 +33,7 @@ namespace UI.Tools
 
 				if ("Products".Equals(_routeValues["controller"]))
 				{
-					Part part = null;
+					Product part = null;
 					var parts = await new PartsBL().GetSimpleByAliasAsync(alias.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault());
 					if (parts != null)
 					{

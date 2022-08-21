@@ -46,16 +46,12 @@ namespace UI.Models
 
 		public static List<NewsModel> ConvertListFromDal(IEnumerable<News> models)
 		{
-			var result = models.Select(ConvertFromDal).ToList();
-
-			return result;
+			return models.Select(ConvertFromDal).ToList();
 		}
 
 		public static List<News> ConvertListToDal(IEnumerable<NewsModel> models)
 		{
-			var result = models.Select(ConvertToDal).ToList();
-
-			return result;
+			return models.Select(ConvertToDal).ToList();
 		}
 	}
 }

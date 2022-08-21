@@ -21,9 +21,9 @@ namespace BL
 	    {
 		    
 	    }
-	    public async Task<IEnumerable<Part>> GetSimpleByAliasAsync(string alias)
+	    public async Task<IEnumerable<Product>> GetSimpleByAliasAsync(string alias)
 	    {
-		    return await _context.Parts.Where(item => item.Alias == alias && item.Catalog != null).ToListAsync();
+		    return await _context.Products.Where(item => item.Alias == alias && item.Catalog != null).ToListAsync();
 		}
     }
 }
