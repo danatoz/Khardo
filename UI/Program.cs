@@ -1,8 +1,10 @@
+using System;
 using DAL;
 using DAL.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NLog;
 using NLog.Web;
 
 namespace UI
@@ -11,16 +13,28 @@ namespace UI
 	{
 		public static void Main(string[] args)
 		{
+			var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
-			var host = CreateHostBuilder(args).Build();
-
-			using (var scope = host.Services.CreateScope())
+			try
 			{
-				var services = scope.ServiceProvider;
-				var context = services.GetRequiredService<ApplicationDbContext>();
-				Mocks.AddTestData(context);
+				var host = CreateHostBuilder(args).Build();
+
+				using (var scope = host.Services.CreateScope())
+				{
+					var services = scope.ServiceProvider;
+					var context = services.GetRequiredService<ApplicationDbContext>();
+					Mocks.AddTestData(context);
+				}
+				host.Run();
 			}
-			host.Run();
+			catch (Exception ex)
+			{
+				logger.Error(ex, "App run was unsuccessful");
+			}
+			finally
+			{
+				LogManager.Shutdown();
+			}
 		}
 
 		private static IHostBuilder CreateHostBuilder(string[] args) =>

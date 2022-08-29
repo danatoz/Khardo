@@ -33,37 +33,31 @@ namespace UI.Tools
 
 				if ("Products".Equals(_routeValues["controller"]))
 				{
-					Product part = null;
-					var parts = await new PartsBL().GetSimpleByAliasAsync(alias.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault());
-					if (parts != null)
+					Product product = null;
+					var products = await new ProductsBL().GetSimpleByAliasAsync(alias.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault());
+					if (products != null)
 					{
-						foreach (var item in parts)
+						foreach (var item in products)
 						{
 							if (alias == $"{await catalog.GenerateFullUrl(item.CatalogId)}/{item.Alias}")
 							{
-								part = item;
+								product = item;
 								break;
 							}
 						}
 					}
-					//var product = (await new ProductsBL().GetAsync(new Common.Search.ProductsSearchParams
-					//{
-					//	ObjectsCount = 1,
-					//	Alias = aliasParameter.ToString().Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault()
-					//})).Objects.FirstOrDefault();
-
-					if (part != null)
-						categoryList.AddRange(await catalog.GetParentCategories(part.CatalogId));
+					if (product != null)
+						categoryList.AddRange(await catalog.GetParentCatalogs(product.CatalogId));
 				}
 				else
 				{
-					categoryList.AddRange(await catalog.GetParentCategories(aliasParameter.ToString()));
+					categoryList.AddRange(await catalog.GetParentCatalogs(aliasParameter.ToString()));
 				}
 
 				breadCrumbList.Add(new BreadCrumbModel
 				{
 					Name = "Каталог",
-					Url = "uslugi"
+					Url = "catalog"
 				});
 
 				foreach (var item in categoryList)

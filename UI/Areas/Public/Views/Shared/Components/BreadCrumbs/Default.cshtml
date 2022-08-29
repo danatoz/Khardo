@@ -1,0 +1,23 @@
+﻿@model IEnumerable<UI.Areas.Public.Models.BreadCrumbModel>
+@if (Model.Any())
+{
+    <section class="broad">
+        <div class="broad__container container">
+            <div class="broad__block">
+                <a class="broad__block-text broad__block-last" asp-area="Public" asp-action="Index" asp-controller="Home">Главная</a>
+                @foreach (var item in Model)
+                {
+                    if (item.IsActive)
+                    {
+                        <span class="broad__block-text broad__block-active">@item.Name</span>
+                    }
+                    else
+                    {
+                        <a class="broad__block-text broad__block-last" href="@Url.Content($"~/{item.Url}") ">@item.Name</a>
+                    }
+
+                }
+            </div>
+        </div>
+    </section>
+}

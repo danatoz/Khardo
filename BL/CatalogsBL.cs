@@ -20,7 +20,7 @@ namespace BL
 	    public CatalogsBL()
 	    {
 	    }
-	    public async Task<IEnumerable<Catalog>> GetParentCategories(int parentId)
+	    public async Task<IEnumerable<Catalog>> GetParentCatalogs(int parentId)
 	    {
 		    var list = new List<Catalog>();
 		    var catalog = _context.Catalogs;
@@ -42,9 +42,10 @@ namespace BL
 
 		    return list;
 	    }
+
 		public async Task<string> GenerateFullUrl(int categoryId)
 		{
-			var categories = await GetParentCategories(categoryId);
+			var categories = await GetParentCatalogs(categoryId);
 			var builder = new StringBuilder();
 			foreach (var alias in categories.Select(item => item.Alias))
 			{
@@ -57,11 +58,25 @@ namespace BL
 			return builder.ToString();
 		}
 
-		public async Task<IList<Catalog>> GetParentCategories(string aliasPath)
+		public async Task<IList<Catalog>> GetParentCatalogs(string aliasPath)
 		{
 			var list = await _context.Catalogs.Where(item => aliasPath.Contains(item.Alias)).ToListAsync();
 
 			return aliasPath.Split(new string[] {"/"}, StringSplitOptions.RemoveEmptyEntries).Distinct().Select(alias => list.FirstOrDefault(item => item.Alias == alias)).Where(category => category != null).ToList();
+		}
+
+		public async Task<Catalog> GetSimpleByAliasAsync(string alias)
+		{
+			try
+			{
+				return await _context.Catalogs.FirstOrDefaultAsync(item => item.Alias == alias && item.IsPublic);
+			}
+			catch
+			{
+
+			}
+
+			return new Catalog();
 		}
 	}
 }

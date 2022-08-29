@@ -15,7 +15,7 @@ namespace UI.Models
 		public string IconUrl { get; set; }
 		public int? ParentId { get; set; }
 		public CatalogModel ParentCatalog { get; set; }
-		public List<CatalogModel> Catalogs { get; set; }
+		//public List<CatalogModel> Catalogs { get; set; }
 		public List<ProductModel> Products { get; set; }
 
 		public static Catalog ConvertToDal(CatalogModel obj)
@@ -59,5 +59,20 @@ namespace UI.Models
 			return models?.Select(ConvertToDal).ToList();
 
 		}
+
+		public static CatalogModel ConvetForTree(Catalog obj)
+		{
+			return obj == null
+				? null
+				: new CatalogModel()
+				{
+					Id = obj.Id,
+					Name = obj.Name,
+					ParentId = obj.ParentId
+				};
+		}
+
+		public static List<CatalogModel> ConvetForTreeList(List<Catalog> objList) =>
+			objList?.Select(ConvetForTree).ToList();
 	}
 }

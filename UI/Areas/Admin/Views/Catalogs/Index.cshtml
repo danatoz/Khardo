@@ -1,9 +1,19 @@
-﻿@model SearchResultViewModel<CatalogModel>
+﻿@using Hierarchy
+@using DAL.DbModels
+@using UI.TreeModel
+@model SearchResultViewModel<CatalogModel>
 @{
 	ViewData["Title"] = "Каталоги";
+	var catalogue = ViewBag.Tree as List<Node<CatalogModel>> ?? new List<Node<CatalogModel>>();
+}
+@foreach (var item in catalogue)
+{
+	<a href="#">@item.Data.Name</a>
 }
 
-@foreach (var item in Model.Objects)
+
+@*ViewBag.Tree*@
+@section Scripts
 {
-	<p>@item.Name</p>
+
 }

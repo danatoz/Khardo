@@ -11,16 +11,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Public\Views\Shared\Components\BreadCrumbs\Default.cshtml" />
     <None Include="compilerconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hierarchy" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.26" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.26" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.26" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.26" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.26" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.26" />
+    <PackageReference Include="Microsoft.VisualStudio.GraphModel" Version="17.3.32804.24" />
     <PackageReference Include="NLog" Version="5.0.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.1.0" />
   </ItemGroup>
@@ -33,6 +36,8 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Home\Partials\" />
     <Folder Include="FilterModel\" />
+    <Folder Include="wwwroot\images\ManufacturerLogo\" />
+    <Folder Include="wwwroot\images\ProductImage\" />
   </ItemGroup>
 
 </Project>

@@ -10,5 +10,7 @@ namespace DAL.DbModels
     {
 	    public int Id { get; set; }
 	    public string Name { get; set; }
-    }
+	    public string UrlLogo { get; set; }
+
+	}
 }

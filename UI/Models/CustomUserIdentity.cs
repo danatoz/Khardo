@@ -10,7 +10,7 @@ namespace UI.Models
 {
     public class CustomUserIdentity : ClaimsIdentity
     {
-		public string Id { get; set; }
+		public int? Id { get; set; }
 
 		public CustomUserIdentity(User user, string authenticationType = "Cookie") : base(GetUserClaims(user), authenticationType)
 		{
@@ -22,7 +22,7 @@ namespace UI.Models
 
 			var result = new List<Claim>
 			{
-				new Claim(ClaimTypes.Name, user.UserName),
+				new Claim(ClaimTypes.Name, user.Login),
 			};
 
 			return result;

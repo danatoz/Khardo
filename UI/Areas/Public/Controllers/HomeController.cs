@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using UI.Enums;
+using Common.Enums;
 using UI.Models;
 
 namespace UI.Areas.Public.Controllers
@@ -26,6 +26,12 @@ namespace UI.Areas.Public.Controllers
 		}
 
 		public IActionResult Privacy()
+		{
+			return View();
+		}
+
+		[AllowAnonymous]
+		public async Task<IActionResult> Catalog()
 		{
 			return View();
 		}

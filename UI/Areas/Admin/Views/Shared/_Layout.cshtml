@@ -6,7 +6,7 @@
 	<title>@ViewData["Title"] - Khardo</title>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="~/css/site.css" />
-	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true"/>
+	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
 </head>
 <body>
 	@if (User.Identity.IsAuthenticated)
@@ -15,6 +15,10 @@
 	}
 
 	<main role="main" class="pb-3">
+		@if (User.Identity.IsAuthenticated)
+		{
+			<partial name="_MainMenu" />
+		}
 		@RenderBody()
 	</main>
 
@@ -24,11 +28,16 @@
 			&copy; @DateTime.Now.Year - Khardo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 		</div>
 	</footer>
+	<!-- Icons -->
+	<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+	<script>
+		feather.replace()
+	</script>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
-	<script src="lib/vue/vue.runtime.global.min.js" asp-append-version="true"></script>
-	<script src="js/admin/showHideSearchPanel.js" asp-append-version="true"></script>
+	<script src="lib/vue/vue.runtime.global.min.js"></script>
+	<script src="js/admin/showHideSearchPanel.js"></script>
 	@RenderSection("Scripts", required: false)
 </body>
 </html>

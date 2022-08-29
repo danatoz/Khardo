@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using UI.Enums;
+using Common.Enums;
 using UI.Models;
 
 namespace UI.Areas.Admin.Controllers

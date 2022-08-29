@@ -9,15 +9,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BL
 {
-    public class PartsBL
+    public class ProductsBL
     {
 	    private readonly ApplicationDbContext _context;
-	    public PartsBL(ApplicationDbContext context)
+	    public ProductsBL(ApplicationDbContext context)
 	    {
 		    _context = context;
 	    }
 
-	    public PartsBL()
+	    public ProductsBL()
 	    {
 		    
 	    }
@@ -25,5 +25,11 @@ namespace BL
 	    {
 		    return await _context.Products.Where(item => item.Alias == alias && item.Catalog != null).ToListAsync();
 		}
-    }
+
+	    public async Task GetAsync(string alias)
+	    {
+
+	    }
+
+	}
 }

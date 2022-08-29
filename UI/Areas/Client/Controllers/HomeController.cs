@@ -5,7 +5,7 @@ using DAL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using UI.Enums;
+using Common.Enums;
 using UI.Models;
 
 namespace UI.Areas.Client.Controllers

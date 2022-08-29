@@ -1,15 +1,23 @@
 {
   "version": "1.0",
   "defaultProvider": "cdnjs",
-	"libraries": [
-		{
-			"library": "vue@3.2.37",
-			"destination": "wwwroot/lib/vue/",
-			"files": [
-				"vue.global.js",
-				"vue.runtime.global.min.js",
-				"vue.runtime.global.prod.js"
-			]
-		}
-	]
+  "libraries": [
+    {
+      "library": "vue@3.2.37",
+      "destination": "wwwroot/lib/vue/",
+      "files": [
+        "vue.global.js",
+        "vue.runtime.global.min.js",
+        "vue.runtime.global.prod.js"
+      ]
+    },
+    {
+      "library": "d3-hierarchy@1.1.5",
+      "destination": "wwwroot/d3-hierarchy/"
+    },
+    {
+      "library": "jstree@3.3.12",
+      "destination": "wwwroot/lib/jstree/"
+    }
+  ]
 }

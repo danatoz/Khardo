@@ -24,32 +24,5 @@ namespace UI.Models
 
 	    public bool RememberMe { get; set; }
 	    public string ReturnUrl { get; set; }
-
-	    public async Task<User> VerifyUser(LoginModel model, ApplicationDbContext context)
-	    {
-		    var user = new User();
-		    try
-		    {
-				//var passwordHash = HashPassword()
-			    user = await context.Users.FirstOrDefaultAsync(item =>
-				    item.UserName == model.Login && item.PasswordHash == model.Password);
-
-		    }
-		    catch (Exception ex)
-		    {
-			    Console.WriteLine(ex);
-		    }
-
-		    return user;
-	    }
-
-	    private static async Task<string> HashPassword(User user,string password)
-	    {
-		    var ph = new PasswordHasher<User>();
-
-		    var hash = ph.HashPassword(user, password);
-
-		    return hash;
-	    }
-	}
+    }
 }

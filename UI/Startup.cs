@@ -17,7 +17,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
-using UI.Enums;
+using Common.Enums;
+using UI.Constraints.RouteConstraints;
 using UI.Models;
 using UI.Tools;
 
@@ -37,13 +38,13 @@ namespace UI
 			//services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Server=localhost;Database=Khardo;Trusted_Connection=True;MultipleActiveResultSets=true"));
 			services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "Default"));
 			services.AddMvc();
-			services.AddIdentity<User, IdentityRole>(options =>
-			{
-				options.User.RequireUniqueEmail = false;
-			})
-				.AddEntityFrameworkStores<ApplicationDbContext>()
-				.AddDefaultUI()
-				.AddDefaultTokenProviders();
+			//services.AddIdentity<User, IdentityRole>(options =>
+			//{
+			//	options.User.RequireUniqueEmail = false;
+			//})
+			//	.AddEntityFrameworkStores<ApplicationDbContext>()
+			//	.AddDefaultUI()
+			//	.AddDefaultTokenProviders();
 
 			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 				.AddCookie(nameof(AuthScheme.Admin), options =>
@@ -59,7 +60,7 @@ namespace UI
 						 }
 
 						 var user = _context.Users.FirstOrDefaultAsync(item =>
-							 item.UserName == context.Principal.Identity.Name).Result;
+							 item.Login == context.Principal.Identity.Name).Result;
 						 if (user == null)
 						 {
 							 context.RejectPrincipal();
@@ -86,7 +87,7 @@ namespace UI
 
 			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			services.AddRazorPages();
-			services.AddScoped<PasswordHasher<User>>();
+
 			services.AddTransient<IBreadCrumbDataProvider, BreadCrumbDataProvider>();
 			_context = services.BuildServiceProvider().GetService<ApplicationDbContext>();
 		}
@@ -135,6 +136,23 @@ namespace UI
 				name: "ClientErrorRoute",
 				pattern: "Client/{controller=Error}/{code:int}",
 				defaults: new { area = "Client", action = "Index" });
+
+			#region Custom Constrains
+
+			endpoints.MapControllerRoute(
+				name: "ProductDetails",
+				pattern: @"{**alias}",
+				defaults: new { area = "Public", controller = "Products", action = "Details", },
+				constraints: new { alias = new ProductRouteConstraint() }
+			);
+
+			endpoints.MapControllerRoute(
+				name: "SubCatalog",
+				pattern: @"{**alias}",
+				defaults: new { area = "Public", controller = "Catalogs", action = "SubCategoryList" },
+				constraints: new { alias = new CatalogRouteConstraint() }
+			);
+			#endregion
 
 			endpoints.MapControllerRoute(
 				name: "PublicDefaultRoute",
