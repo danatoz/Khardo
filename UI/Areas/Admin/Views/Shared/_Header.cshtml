@@ -19,7 +19,27 @@
 
 		@if (showSearch)
 		{
-			<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+			<ul class="nav ml-auto d-flex justify-content-center" style="width: 100%; align-items: center; min-width:0">
+				<li class="global-search__lishka">
+					<div class="global-search-panel">
+						<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+					</div>
+				</li>
+				@{
+					var creationLink = ViewBag.CreationLink as string;
+					if (creationLink != null)
+					{
+						<li>
+							<a class="btn btn-primary" href="@creationLink">
+								<i class="fa fa-plus" aria-hidden="true"></i>
+								<span>Добавить</span>
+							</a>
+						</li>
+					}
+				}
+			</ul>
+
+
 		}
 
 		<ul class="navbar-nav px-3">

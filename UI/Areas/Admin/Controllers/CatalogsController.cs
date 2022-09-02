@@ -16,11 +16,14 @@ using Common.Enums;
 using UI.Models;
 using UI.Models.ViewModels;
 using Hierarchy;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using UI.TreeModel;
 using Microsoft.VisualStudio.GraphModel;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using UI.Models.ViewModels.FilterModel;
+using Tools;
 
 namespace UI.Areas.Admin.Controllers
 {
@@ -37,43 +40,62 @@ namespace UI.Areas.Admin.Controllers
 			_context = context;
 		}
 
-		public async Task<IActionResult> Index(int page = 1)
+		public async Task<IActionResult> Index(CatalogFilterModel filter, int page = 1)
 		{
-			const int objectsPerPage = 20;
+			const int objectsPerPage = 30;
 			var startIndex = (page - 1) * objectsPerPage;
-			var source = _context.Catalogs;
+			var source = _context.Catalogs.Where(item => item.Active);
 			var count = await source.CountAsync();
 			var items = await source.Skip(startIndex).Take(objectsPerPage).ToListAsync();
-			var test = items.OrderBy(i => i.Id).ThenBy(i => i.ParentId).ToList();
-			await InitViewBag(items);
 
-			var treeNodes = CatalogModel.ConvetForTreeList(items)
-				.OrderBy(i => i.Id)
-				.ToHierarchy(t => t.Id, t => t.ParentId);
-
-
-
-
-
-			var viewModel = new SearchResultViewModel<CatalogModel>(CatalogModel.ConvertListFromDal(items), count, 1, 1, objectsPerPage);
+			var viewModel = new SearchResultViewModel<CatalogModel, CatalogFilterModel>(CatalogModel.ConvertListFromDal(items), filter, count, 1, 1, objectsPerPage);
 			return View(viewModel);
 		}
 
-		public async Task<IActionResult> Update(int id)
+		public async Task<IActionResult> Update(int? id)
 		{
-			return View();
-		}
+			await InitViewBag();
 
+			var viewModel = CatalogModel.ConvertFromDal(
+				await _context.Catalogs.FirstOrDefaultAsync(item => item.Id == id)) ?? new CatalogModel();
+
+			return View(viewModel);
+		}
+		[HttpPost]
 		public async Task<IActionResult> Update(CatalogModel model)
 		{
-			return View();
+			await InitViewBag();
+			if (!ModelState.IsValid)
+				return View(model);
+
+			_context.Catalogs.Update(CatalogModel.ConvertToDal(model));
+			await _context.SaveChangesAsync();
+
+			return RedirectToAction("Index", "Catalogs", new {Area = "Admin"});
 		}
 
-		private async Task InitViewBag(List<Catalog> items)
+		public async Task<IActionResult> Delete(int id)
 		{
-			var tree = items.Hierarchize(1, f => f.Id, f => f.ParentId);
+			try
+			{
+				var model = await _context.Catalogs.FirstOrDefaultAsync(item => item.Id == id);
+				model.Active = false;
+				_context.Catalogs.Update(model);
+				await _context.SaveChangesAsync();
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError($"{ex}");
+			}
 
-			ViewBag.Tree = tree;
+			return RedirectToAction("Index", "Catalogs", new {Area = "Admin"});
+		}
+		private async Task InitViewBag()
+		{
+			ViewBag.CatalogCategory = new List<SelectListItem>()
+			{
+				new SelectListItem("--Не выбрано---", "")
+			}.Concat(_context.Catalogs.Select(item => new SelectListItem(item.Name, item.Id.ToString()))).ToList();
 		}
 	}
 }

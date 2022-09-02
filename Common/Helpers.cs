@@ -34,6 +34,7 @@ namespace Common
 				return null;
 			using var hashAlgorithm = SHA512.Create();
 			var hash = hashAlgorithm.ComputeHash(Encoding.Unicode.GetBytes(s));
+			var test = string.Concat(hash.Select(item => item.ToString("x2")));
 			return string.Concat(hash.Select(item => item.ToString("x2")));
 		}
 	}

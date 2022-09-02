@@ -69,3 +69,20 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.header__btn {
+	display: flex;
+}
+.global-search-panel {
+	padding: 0 20px;
+	width: 100%;
+}
+
+.global-search__lishka {
+	position: relative;
+	width: 80%;
+}
+
+.global-search-panel i {
+	color: #6C757D;
+	margin-top: 12px;
+}

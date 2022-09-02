@@ -46,7 +46,7 @@ namespace UI
 			//	.AddDefaultUI()
 			//	.AddDefaultTokenProviders();
 
-			services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+			services.AddAuthentication()
 				.AddCookie(nameof(AuthScheme.Admin), options =>
 				 {
 					 options.LoginPath = new PathString("/Admin/Users/Login");

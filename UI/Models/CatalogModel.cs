@@ -1,19 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.DbModels;
+using Tools;
 
 namespace UI.Models
 {
 	public class CatalogModel
 	{
 		public int Id { get; set; }
+		[Required(ErrorMessage = "Укажите значение")]
+		[Display(Name = "Наименование")]
 		public string Name { get; set; }
 		public string Alias { get; set; }
+		[Required(ErrorMessage = "Укажите значение")]
+		[Display(Name = "Изображение")]
 		public string IconUrl { get; set; }
+		[Display(Name = "Родительская категория")]
 		public int? ParentId { get; set; }
+		[Display(Name = "Активна")]
+		public bool Active { get; set; }
 		public CatalogModel ParentCatalog { get; set; }
 		//public List<CatalogModel> Catalogs { get; set; }
 		public List<ProductModel> Products { get; set; }
@@ -24,9 +33,10 @@ namespace UI.Models
 			{
 				Id = obj.Id,
 				Name = obj.Name,
-				Alias = obj.Alias,
+				Alias = Transliteration.Translit(obj.Name),
 				IconUrl = obj.IconUrl,
 				ParentId = obj.ParentId,
+				Active = obj.Active,
 				Products = ProductModel.ConvertListToDal(obj.Products),
 				ParentCatalog = ConvertToDal(obj.ParentCatalog),
 				//Catalogs = ConvertListToDal(obj.Catalogs)
@@ -43,6 +53,7 @@ namespace UI.Models
 				Alias = obj.Alias,
 				IconUrl = obj.IconUrl,
 				ParentId = obj.ParentId,
+				Active = obj.Active,
 				Products = ProductModel.ConvertListFromDal(obj.Products),
 				ParentCatalog = ConvertFromDal(obj.ParentCatalog),
 				//Catalogs = ConvertListFromDal(obj.Catalogs)

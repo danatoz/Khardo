@@ -6,6 +6,7 @@
 	<title>@ViewData["Title"] - Khardo</title>
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="~/css/site.css" />
+	<link rel="stylesheet" href="~/css/font-awesome.min.css">
 	<link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
 </head>
 <body>
@@ -19,13 +20,15 @@
 		{
 			<partial name="_MainMenu" />
 		}
-		@RenderBody()
+		<div class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+			@RenderBody()
+		</div>
 	</main>
 
 
 	<footer class="border-top footer text-muted">
 		<div class="container">
-			&copy; @DateTime.Now.Year - Khardo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+			&copy; 2022 - @DateTime.Now.Year - Khardo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 		</div>
 	</footer>
 	<!-- Icons -->
@@ -35,7 +38,7 @@
 	</script>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
+	<script src="~/js/admin/admin.js" asp-append-version="true"></script>
 	<script src="lib/vue/vue.runtime.global.min.js"></script>
 	<script src="js/admin/showHideSearchPanel.js"></script>
 	@RenderSection("Scripts", required: false)

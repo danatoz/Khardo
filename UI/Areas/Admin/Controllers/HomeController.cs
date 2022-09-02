@@ -19,14 +19,11 @@ namespace UI.Areas.Admin.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private ApplicationDbContext _context;
-		private readonly UserManager<User> _userManager;
-		private readonly SignInManager<User> _signInManager;
-		public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+
+		public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
 		{
 			_logger = logger;
 			_context = context;
-			_userManager = userManager;
-			_signInManager = signInManager;
 		}
 		
 		public async Task<IActionResult> Index()

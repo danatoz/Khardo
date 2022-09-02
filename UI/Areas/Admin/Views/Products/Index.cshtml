@@ -1,8 +1,8 @@
-﻿@model SearchResultViewModel<CatalogModel, CatalogFilterModel>
+﻿@model SearchResultViewModel<ProductModel, ProductFilterModel>
 @{
-	ViewBag.CreationLink = Url.Action("Update", "Catalogs", new { Area = "Admin" });
+	ViewBag.CreationLink = Url.Action("Update", "Products", new { Area = "Admin" });
 
-	ViewData["Title"] = "Каталоги";
+	ViewData["Title"] = "Продукты";
 }
 
 <div class="row">
@@ -13,7 +13,6 @@
 
 					<th class="text-center">Название</th>
 					<th class="text-center">Короткая ссылка</th>
-					<th class="text-center">Родительская категория</th>
 					<th class="text-center">Порядок отображения</th>
 					<th class="text-center">Действия</th>
 				</tr>
@@ -25,9 +24,6 @@
 						</td>
 						<td>
 							@item.Alias
-						</td>
-						<td>
-							@item.ParentCatalog?.Name
 						</td>
 						<td>
 							@@item.SortKey

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DAL.DbModels;
 using Common.Enums;
 
@@ -20,10 +17,13 @@ namespace UI.Models
 		public decimal Price { get; set; }
 		public int CatalogId { get; set; }
 		public int? ManufacturerId { get; set; }
+		public int VendorId { get; set; }
+		public bool Active { get; set; }
 		public ManufacturerType ManufacturerType { get; set; }
 
 		public CatalogModel Catalog { get; set; }
 		public ManufacturerModel Manufacturer { get; set; }
+		public VendorModel Vendor { get; set; }
 		public static Product ConvertToDal(ProductModel obj)
 		{
 			return obj == null ? null : new Product
@@ -36,11 +36,14 @@ namespace UI.Models
 				Price = obj.Price,
 				CatalogId = obj.CatalogId,
 				ManufacturerId = obj.ManufacturerId,
+				VendorId = obj.VendorId,
 				Description = obj.Description,
 				UrlImage = obj.UrlImage,
+				Active = obj.Active,
 				ManufacturerType = (int)obj.ManufacturerType,
 				Catalog = CatalogModel.ConvertToDal(obj.Catalog),
-				Manufacturer = ManufacturerModel.ConvertToDal(obj.Manufacturer)
+				Manufacturer = ManufacturerModel.ConvertToDal(obj.Manufacturer),
+				Vendor = VendorModel.ConvertToDal(obj.Vendor),
 			};
 		}
 		public static ProductModel ConvertFromDal(Product obj)
@@ -55,11 +58,14 @@ namespace UI.Models
 				Price = obj.Price,
 				CatalogId = obj.CatalogId,
 				ManufacturerId = obj.ManufacturerId,
+				VendorId = obj.VendorId,
 				Description = obj.Description,
 				UrlImage = obj.UrlImage,
+				Active = obj.Active,
 				ManufacturerType = (ManufacturerType)obj.ManufacturerType,
 				Catalog = CatalogModel.ConvertFromDal(obj.Catalog),
 				Manufacturer = ManufacturerModel.ConvertFromDal(obj.Manufacturer),
+				Vendor = VendorModel.ConvertFromDal(obj.Vendor),
 			};
 		}
 

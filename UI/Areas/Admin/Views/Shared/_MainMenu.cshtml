@@ -1,4 +1,7 @@
-﻿
+﻿@{
+	var controllerName = ViewContext.RouteData.Values["controller"].ToString();
+	var actionName = ViewContext.RouteData.Values["action"].ToString();
+}
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
 	<div class="sidebar-sticky">
 		<ul class="nav flex-column">
@@ -21,7 +24,7 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">
+				<a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">
 					<span data-feather="shopping-cart"></span>
 					Продукты
 				</a>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.DbModels
 {
@@ -20,9 +15,13 @@ namespace DAL.DbModels
 	    public int CatalogId { get; set; }
 	    public int? ManufacturerId { get; set; }
 	    public int ManufacturerType { get; set; }
+	    public int VendorId { get; set; }
+	    public bool Active { get; set; }
 		[ForeignKey("CatalogId")]
 	    public Catalog Catalog { get; set; }
 	    [ForeignKey("ManufacturerId")]
 	    public Manufacturer Manufacturer { get; set; }
+		[ForeignKey("VendorId")]
+	    public Vendor Vendor { get; set; }
     }
 }

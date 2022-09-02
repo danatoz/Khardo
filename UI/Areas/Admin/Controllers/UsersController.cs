@@ -26,14 +26,11 @@ namespace UI.Areas.Admin.Controllers
     {
 		private readonly ILogger<HomeController> _logger;
 		private readonly ApplicationDbContext _context;
-		private readonly UserManager<User> _userManager;
-		private readonly SignInManager<User> _signInManager;
-		public UsersController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+
+		public UsersController(ILogger<HomeController> logger, ApplicationDbContext context)
 		{
 			_logger = logger;
 			_context = context;
-			_userManager = userManager;
-			_signInManager = signInManager;
 		}
 
 		[AllowAnonymous]
@@ -49,15 +46,15 @@ namespace UI.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var result =
-					await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
+				var result = _context.Users.Any(item => 
+					item.Login == model.Login && 
+					item.Password == Helpers.GetPasswordHash(model.Password));
 
-				if (result.Succeeded)
+				if (result)
 				{
 					if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
 					{
 						await Authenticate(model.Login);
-						//await _signInManager.SignInAsync(user, false, nameof(AuthScheme.Admin));
 						return RedirectToAction("Index", "Home", new { Area = "Admin" });
 					}
 					else
@@ -86,7 +83,7 @@ namespace UI.Areas.Admin.Controllers
 				new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
 			};
 			// создаем объект ClaimsIdentity
-			ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+			var id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 			// установка аутентификационных куки
 			await HttpContext.SignInAsync(nameof(AuthScheme.Admin), new ClaimsPrincipal(id));
 		}

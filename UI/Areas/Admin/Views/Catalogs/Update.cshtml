@@ -1,6 +1,8 @@
 ﻿@model CatalogModel
 @{
-
+	var exists = Model != null && Model.Id != 0;
+	ViewBag.Title = (exists ? "Редактирование" : "Создание") + " категории";
+	var catalogCategory = ViewBag.CatalogCategory as List<SelectListItem> ?? new List<SelectListItem>();
 }
 
 <form asp-area="Admin" asp-controller="Catalogs" asp-action="Update" method="post">
@@ -15,17 +17,38 @@
 		</div>
 		<div class="col-md-4 col-sm-6">
 			<div class="form-group">
-				<label asp-for="Name"></label>
-				<input type="text" asp-for="Name" class="form-control" autocomplete="off"/>
-				<span asp-validation-for="Name" class="text-danger"></span>
+				<label asp-for="Alias"></label>
+				<input type="text" asp-for="Alias" class="form-control" disabled autocomplete="off"/>
+				<span asp-validation-for="Alias" class="text-danger"></span>
 			</div>
 		</div>
 		<div class="col-md-4 col-sm-6">
 			<div class="form-group">
-				<label asp-for="Name"></label>
-				<input type="text" asp-for="Name" class="form-control" autocomplete="off"/>
-				<span asp-validation-for="Name" class="text-danger"></span>
+				<label asp-for="ParentId"></label>
+				<select type="" asp-for="ParentId" asp-items="catalogCategory" class="form-control" autocomplete="off"></select>
+				<span asp-validation-for="ParentId" class="text-danger"></span>
 			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="IconUrl"></label>
+				<input type="text" asp-for="IconUrl" class="form-control" autocomplete="off"/>
+				<span asp-validation-for="IconUrl" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Active"></label>
+				<input type="checkbox" asp-for="Active" class="form-control" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="mx-auto mt-3">
+			<button type="submit" class="btn btn-primary">@(exists ? "Сохранить" : "Добавить")</button>
+			<a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
 		</div>
 	</div>
 </form>
