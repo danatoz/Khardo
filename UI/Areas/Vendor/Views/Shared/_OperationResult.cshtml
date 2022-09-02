@@ -1,0 +1,32 @@
+﻿@using UI.Other
+@{
+	string alertClass = null;
+	string alertText = null;
+}
+@if (TempData[OperationResultType.Success.ToString()] != null)
+{
+	alertClass = "success";
+	alertText = TempData[OperationResultType.Success.ToString()].ToString();
+}
+@if (TempData[OperationResultType.Info.ToString()] != null)
+{
+	alertClass = "info";
+	alertText = TempData[OperationResultType.Info.ToString()].ToString();
+}
+@if (TempData[OperationResultType.Warning.ToString()] != null)
+{
+	alertClass = "warning";
+	alertText = TempData[OperationResultType.Warning.ToString()].ToString();
+}
+@if (TempData[OperationResultType.Error.ToString()] != null)
+{
+	alertClass = "danger";
+	alertText = TempData[OperationResultType.Error.ToString()].ToString();
+}
+@if (!string.IsNullOrEmpty(alertText) && !string.IsNullOrEmpty(alertClass))
+{
+<div class="alert alert-@alertClass alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    @Html.Raw(alertText)
+</div>
+}

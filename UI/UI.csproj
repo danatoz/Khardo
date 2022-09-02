@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Home\Partials\" />
+    <Folder Include="Areas\Vendor\Views\Shared\Components\" />
     <Folder Include="FilterModel\" />
     <Folder Include="wwwroot\css\fonts\" />
     <Folder Include="wwwroot\images\ManufacturerLogo\" />
@@ -46,6 +47,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Areas\Vendor\Views\Shared\_LoginPartial.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="wwwroot\fonts\fontawesome-webfont.eot">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

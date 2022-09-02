@@ -19,10 +19,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using UI.Other;
 
-namespace UI.Areas.Admin.Controllers
+namespace UI.Areas.Vendor.Controllers
 {
-	[Area("Admin")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Admin))]
+	[Area("Vendor")]
+	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Vendor))]
 	public class UsersController : BaseController
     {
 		private readonly ILogger<HomeController> _logger;
@@ -47,7 +47,7 @@ namespace UI.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var result = _context.Users.Any(item => 
+				var result = _context.Vendors.Any(item => 
 					item.Login == model.Login && 
 					item.Password == Helpers.GetPasswordHash(model.Password));
 
@@ -56,22 +56,23 @@ namespace UI.Areas.Admin.Controllers
 					if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
 					{
 						await Authenticate(model.Login);
-						return RedirectToAction("Index", "Home", new { Area = "Admin" });
+						return RedirectToAction("Index", "Home", new { Area = "Vendor" });
 					}
 					else
 					{
-						return RedirectToAction("Login", "Users", new { Area = "Admin" });
+						return RedirectToAction("Index", "Home", new { Area = "Vendor" });
 					}
 				}
 			}
+
 			TempData[OperationResultType.Error.ToString()] = "Неправильный логин и (или) пароль";
 
-			return RedirectToAction("Login", "Users", new { Area = "Admin" });
+			return RedirectToAction("Login", "Home", new { Area = "Vendor" });
 		}
 
 		public async Task<IActionResult> Logout()
 		{
-			await HttpContext.SignOutAsync(nameof(AuthScheme.Admin));
+			await HttpContext.SignOutAsync(nameof(AuthScheme.Vendor));
 			return RedirectToAction("Index", "Home", new { Area = "Public" });
 		}
 
@@ -85,7 +86,7 @@ namespace UI.Areas.Admin.Controllers
 			// создаем объект ClaimsIdentity
 			var id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 			// установка аутентификационных куки
-			await HttpContext.SignInAsync(nameof(AuthScheme.Admin), new ClaimsPrincipal(id));
+			await HttpContext.SignInAsync(nameof(AuthScheme.Vendor), new ClaimsPrincipal(id));
 		}
 	}
 }

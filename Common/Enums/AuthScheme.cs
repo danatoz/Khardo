@@ -3,7 +3,7 @@
     public enum AuthScheme
     {
         Admin,
-        Client,
+        Vendor,
         Public
     }
 }

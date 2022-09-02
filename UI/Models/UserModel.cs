@@ -11,6 +11,18 @@ namespace UI.Models
 {
     public class UserModel : BaseUser
     {
+	    public string FullName
+	    {
+		    get
+		    {
+			    var result = LastName + " " + FirstName;
+			    if (!string.IsNullOrEmpty(MiddleName))
+			    {
+				    result += " " + MiddleName;
+			    }
+			    return result;
+		    }
+		}
 		public UserRole Role { get; set; }
 		public int? CityId { get; set; }
 		public City City { get; set; }
@@ -32,7 +44,7 @@ namespace UI.Models
 					MobilePhone = obj.MobilePhone,
 					Password = obj.Password,
 					CityId = obj.CityId,
-					Role = (int)obj.Role
+					Role = (int)obj.Role,
 				};
 		}
 
@@ -52,7 +64,7 @@ namespace UI.Models
 					MobilePhone = obj.MobilePhone,
 					Password = obj.Password,
 					CityId = obj.CityId,
-					Role = (UserRole)obj.Role
+					Role = (UserRole)obj.Role,
 				};
 		}
 

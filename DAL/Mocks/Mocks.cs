@@ -36,10 +36,27 @@ namespace DAL.Mocks
 						Login = "manager",
 						Password = "cd8c29b8deed323fe1538cfbdb46fc2a2ea61cfd67807f0629708ea2a6e13a2919def3c837c4e7f2c8e0067568e3236827defb05c9346e476b6e954440a908a7",
 						CityId = cityId,
-						Role = (int)UserRole.Manager
+						Role = (int)UserRole.Manager,
+						MobilePhone = "8 800 555-35-35",
+						LastName = "Иванов",
+						FirstName = "Иван",
+						MiddleName = "Иванович"
 					}
 				};
 				context.Users.AddRange(users);
+				context.SaveChanges();
+
+				var vendors = new List<Vendor>()
+				{
+					new Vendor()
+					{
+						Email = "vendor@vendor.ru",
+						Login = "vendor",
+						Password = "cd8c29b8deed323fe1538cfbdb46fc2a2ea61cfd67807f0629708ea2a6e13a2919def3c837c4e7f2c8e0067568e3236827defb05c9346e476b6e954440a908a7",
+						ResponsibleId = 2
+					}
+				};
+				context.Vendors.AddRange(vendors);
 				context.SaveChanges();
 
 				var catalogs = new List<Catalog>()

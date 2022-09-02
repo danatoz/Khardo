@@ -72,10 +72,27 @@ namespace UI
 					 };
 
 				 })
-				.AddCookie(nameof(AuthScheme.Client), options =>
+				.AddCookie(nameof(AuthScheme.Vendor), options =>
 				{
-					options.LoginPath = new PathString("/Client/Login");
+					options.LoginPath = new PathString("/Vendor/Users/Login");
+					options.AccessDeniedPath = new PathString("/Vendor/Users/Login");
 					options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
+					options.Events.OnValidatePrincipal += async context =>
+					{
+						if (!context.Principal.Identity.IsAuthenticated)
+						{
+							return;
+						}
+
+						var user = _context.Vendors.FirstOrDefaultAsync(item =>
+							item.Login == context.Principal.Identity.Name).Result;
+						if (user == null)
+						{
+							context.RejectPrincipal();
+							await context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+							return;
+						}
+					};
 
 				})
 				.AddCookie(nameof(AuthScheme.Public), options =>
@@ -128,14 +145,14 @@ namespace UI
 				defaults: new { area = "Admin", action = "Index" });
 
 			endpoints.MapControllerRoute(
-				name: "ClientDefaultRoute",
-				pattern: "Client/{controller=Home}/{action=Index}/{id?}",
-				new { area = "Client" });
+				name: "VendorDefaultRoute",
+				pattern: "Vendor/{controller=Home}/{action=Index}/{id?}",
+				new { area = "Vendor" });
 
 			endpoints.MapControllerRoute(
-				name: "ClientErrorRoute",
-				pattern: "Client/{controller=Error}/{code:int}",
-				defaults: new { area = "Client", action = "Index" });
+				name: "VendorErrorRoute",
+				pattern: "Vendor/{controller=Error}/{code:int}",
+				defaults: new { area = "Vendor", action = "Index" });
 
 			#region Custom Constrains
 

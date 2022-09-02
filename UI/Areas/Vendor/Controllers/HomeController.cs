@@ -8,10 +8,10 @@ using Microsoft.Extensions.Logging;
 using Common.Enums;
 using UI.Models;
 
-namespace UI.Areas.Client.Controllers
+namespace UI.Areas.Vendor.Controllers
 {
-	[Area("Client")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Client))]
+	[Area("Vendor")]
+	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Vendor))]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;

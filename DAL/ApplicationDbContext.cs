@@ -72,6 +72,7 @@ namespace DAL
 		public DbSet<Manufacturer> Manufacturers { get; set; }
 		public DbSet<Customer> Customers { get; set; }
 		public DbSet<Vendor> Vendors { get; set; }
+		public DbSet<Order> Orders { get; set; }
 
 
 	}
