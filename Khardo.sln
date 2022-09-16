@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32630.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{1E01F869-FACD-45E7-8F80-84406E018845}"
 EndProject
@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "UI\UI.csproj", "{6C2A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{17F805DA-6CBC-458B-A144-B44AE9313677}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{970C9E27-5D3D-4E46-9FBD-14CCEA3BE7AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools", "Tools\Tools.csproj", "{970C9E27-5D3D-4E46-9FBD-14CCEA3BE7AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{822EB22D-D44F-408B-B1D4-FE89CCE315C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL.MsSqlServer", "DAL.MsSqlServer\DAL.MsSqlServer.csproj", "{4A8A4A09-F87A-44A3-91DB-03BAADD3419B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,17 @@ Global
 		{970C9E27-5D3D-4E46-9FBD-14CCEA3BE7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{970C9E27-5D3D-4E46-9FBD-14CCEA3BE7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{970C9E27-5D3D-4E46-9FBD-14CCEA3BE7AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A8A4A09-F87A-44A3-91DB-03BAADD3419B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A8A4A09-F87A-44A3-91DB-03BAADD3419B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A8A4A09-F87A-44A3-91DB-03BAADD3419B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A8A4A09-F87A-44A3-91DB-03BAADD3419B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{034241BE-286C-4C58-B9CB-47F270191F81} = {822EB22D-D44F-408B-B1D4-FE89CCE315C6}
+		{4A8A4A09-F87A-44A3-91DB-03BAADD3419B} = {822EB22D-D44F-408B-B1D4-FE89CCE315C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57C124DD-E653-46F6-A39D-812988C0D2E5}

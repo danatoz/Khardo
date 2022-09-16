@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Common.Enums;
+using DAL.MsSqlServer;
 using UI.Constraints.RouteConstraints;
 using UI.Models;
 using UI.Tools;
@@ -35,17 +36,18 @@ namespace UI
 		private ApplicationDbContext _context;
 		public void ConfigureServices(IServiceCollection services)
 		{
-			//services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Server=localhost;Database=Khardo;Trusted_Connection=True;MultipleActiveResultSets=true"));
-			services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "Default"));
+			var dbType = Configuration["Database"];
+			switch (dbType)
+			{
+				case "MsSql":
+					services.AddKhardoDbSqlServer(Configuration.GetConnectionString("MsSqlConnectionString"));
+					break;
+				default:
+					services.AddDbContext<ApplicationDbContext>(options => 
+						options.UseInMemoryDatabase(databaseName: "Default"));
+					break;
+			}
 			services.AddMvc();
-			//services.AddIdentity<User, IdentityRole>(options =>
-			//{
-			//	options.User.RequireUniqueEmail = false;
-			//})
-			//	.AddEntityFrameworkStores<ApplicationDbContext>()
-			//	.AddDefaultUI()
-			//	.AddDefaultTokenProviders();
-
 			services.AddAuthentication()
 				.AddCookie(nameof(AuthScheme.Admin), options =>
 				 {
