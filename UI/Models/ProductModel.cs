@@ -2,6 +2,7 @@
 using System.Linq;
 using DAL.DbModels;
 using Common.Enums;
+using AutoMapper;
 
 namespace UI.Models
 {
@@ -24,49 +25,21 @@ namespace UI.Models
 		public CatalogModel Catalog { get; set; }
 		public ManufacturerModel Manufacturer { get; set; }
 		public VendorModel Vendor { get; set; }
+
 		public static Product ConvertToDal(ProductModel obj)
 		{
-			return obj == null ? null : new Product
-			{
-				Id = obj.Id,
-				Name = obj.Name,
-				VendorCode = obj.VendorCode,
-				Alias = obj.Alias,
-				Amount = obj.Amount,
-				Price = obj.Price,
-				CatalogId = obj.CatalogId,
-				ManufacturerId = obj.ManufacturerId,
-				VendorId = obj.VendorId,
-				Description = obj.Description,
-				UrlImage = obj.UrlImage,
-				Active = obj.Active,
-				ManufacturerType = (int)obj.ManufacturerType,
-				Catalog = CatalogModel.ConvertToDal(obj.Catalog),
-				Manufacturer = ManufacturerModel.ConvertToDal(obj.Manufacturer),
-				Vendor = VendorModel.ConvertToDal(obj.Vendor),
-			};
+			var config = new MapperConfiguration(cfg => 
+				cfg.CreateMap<ProductModel, Product>());
+			var mapper = new Mapper(config);
+			return mapper.Map<ProductModel, Product>(obj);
 		}
+
 		public static ProductModel ConvertFromDal(Product obj)
 		{
-			return obj == null ? null : new ProductModel
-			{
-				Id = obj.Id,
-				Name = obj.Name,
-				VendorCode = obj.VendorCode,
-				Alias = obj.Alias,
-				Amount = obj.Amount,
-				Price = obj.Price,
-				CatalogId = obj.CatalogId,
-				ManufacturerId = obj.ManufacturerId,
-				VendorId = obj.VendorId,
-				Description = obj.Description,
-				UrlImage = obj.UrlImage,
-				Active = obj.Active,
-				ManufacturerType = (ManufacturerType)obj.ManufacturerType,
-				Catalog = CatalogModel.ConvertFromDal(obj.Catalog),
-				Manufacturer = ManufacturerModel.ConvertFromDal(obj.Manufacturer),
-				Vendor = VendorModel.ConvertFromDal(obj.Vendor),
-			};
+			var config = new MapperConfiguration(cfg =>
+				cfg.CreateMap<Product, ProductModel>());
+			var mapper = new Mapper(config);
+			return mapper.Map<Product, ProductModel>(obj);
 		}
 
 		public static List<ProductModel> ConvertListFromDal(IEnumerable<Product> models)

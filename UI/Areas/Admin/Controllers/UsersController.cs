@@ -24,7 +24,7 @@ namespace UI.Areas.Admin.Controllers
 	[Area("Admin")]
 	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Admin))]
 	public class UsersController : BaseController
-    {
+	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly ApplicationDbContext _context;
 
@@ -47,21 +47,14 @@ namespace UI.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var result = _context.Users.Any(item => 
-					item.Login == model.Login && 
+				var result = _context.Users.Any(item =>
+					item.Login == model.Login &&
 					item.Password == Helpers.GetPasswordHash(model.Password));
 
 				if (result)
 				{
-					if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-					{
-						await Authenticate(model.Login);
-						return RedirectToAction("Index", "Home", new { Area = "Admin" });
-					}
-					else
-					{
-						return RedirectToAction("Login", "Users", new { Area = "Admin" });
-					}
+					await Authenticate(model.Login);
+					return RedirectToAction("Index", "Home", new { Area = "Admin" });
 				}
 			}
 			TempData[OperationResultType.Error.ToString()] = "Неправильный логин и (или) пароль";
