@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "Data\DAL\DAL.csproj"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL.MsSqlServer", "Data\DAL.MsSqlServer\DAL.MsSqlServer.csproj", "{F7E523DC-9A3F-4E8A-90DB-AD56C7F6F402}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{635D6D10-4159-40E5-A284-9CBF1C4ECC43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{F7E523DC-9A3F-4E8A-90DB-AD56C7F6F402}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7E523DC-9A3F-4E8A-90DB-AD56C7F6F402}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7E523DC-9A3F-4E8A-90DB-AD56C7F6F402}.Release|Any CPU.Build.0 = Release|Any CPU
+		{635D6D10-4159-40E5-A284-9CBF1C4ECC43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{635D6D10-4159-40E5-A284-9CBF1C4ECC43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{635D6D10-4159-40E5-A284-9CBF1C4ECC43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{635D6D10-4159-40E5-A284-9CBF1C4ECC43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

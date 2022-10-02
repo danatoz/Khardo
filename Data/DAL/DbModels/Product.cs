@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DAL.DbModels
+﻿namespace DAL.DbModels
 {
-    public class Product : IDbModel
+    public class Product : Entity
     {
-	    public int Id { get; set; }
 	    public string Name { get; set; }
 	    public string VendorCode { get; set; }
 	    public string Alias { get; set; }

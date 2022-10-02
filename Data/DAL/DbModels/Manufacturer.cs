@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL.DbModels
+﻿namespace DAL.DbModels
 {
-    public class Manufacturer : IDbModel
+    public class Manufacturer : Entity
     {
-	    public int Id { get; set; }
 	    public string Name { get; set; }
 	    public string UrlLogo { get; set; }
 

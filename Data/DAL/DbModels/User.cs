@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DAL.DbModels
+﻿namespace DAL.DbModels
 {
     public class User : BaseUser
     {
