@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DAL.DbModels
+﻿namespace DAL.DbModels
 {
     public class Vendor : BaseUser
     {
