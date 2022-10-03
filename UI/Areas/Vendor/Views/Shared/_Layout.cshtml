@@ -1,29 +1,33 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - Khardo</title>
-	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Khardo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+
 </head>
 <body>
-	@if (User.Identity.IsAuthenticated)
-	{
-		<partial name="_Header" />
-	}
-	<div class="container">
-		<main role="main" class="pb-3">
-			<partial name="_OperationResult" />
-			@RenderBody()
-		</main>
-	</div>
 
-	<partial name="_Footer"/>
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
-	<script src="lib/vue/vue.runtime.global.min.js" asp-append-version="true"></script>
-	@RenderSection("Scripts", required: false)
+    @if (User.Identity.IsAuthenticated)
+    {
+        <partial name="_Header" />
+    }
+
+    <main role="main" class="pb-3">
+        <div class="container ">
+            <partial name="_OperationResult" />
+            @RenderBody()
+        </div>
+    </main>
+
+    <partial name="_Footer" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="lib/vue/vue.runtime.global.min.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

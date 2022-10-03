@@ -2,7 +2,6 @@
 {
     public class User : BaseUser
     {
-	    public int Role { get; set; }
 		public int? CityId { get; set; }
 		[ForeignKey("CityId")]
 	    public City City { get; set; }

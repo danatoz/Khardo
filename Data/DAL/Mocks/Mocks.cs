@@ -53,7 +53,8 @@ namespace DAL.Mocks
 						Email = "vendor@vendor.ru",
 						Login = "vendor",
 						Password = "cd8c29b8deed323fe1538cfbdb46fc2a2ea61cfd67807f0629708ea2a6e13a2919def3c837c4e7f2c8e0067568e3236827defb05c9346e476b6e954440a908a7",
-						ResponsibleId = 2
+						ResponsibleId = 2,
+						Role = (int)UserRole.Vendor
 					}
 				};
 				context.Vendors.AddRange(vendors);

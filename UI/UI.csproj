@@ -51,6 +51,7 @@
     <Folder Include="wwwroot\css\fonts\" />
     <Folder Include="wwwroot\images\ManufacturerLogo\" />
     <Folder Include="wwwroot\images\ProductImage\" />
+    <Folder Include="wwwroot\Upload\Vendors\" />
   </ItemGroup>
 
   <ItemGroup>

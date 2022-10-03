@@ -1,0 +1,29 @@
+﻿@{
+
+}
+
+<div class="mt-5">
+    <div>
+        <form asp-area="Vendor" asp-controller="Price" asp-action="Upload" method="post" asp-antiforgery="true" enctype="multipart/form-data">
+            <input type="file" name="formFile">
+            <input type="submit">
+        </form>
+    </div>
+    <div class="mt-4">
+        <div>
+            <span>Прайс обрабатывается</span>
+            <div class="spinner-border text-primary spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div>
+            <span>Прайс ожидает модерации</span>
+            <div class="spinner-grow text-warning spinner-grow-sm" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div>
+            Последняя дата загрузки прайса: @DateTime.Now.ToString("g")
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 ﻿@{
 
 }
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark  bg-dark">
 	<a class="navbar-brand" asp-area="Vendor" asp-controller="Home" asp-action="Index">
 		<img src="~/images/logo.png" alt="Logo" height="40" />
 	</a>
@@ -13,8 +13,19 @@
 			<li class="nav-item active">
 				<a class="nav-link" asp-area="Vendor" asp-controller="Home" asp-action="Index">Главная <span class="sr-only">(current)</span></a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Link</a>
+			<li class="nav-item dropdown">
+				<a href="javascript:void(0)" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Мой прайс</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" asp-area="Vendor" asp-controller="Price" asp-action="Index">
+                        Актуальный прайс
+                    </a>
+					<a class="dropdown-item" asp-area="Vendor" asp-controller="Price" asp-action="Info">
+						Обновить / загрузить прайс
+                    </a>
+                    <a class="dropdown-item" asp-area="Vendor" asp-controller="Price" asp-action="Index">
+                        Something else here
+                    </a>
+                </div>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link disabled" href="#">Disabled</a>

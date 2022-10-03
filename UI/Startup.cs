@@ -10,8 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DAL;
-using DAL.DbModels;
-using DAL.Mocks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -19,9 +17,8 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Common.Enums;
 using DAL.MsSqlServer;
-using UI.Constraints.RouteConstraints;
-using UI.Models;
-using UI.Tools;
+using Microsoft.Net.Http.Headers;
+
 
 namespace UI
 {
@@ -48,67 +45,14 @@ namespace UI
 					break;
 			}
 			services.AddMvc();
-			services.AddAuthentication()
-				.AddCookie(nameof(AuthScheme.Admin), options =>
-				 {
-					 options.LoginPath = new PathString("/Admin/Users/Login");
-					 options.AccessDeniedPath = new PathString("/Admin/Users/Login");
-					 options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
-					 options.Events.OnValidatePrincipal += async context =>
-					 {
-						 if (!context.Principal.Identity.IsAuthenticated)
-						 {
-							 return;
-						 }
-
-						 var user = _context.Users.FirstOrDefaultAsync(item =>
-							 item.Login == context.Principal.Identity.Name).Result;
-						 if (user == null)
-						 {
-							 context.RejectPrincipal();
-							 await context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-							 return;
-						 }
-						 context.ReplacePrincipal(new ClaimsPrincipal(new CustomUserIdentity(user)));
-
-					 };
-
-				 })
-				.AddCookie(nameof(AuthScheme.Vendor), options =>
-				{
-					options.LoginPath = new PathString("/Vendor/Users/Login");
-					options.AccessDeniedPath = new PathString("/Vendor/Users/Login");
-					options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
-					options.Events.OnValidatePrincipal += async context =>
-					{
-						if (!context.Principal.Identity.IsAuthenticated)
-						{
-							return;
-						}
-
-						var user = _context.Vendors.FirstOrDefaultAsync(item =>
-							item.Login == context.Principal.Identity.Name).Result;
-						if (user == null)
-						{
-							context.RejectPrincipal();
-							await context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-							return;
-						}
-					};
-
-				})
-				.AddCookie(nameof(AuthScheme.Public), options =>
-				{
-					options.LoginPath = new PathString("/Public/Login");
-					options.ExpireTimeSpan = new TimeSpan(30, 0, 0, 0);
-
-				});
-
+			_context = services.BuildServiceProvider().GetService<ApplicationDbContext>();
+			services.AddAuthenticationConfig(_context);
 			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			services.AddRazorPages();
+			services.AddRouting(options => options.LowercaseUrls = true);
 
 			services.AddTransient<IBreadCrumbDataProvider, BreadCrumbDataProvider>();
-			_context = services.BuildServiceProvider().GetService<ApplicationDbContext>();
+			services.AddHttpContextAccessor();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -124,7 +68,13 @@ namespace UI
 				app.UseHsts();
 			}
 			app.UseHttpsRedirection();
-			app.UseStaticFiles();
+			app.UseStaticFiles(new StaticFileOptions
+			{
+				OnPrepareResponse = context =>
+				{
+					context.Context.Response.Headers.Append(HeaderNames.CacheControl, "public, max-age=31622400");
+				}
+			});
 
 			app.UseRouting();
 

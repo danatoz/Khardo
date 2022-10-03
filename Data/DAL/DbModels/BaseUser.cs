@@ -1,4 +1,6 @@
-﻿namespace DAL.DbModels
+﻿using Common.Enums;
+
+namespace DAL.DbModels
 {
     public class BaseUser : Entity
     {
@@ -9,5 +11,7 @@
 	    public string Email { get; set; }
 	    public string Login { get; set; }
 	    public string Password { get; set; }
+	    public int Role { get; set; }
+	    public bool IsBlocked { get; set; }
 	}
 }
