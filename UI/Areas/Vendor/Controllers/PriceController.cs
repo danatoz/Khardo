@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using NLog;
+using Tools.RabbitMq;
 using UI.Other;
 
 namespace UI.Areas.Vendor.Controllers
@@ -26,11 +27,14 @@ namespace UI.Areas.Vendor.Controllers
 		private readonly ApplicationDbContext _context;
 		private readonly ILogger<PriceController> _logger;
 		private readonly IWebHostEnvironment _environment;
-		public PriceController(ApplicationDbContext context, ILogger<PriceController> logger, IWebHostEnvironment environment)
+		private readonly IRabbitMqService _mqService;
+
+		public PriceController(ApplicationDbContext context, ILogger<PriceController> logger, IWebHostEnvironment environment, IRabbitMqService mqService)
 		{
 			_context = context;
 			_logger = logger;
 			_environment = environment;
+			_mqService = mqService;
 		}
 
 		public async Task<IActionResult> Index()
@@ -68,8 +72,8 @@ namespace UI.Areas.Vendor.Controllers
 					!string.IsNullOrEmpty(contentDisposition.FileName.Value))
 				{
 
-					var currentUserId = this.GetCurrentUserId();
-					var path = _environment.WebRootPath + "//Upload//Vendors//" + currentUserId;
+					var vendorId = this.GetCurrentUserId();
+					var path = _environment.WebRootPath + "//Upload//Vendors//" + vendorId;
 					var df = new DirectoryInfo(path);
 					if(!df.Exists)
 						new DirectoryInfo(path).Create();
@@ -80,6 +84,12 @@ namespace UI.Areas.Vendor.Controllers
 					{
 						await section.Body.CopyToAsync(targetStream);
 					}
+
+					_mqService.SendMessage(new
+					{
+						vendorId,
+						saveToPath
+					});
 
 					TempData[nameof(OperationResultType.Success)] = "Прайс загружен и ожидает обработки.";
 					return RedirectToAction("Info", "Price", new { Area = "Vendor" });

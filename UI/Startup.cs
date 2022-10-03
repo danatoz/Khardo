@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using Common.Enums;
 using DAL.MsSqlServer;
 using Microsoft.Net.Http.Headers;
+using Tools.RabbitMq;
 
 
 namespace UI
@@ -50,7 +51,7 @@ namespace UI
 			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			services.AddRazorPages();
 			services.AddRouting(options => options.LowercaseUrls = true);
-
+			services.AddScoped<IRabbitMqService, RabbitMqService>();
 			services.AddTransient<IBreadCrumbDataProvider, BreadCrumbDataProvider>();
 			services.AddHttpContextAccessor();
 		}
