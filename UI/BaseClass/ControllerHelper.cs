@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common.Enums;
+using Microsoft.AspNetCore.Mvc;
 
 namespace UI
 {
@@ -7,6 +8,11 @@ namespace UI
 		public static int? GetCurrentUserId(this Controller controller)
 		{
 			return (controller.User.Identity as CustomUserIdentity)?.Id;
+		}		
+
+		public static UserRole? GetCurrentUserRole(this Controller controller)
+		{
+			return (controller.User.Identity as CustomUserIdentity)?.Role;
 		}
 	}
 }

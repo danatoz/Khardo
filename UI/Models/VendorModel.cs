@@ -8,6 +8,8 @@ namespace UI.Models
 {
     public class VendorModel : BaseUser
     {
+	    public string NameOrganization { get; set; }
+
 	    public int Rating { get; set; }
 
 	    public int ResponsibleId { get; set; }

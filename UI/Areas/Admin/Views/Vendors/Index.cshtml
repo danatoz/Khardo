@@ -1,1 +1,30 @@
-﻿
+﻿@model SearchResultViewModel<VendorModel, VendorFilterModel>
+@{
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+
+                    <th class="text-center">Организация</th>
+                    <th class="text-center">Действия</th>
+                </tr>
+                @foreach (var item in Model.Objects)
+                {
+                    <tr class="text-center">
+                        <td>
+                            @item.NameOrganization
+                        </td>
+                        <td class="text-center">
+                            <a asp-action="Update" asp-area="Admin" asp-route-id="@item.Id">Изменить</a><br />
+                            @*<a asp-action="Delete" asp-area="Admin" asp-route-id="@item.Id" class="delete-object-button">Удалить</a>*@
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

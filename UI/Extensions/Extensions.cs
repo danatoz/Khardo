@@ -37,7 +37,7 @@ namespace UI.Extensions
 						if (user == null)
 						{
 							context.RejectPrincipal();
-							await context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+							await context.HttpContext.SignOutAsync(nameof(AuthScheme.Admin));
 							return;
 						}
 						context.ReplacePrincipal(new ClaimsPrincipal(new CustomUserIdentity(user)));

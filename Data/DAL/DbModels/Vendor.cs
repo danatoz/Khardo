@@ -4,6 +4,7 @@ namespace DAL.DbModels
 {
 	public class Vendor : BaseUser
 	{
+		public string NameOrganization { get; set; }
 
 		public int Rating { get; set; }
 
