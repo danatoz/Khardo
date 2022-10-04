@@ -21,7 +21,7 @@ namespace UI.Areas.Public.Controllers
 
 		public async Task<IActionResult> SubCategoryList(string alias, int page = 1)
 		{
-			var viewModel = new CatalogModel();
+			var viewModel = new CategoryModel();
 
 			return View(viewModel);
 		}

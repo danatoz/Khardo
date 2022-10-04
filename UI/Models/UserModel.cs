@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Common.Enums;
 using DAL.DbModels;
-using Microsoft.AspNetCore.Identity;
+using Entities;
 
 namespace UI.Models
 {
@@ -25,56 +26,34 @@ namespace UI.Models
 		}
 		public UserRole Role { get; set; }
 		public int? CityId { get; set; }
-		public City City { get; set; }
+		public CityModel City { get; set; }
 
-		public List<Vendor> Vendors { get; set; }
+		public List<VendorModel> Vendors { get; set; }
 
 		public static User ConvertToDal(UserModel obj)
 		{
-			return obj == null
-				? null
-				: new User()
-				{
-					Id = obj.Id,
-					Email = obj.Email,
-					FirstName = obj.FirstName,
-					MiddleName = obj.MiddleName,
-					LastName = obj.LastName,
-					Login = obj.Login,
-					MobilePhone = obj.MobilePhone,
-					Password = obj.Password,
-					CityId = obj.CityId,
-					Role = (int)obj.Role,
-				};
+			var config = new MapperConfiguration(cfg =>
+				cfg.CreateMap<UserModel, User>());
+			var mapper = new Mapper(config);
+			return mapper.Map<UserModel, User>(obj);
 		}
 
 
 		public static UserModel ConvertFromDal(User obj)
 		{
-			return obj == null
-				? null
-				: new UserModel()
-				{
-					Id = obj.Id,
-					Email = obj.Email,
-					FirstName = obj.FirstName,
-					MiddleName = obj.MiddleName,
-					LastName = obj.LastName,
-					Login = obj.Login,
-					MobilePhone = obj.MobilePhone,
-					Password = obj.Password,
-					CityId = obj.CityId,
-					Role = (UserRole)obj.Role,
-				};
+			var config = new MapperConfiguration(cfg =>
+				cfg.CreateMap<User, UserModel>());
+			var mapper = new Mapper(config);
+			return mapper.Map<User, UserModel>(obj);
 		}
 
-		public static List<UserModel> ConvertListFromDal(IEnumerable<User> models)
+		public static List<UserModel> ConvertListFromDal(IEnumerable<User> obj)
 		{
-			return models?.Select(ConvertFromDal).ToList();
+			return obj?.Select(ConvertFromDal).ToList();
 		}
-		public static List<User> ConvertListToDal(IEnumerable<UserModel> models)
+		public static List<User> ConvertListToDal(IEnumerable<UserModel> obj)
 		{
-			return models?.Select(ConvertToDal).ToList();
+			return obj?.Select(ConvertToDal).ToList();
 		}
 	}
 }

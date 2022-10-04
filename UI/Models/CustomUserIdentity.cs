@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Enums;
 using DAL.DbModels;
+using Entities;
 using Microsoft.VisualStudio.OLE.Interop;
 
 namespace UI.Models

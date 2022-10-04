@@ -28,13 +28,19 @@ namespace DAL
 		}
 
 		public DbSet<User> Users { get; set; }
-		public DbSet<Catalog> Catalogs { get; set; }
+		public DbSet<Category> Categories { get; set; }
 		public DbSet<Product> Products { get; set; }
+		public DbSet<ProductPhoto> ProductPhotos { get; set; }
+		public DbSet<ProductTemplate> ProductTemplates { get; set; }
 		public DbSet<City> Cities { get; set; }
 		public DbSet<News> News { get; set; }
 		public DbSet<Manufacturer> Manufacturers { get; set; }
 		public DbSet<Customer> Customers { get; set; }
 		public DbSet<Vendor> Vendors { get; set; }
 		public DbSet<Order> Orders { get; set; }
+		public DbSet<Country> Countries { get; set; }
+		public DbSet<OrderPosition> OrderPositions { get; set; }
+
+
 	}
 }

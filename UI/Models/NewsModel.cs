@@ -3,45 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DAL.DbModels;
+using Entities.Base;
 
 namespace UI.Models
 {
-    public class NewsModel
+    public class NewsModel : Entity
     {
-		public int Id { get; set; }
 		public string Title { get; set; }
 		public string Url { get; set; }
 		public string Content { get; set; }
 		public DateTime CreationDate { get; set; }
 
-		public static News ConvertToDal(NewsModel model)
+		public static News ConvertToDal(NewsModel obj)
 		{
-			var result = new News
-			{
-				Id = model.Id,
-				Title = model.Title,
-				Content = model.Content,
-				CreationDate = model.CreationDate,
-				Url = model.Url
-			};
-
-			return result;
+			var config = new MapperConfiguration(cfg =>
+				cfg.CreateMap<NewsModel, News>());
+			var mapper = new Mapper(config);
+			return mapper.Map<NewsModel, News>(obj);
 		}
 
-		public static NewsModel ConvertFromDal(News model)
+		public static NewsModel ConvertFromDal(News obj)
 		{
-			var result = new NewsModel
-			{
-				Id = model.Id,
-				Title = model.Title,
-				Content = model.Content,
-				CreationDate = model.CreationDate,
-				Url = model.Url
-
-			};
-
-			return result;
+			var config = new MapperConfiguration(cfg =>
+				cfg.CreateMap<News, NewsModel>());
+			var mapper = new Mapper(config);
+			return mapper.Map<News, NewsModel>(obj);
 		}
 
 		public static List<NewsModel> ConvertListFromDal(IEnumerable<News> models)

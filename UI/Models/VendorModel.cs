@@ -1,73 +1,53 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using DAL.DbModels;
+using Entities;
 
 namespace UI.Models
 {
     public class VendorModel : BaseUser
     {
 	    public int Rating { get; set; }
+
 	    public int ResponsibleId { get; set; }
+
 	    public string ITN { get; set; }
+
 	    public string BIC { get; set; }
+
 	    public string PhysicalAdress { get; set; }
+
 	    public string LegalAddress { get; set; }
+
 	    public UserModel Responsible { get; set; }
 
-	    public static Vendor ConvertToDal(VendorModel obj)
+	    public List<ProductModel> Products { get; set; }
+
+		public static Vendor ConvertToDal(VendorModel obj)
 	    {
-		    return obj == null
-			    ? null
-			    : new Vendor()
-			    {
-					Id = obj.Id,
-					Email = obj.Email,
-					FirstName = obj.FirstName,
-					MiddleName = obj.MiddleName,
-					LastName = obj.LastName,
-					Login = obj.Login,
-					MobilePhone = obj.MobilePhone,
-					Password = obj.Password,
-					Rating = obj.Rating,
-					ResponsibleId = obj.ResponsibleId,
-					ITN = obj.ITN,
-					BIC = obj.BIC,
-					PhysicalAdress = obj.PhysicalAdress,
-					LegalAddress = obj.LegalAddress,
-			    };
-	    }
+		    var config = new MapperConfiguration(cfg =>
+			    cfg.CreateMap<VendorModel, Vendor>());
+		    var mapper = new Mapper(config);
+		    return mapper.Map<VendorModel, Vendor>(obj);
+		}
 
 
 		public static VendorModel ConvertFromDal(Vendor obj)
 	    {
-		    return obj == null
-			    ? null
-			    : new VendorModel()
-			    {
-				    Id = obj.Id,
-				    Email = obj.Email,
-				    FirstName = obj.FirstName,
-				    MiddleName = obj.MiddleName,
-				    LastName = obj.LastName,
-				    Login = obj.Login,
-				    MobilePhone = obj.MobilePhone,
-				    Password = obj.Password,
-				    Rating = obj.Rating,
-				    ResponsibleId = obj.ResponsibleId,
-				    ITN = obj.ITN,
-				    BIC = obj.BIC,
-				    PhysicalAdress = obj.PhysicalAdress,
-				    LegalAddress = obj.LegalAddress,
-				};
-	    }
+		    var config = new MapperConfiguration(cfg =>
+			    cfg.CreateMap<Vendor, VendorModel>());
+		    var mapper = new Mapper(config);
+		    return mapper.Map<Vendor, VendorModel>(obj);
+		}
 
-		public static List<VendorModel> ConvertListFromDal(IEnumerable<Vendor> models)
+		public static List<VendorModel> ConvertListFromDal(IEnumerable<Vendor> obj)
 	    {
-		    return models?.Select(ConvertFromDal).ToList();
+		    return obj?.Select(ConvertFromDal).ToList();
 	    }
-	    public static List<Vendor> ConvertListToDal(IEnumerable<VendorModel> models)
+	    public static List<Vendor> ConvertListToDal(IEnumerable<VendorModel> obj)
 	    {
-		    return models?.Select(ConvertToDal).ToList();
+		    return obj?.Select(ConvertToDal).ToList();
 	    }
 	}
 }

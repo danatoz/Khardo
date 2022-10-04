@@ -1,47 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DAL.DbModels;
+using Entities.Base;
 
 namespace UI.Models
 {
-	public class ManufacturerModel
+	public class ManufacturerModel : Entity
 	{
-		public int Id { get; set; }
 		public string Name { get; set; }
-		public int Rating { get; set; }
+
 		public string UrlLogo { get; set; }
+
+		public int CountryId { get; set; }
+
+		public Country Country { get; set; }
 
 
 		public static Manufacturer ConvertToDal(ManufacturerModel obj)
 		{
-			return obj == null ? null : new Manufacturer
-			{
-				Id = obj.Id,
-				Name = obj.Name,
-				UrlLogo = obj.UrlLogo
-			};
+			var config = new MapperConfiguration(cfg =>
+				cfg.CreateMap<ManufacturerModel, Manufacturer>());
+			var mapper = new Mapper(config);
+			return mapper.Map<ManufacturerModel, Manufacturer>(obj);
 		}
 
 		public static ManufacturerModel ConvertFromDal(Manufacturer obj)
 		{
-			return obj == null ? null : new ManufacturerModel
-			{
-				Id = obj.Id,
-				Name = obj.Name,
-				UrlLogo = obj.UrlLogo
-			};
+			var config = new MapperConfiguration(cfg =>
+				cfg.CreateMap<Manufacturer, ManufacturerModel>());
+			var mapper = new Mapper(config);
+			return mapper.Map<Manufacturer, ManufacturerModel>(obj);
 		}
 
-		public static List<ManufacturerModel> ConvertListFromDal(IEnumerable<Manufacturer> models)
+		public static List<ManufacturerModel> ConvertListFromDal(IEnumerable<Manufacturer> obj)
 		{
-			return models?.Select(ConvertFromDal).ToList();
+			return obj?.Select(ConvertFromDal).ToList();
 		}
-		public static List<Manufacturer> ConvertListToDal(IEnumerable<ManufacturerModel> models)
+		public static List<Manufacturer> ConvertListToDal(IEnumerable<ManufacturerModel> obj)
 		{
-			return models?.Select(ConvertToDal).ToList();
+			return obj?.Select(ConvertToDal).ToList();
 		}
 	}
 }

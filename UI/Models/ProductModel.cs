@@ -8,23 +8,23 @@ namespace UI.Models
 {
     public class ProductModel
     {
-		public int Id { get; set; }
-		public string Name { get; set; }
-		public string VendorCode { get; set; }
-		public string Alias { get; set; }
-		public string UrlImage { get; set; }
-		public string Description { get; set; }
-		public int Amount { get; set; }
-		public decimal Price { get; set; }
-		public int CatalogId { get; set; }
-		public int? ManufacturerId { get; set; }
-		public int VendorId { get; set; }
-		public bool Active { get; set; }
-		public ManufacturerType ManufacturerType { get; set; }
+	    public long Id { get; set; }
 
-		public CatalogModel Catalog { get; set; }
-		public ManufacturerModel Manufacturer { get; set; }
-		public VendorModel Vendor { get; set; }
+	    public string VendorCode { get; set; }
+
+	    public int VendorId { get; set; }
+
+	    public string Alias { get; set; }
+
+	    public int Amount { get; set; }
+
+	    public decimal Price { get; set; }
+
+	    public bool Active { get; set; }
+
+	    public ProductTemplateModel ProductTemplate { get; set; }
+
+	    public VendorModel Vendor { get; set; }
 
 		public static Product ConvertToDal(ProductModel obj)
 		{
@@ -42,13 +42,13 @@ namespace UI.Models
 			return mapper.Map<Product, ProductModel>(obj);
 		}
 
-		public static List<ProductModel> ConvertListFromDal(IEnumerable<Product> models)
+		public static List<ProductModel> ConvertListFromDal(IEnumerable<Product> obj)
 		{
-			return models?.Select(ConvertFromDal).ToList();
+			return obj?.Select(ConvertFromDal).ToList();
 		}
-		public static List<Product> ConvertListToDal(IEnumerable<ProductModel> models)
+		public static List<Product> ConvertListToDal(IEnumerable<ProductModel> obj)
 		{
-			return models?.Select(ConvertToDal).ToList();
+			return obj?.Select(ConvertToDal).ToList();
 		}
 	}
 }

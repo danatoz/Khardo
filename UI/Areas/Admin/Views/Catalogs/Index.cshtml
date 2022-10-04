@@ -1,4 +1,4 @@
-﻿@model SearchResultViewModel<CatalogModel, CatalogFilterModel>
+﻿@model SearchResultViewModel<CategoryModel, CatalogFilterModel>
 @{
 	ViewBag.CreationLink = Url.Action("Update", "Catalogs", new { Area = "Admin" });
 
@@ -27,7 +27,7 @@
 							@item.Alias
 						</td>
 						<td>
-							@item.ParentCatalog?.Name
+							@item.ParentCategory?.Name
 						</td>
 						<td>
 							@@item.SortKey

@@ -41,6 +41,7 @@
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\Data\DAL.MsSqlServer\DAL.MsSqlServer.csproj" />
     <ProjectReference Include="..\Data\DAL\DAL.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\Tools\Tools.csproj" />
   </ItemGroup>
 

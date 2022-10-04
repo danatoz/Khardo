@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using BL;
 using DAL.DbModels;
-using UI.Areas.Public.Models;
 using UI.Models;
 
 namespace UI.Tools
@@ -24,66 +23,66 @@ namespace UI.Tools
         {
 			var urlBuilder = new StringBuilder();
 			var breadCrumbList = new List<BreadCrumbModel>();
-			if (_routeValues.TryGetValue("alias", out object aliasParameter)
-				&& !string.IsNullOrWhiteSpace(aliasParameter.ToString()))
-			{
-				var alias = aliasParameter.ToString();
-				var catalog = new CatalogsBL();
-				var categoryList = new List<Catalog>();
+			//if (_routeValues.TryGetValue("alias", out object aliasParameter)
+			//	&& !string.IsNullOrWhiteSpace(aliasParameter.ToString()))
+			//{
+			//	var alias = aliasParameter.ToString();
+			//	var catalog = new CatalogsBL();
+			//	var categoryList = new List<Category>();
 
-				if ("Products".Equals(_routeValues["controller"]))
-				{
-					Product product = null;
-					var products = await new ProductsBL().GetSimpleByAliasAsync(alias.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault());
-					if (products != null)
-					{
-						foreach (var item in products)
-						{
-							if (alias == $"{await catalog.GenerateFullUrl(item.CatalogId)}/{item.Alias}")
-							{
-								product = item;
-								break;
-							}
-						}
-					}
-					if (product != null)
-						categoryList.AddRange(await catalog.GetParentCatalogs(product.CatalogId));
-				}
-				else
-				{
-					categoryList.AddRange(await catalog.GetParentCatalogs(aliasParameter.ToString()));
-				}
+			//	if ("Products".Equals(_routeValues["controller"]))
+			//	{
+			//		Product product = null;
+			//		var products = await new ProductsBL().GetSimpleByAliasAsync(alias.Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries).LastOrDefault());
+			//		if (products != null)
+			//		{
+			//			foreach (var item in products)
+			//			{
+			//				if (alias == $"{await catalog.GenerateFullUrl(item.CatalogId)}/{item.Alias}")
+			//				{
+			//					product = item;
+			//					break;
+			//				}
+			//			}
+			//		}
+			//		if (product != null)
+			//			categoryList.AddRange(await catalog.GetParentCatalogs(product.CatalogId));
+			//	}
+			//	else
+			//	{
+			//		categoryList.AddRange(await catalog.GetParentCatalogs(aliasParameter.ToString()));
+			//	}
 
-				breadCrumbList.Add(new BreadCrumbModel
-				{
-					Name = "Каталог",
-					Url = "catalog"
-				});
+			//	breadCrumbList.Add(new BreadCrumbModel
+			//	{
+			//		Name = "Каталог",
+			//		Url = "catalog"
+			//	});
 
-				foreach (var item in categoryList)
-				{
-					breadCrumbList.Add(new BreadCrumbModel
-					{
-						Name = item.Name,
-						Url = urlBuilder.AppendFormat("/{0}", item.Alias).ToString().TrimStart('/')
-					});
-				}
+			//	foreach (var item in categoryList)
+			//	{
+			//		breadCrumbList.Add(new BreadCrumbModel
+			//		{
+			//			Name = item.Name,
+			//			Url = urlBuilder.AppendFormat("/{0}", item.Alias).ToString().TrimStart('/')
+			//		});
+			//	}
 
-			}
+			//}
 
-			if (!("Home".Equals(_routeValues["controller"])
-				&& "Index".Equals(_routeValues["action"])))
-			{
-				var breadCrumbElement = breadCrumbList.LastOrDefault();
-				if (breadCrumbElement != null && breadCrumbElement.Name == currentPageTitle)
-					breadCrumbElement.IsActive = true;
-				else
-					breadCrumbList.Add(new BreadCrumbModel
-					{
-						Name = currentPageTitle,
-						IsActive = true
-					});
-			}
+			//if (!("Home".Equals(_routeValues["controller"])
+			//	&& "Index".Equals(_routeValues["action"])))
+			//{
+			//	var breadCrumbElement = breadCrumbList.LastOrDefault();
+			//	if (breadCrumbElement != null && breadCrumbElement.Name == currentPageTitle)
+			//		breadCrumbElement.IsActive = true;
+			//	else
+			//		breadCrumbList.Add(new BreadCrumbModel
+			//		{
+			//			Name = currentPageTitle,
+			//			IsActive = true
+			//		});
+			//}
 
 			return breadCrumbList;
 		}

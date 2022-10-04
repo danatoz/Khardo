@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace UI.Areas.Public.Models
+﻿namespace UI.Models
 {
     public class BreadCrumbModel
     {

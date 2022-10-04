@@ -52,7 +52,7 @@ namespace UI
 			services.AddRazorPages();
 			services.AddRouting(options => options.LowercaseUrls = true);
 			services.AddScoped<IRabbitMqService, RabbitMqService>();
-			services.AddTransient<IBreadCrumbDataProvider, BreadCrumbDataProvider>();
+			//services.AddTransient<IBreadCrumbDataProvider, BreadCrumbDataProvider>();
 			services.AddHttpContextAccessor();
 		}
 
@@ -109,19 +109,19 @@ namespace UI
 
 			#region Custom Constrains
 
-			endpoints.MapControllerRoute(
-				name: "ProductDetails",
-				pattern: @"{**alias}",
-				defaults: new { area = "Public", controller = "Products", action = "Details", },
-				constraints: new { alias = new ProductRouteConstraint() }
-			);
+			//endpoints.MapControllerRoute(
+			//	name: "ProductDetails",
+			//	pattern: @"{**alias}",
+			//	defaults: new { area = "Public", controller = "Products", action = "Details", },
+			//	constraints: new { alias = new ProductRouteConstraint() }
+			//);
 
-			endpoints.MapControllerRoute(
-				name: "SubCatalog",
-				pattern: @"{**alias}",
-				defaults: new { area = "Public", controller = "Catalogs", action = "SubCategoryList" },
-				constraints: new { alias = new CatalogRouteConstraint() }
-			);
+			//endpoints.MapControllerRoute(
+			//	name: "SubCatalog",
+			//	pattern: @"{**alias}",
+			//	defaults: new { area = "Public", controller = "Catalogs", action = "SubCategoryList" },
+			//	constraints: new { alias = new CatalogRouteConstraint() }
+			//);
 			#endregion
 
 			endpoints.MapControllerRoute(

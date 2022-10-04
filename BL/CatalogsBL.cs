@@ -20,10 +20,10 @@ namespace BL
 	    public CatalogsBL()
 	    {
 	    }
-	    public async Task<IEnumerable<Catalog>> GetParentCatalogs(int parentId)
+	    public async Task<IEnumerable<Category>> GetParentCatalogs(int parentId)
 	    {
-		    var list = new List<Catalog>();
-		    var catalog = _context.Catalogs;
+		    var list = new List<Category>();
+		    var catalog = _context.Categories;
 		    while (true)
 		    {
 			    var category = await catalog.FirstOrDefaultAsync(item => item.Id == parentId);
@@ -58,25 +58,25 @@ namespace BL
 			return builder.ToString();
 		}
 
-		public async Task<IList<Catalog>> GetParentCatalogs(string aliasPath)
+		public async Task<IList<Category>> GetParentCatalogs(string aliasPath)
 		{
-			var list = await _context.Catalogs.Where(item => aliasPath.Contains(item.Alias)).ToListAsync();
+			var list = await _context.Categories.Where(item => aliasPath.Contains(item.Alias)).ToListAsync();
 
 			return aliasPath.Split(new string[] {"/"}, StringSplitOptions.RemoveEmptyEntries).Distinct().Select(alias => list.FirstOrDefault(item => item.Alias == alias)).Where(category => category != null).ToList();
 		}
 
-		public async Task<Catalog> GetSimpleByAliasAsync(string alias)
+		public async Task<Category> GetSimpleByAliasAsync(string alias)
 		{
 			try
 			{
-				return await _context.Catalogs.FirstOrDefaultAsync(item => item.Alias == alias && item.IsPublic);
+				return await _context.Categories.FirstOrDefaultAsync(item => item.Alias == alias && item.IsPublic);
 			}
 			catch
 			{
 
 			}
 
-			return new Catalog();
+			return new Category();
 		}
 	}
 }

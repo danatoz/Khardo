@@ -23,10 +23,10 @@ namespace UI.TreeModel
 			return childrenFetcher(topMostKey);
 		}
 
-		public static void PrintNode(Node<CatalogModel> node, int level)
+		public static void PrintNode(Node<CategoryModel> node, int level)
 		{
 			Console.WriteLine(node.Data?.Name);
-			foreach (Node<CatalogModel> child in node.Children)
+			foreach (Node<CategoryModel> child in node.Children)
 			{
 				PrintNode(child, level + 1); //<-- recursive
 			}

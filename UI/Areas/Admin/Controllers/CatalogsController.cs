@@ -44,11 +44,11 @@ namespace UI.Areas.Admin.Controllers
 		{
 			const int objectsPerPage = 30;
 			var startIndex = (page - 1) * objectsPerPage;
-			var source = _context.Catalogs.Where(item => item.Active);
+			var source = _context.Categories.Where(item => item.Active);
 			var count = await source.CountAsync();
 			var items = await source.Skip(startIndex).Take(objectsPerPage).ToListAsync();
 
-			var viewModel = new SearchResultViewModel<CatalogModel, CatalogFilterModel>(CatalogModel.ConvertListFromDal(items), filter, count, 1, 1, objectsPerPage);
+			var viewModel = new SearchResultViewModel<CategoryModel, CatalogFilterModel>(CategoryModel.ConvertListFromDal(items), filter, count, 1, 1, objectsPerPage);
 			return View(viewModel);
 		}
 
@@ -56,19 +56,19 @@ namespace UI.Areas.Admin.Controllers
 		{
 			await InitViewBag();
 
-			var viewModel = CatalogModel.ConvertFromDal(
-				await _context.Catalogs.FirstOrDefaultAsync(item => item.Id == id)) ?? new CatalogModel();
+			var viewModel = CategoryModel.ConvertFromDal(
+				await _context.Categories.FirstOrDefaultAsync(item => item.Id == id)) ?? new CategoryModel();
 
 			return View(viewModel);
 		}
 		[HttpPost]
-		public async Task<IActionResult> Update(CatalogModel model)
+		public async Task<IActionResult> Update(CategoryModel model)
 		{
 			await InitViewBag();
 			if (!ModelState.IsValid)
 				return View(model);
 
-			_context.Catalogs.Update(CatalogModel.ConvertToDal(model));
+			_context.Categories.Update(CategoryModel.ConvertToDal(model));
 			await _context.SaveChangesAsync();
 
 			return RedirectToAction("Index", "Catalogs", new {Area = "Admin"});
@@ -78,9 +78,9 @@ namespace UI.Areas.Admin.Controllers
 		{
 			try
 			{
-				var model = await _context.Catalogs.FirstOrDefaultAsync(item => item.Id == id);
+				var model = await _context.Categories.FirstOrDefaultAsync(item => item.Id == id);
 				model.Active = false;
-				_context.Catalogs.Update(model);
+				_context.Categories.Update(model);
 				await _context.SaveChangesAsync();
 			}
 			catch (Exception ex)
@@ -95,7 +95,7 @@ namespace UI.Areas.Admin.Controllers
 			ViewBag.CatalogCategory = new List<SelectListItem>()
 			{
 				new SelectListItem("--Не выбрано---", "")
-			}.Concat(_context.Catalogs.Select(item => new SelectListItem(item.Name, item.Id.ToString()))).ToList();
+			}.Concat(_context.Categories.Select(item => new SelectListItem(item.Name, item.Id.ToString()))).ToList();
 		}
 	}
 }
