@@ -22,6 +22,7 @@ namespace DAL.DbModels
 
 		public int ManufacturerType { get; set; }
 
+		public bool Active { get; set; }
 
 		[ForeignKey("ManufacturerId")]
 		public Manufacturer Manufacturer { get; set; }

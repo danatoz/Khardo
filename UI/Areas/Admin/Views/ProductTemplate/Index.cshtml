@@ -1,0 +1,46 @@
+﻿@model SearchResultViewModel<ProductTemplateModel, ProductTemplateFilterModel>
+@{
+	ViewBag.CreationLink = Url.Action("Update", "ProductTemplate", new { Area = "Admin" });
+
+	ViewData["Title"] = "Шаблон продукта";
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<tr>
+
+					<th class="text-center">Название</th>
+					<th class="text-center">Категория</th>
+					<th class="text-center">Производитель</th>
+					<th class="text-center">Действия</th>
+				</tr>
+				@foreach (var item in Model.Objects)
+				{
+					<tr class="text-center">
+						<td>
+							@item.Name
+						</td>
+						<td>
+							@item.Category?.Name
+						</td>
+						<td>
+							@item.Manufacturer?.Name
+						</td>
+						<td class="text-center">
+							<a asp-action="Update" asp-area="Admin" asp-route-id="@item.VendorCode">Изменить</a><br />
+							<a asp-action="Delete" asp-area="Admin" asp-route-id="@item.VendorCode" class="delete-object-button">Удалить</a>
+						</td>
+					</tr>
+				}
+			</table>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts
+{
+
+}

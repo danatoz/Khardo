@@ -155,7 +155,7 @@ namespace DAL.Mocks
 					{
 						VendorCode = "4300xs-R18",
 						Name = "Шина R18/215 65",
-						CategoryId = 1,
+						CategoryId = 2,
 						Description = "Шина классная, резиновая",
 						Photos = new List<ProductPhoto>()
 						{
@@ -166,7 +166,8 @@ namespace DAL.Mocks
 								UrlImage = ""
 							}
 						},
-						ManufacturerId = 1
+						ManufacturerId = 1,
+						Active = true
 					},
 				};
 				context.ProductTemplates.AddRange(productTemplate);
@@ -188,29 +189,6 @@ namespace DAL.Mocks
 
 				context.Products.AddRange(products);
 				context.SaveChangesAsync();
-
-				//var products = new List<Product>()
-				//{
-				//	new Product()
-				//	{
-				//		Id = 1,
-				//		Name = "Шина R18/215 65",
-				//		CatalogId = 1,
-				//		Amount = 4,
-				//		Description = "Шина классная, резиновая",
-				//		UrlImage = "",
-				//		Alias = "",
-				//		Active = true
-				//	},
-				//	new Product() { Id = 2, Name = "Масло моторное 5W40", CatalogId = 4, Amount = 12, Description = "Shell", UrlImage = "", Alias = "",
-				//		Active = true },
-				//	new Product() { Id = 3, Name = "Масло моторное 5W30", CatalogId = 4, Amount = 4, Description = "Nissan", UrlImage = "", Alias = "",
-				//		Active = true},
-				//	new Product() { Id = 4, Name = "Свеча зажигания", CatalogId = 5, Amount = 4, Description = "оригенал", UrlImage = "", Alias = "plug",
-				//		Active = true},
-				//	new Product() { Id = 5, Name = "Свеча зажигания NGK", CatalogId = 5, Amount = 20, Description = "Гарантия качества", UrlImage = "", Alias = "",
-				//		Active = true},
-				//};
 			}
 			catch (Exception ex)
 			{

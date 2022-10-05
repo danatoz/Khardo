@@ -1,0 +1,76 @@
+﻿@model ProductTemplateModel
+@{
+	var exists = Model != null && Model.VendorCode != null;
+	ViewBag.Title = (exists ? "Редактирование" : "Создание") + " категории";
+}
+
+<form asp-area="Admin" asp-controller="ProductTemplate" asp-action="Update" method="post">
+@*	<div class="row">
+		<input type="hidden" asp-for="Id" />
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Name"></label>
+				<input type="text" asp-for="Name" class="form-control" autocomplete="off" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Alias"></label>
+				<input type="text" asp-for="Alias" class="form-control" disabled autocomplete="off" />
+				<span asp-validation-for="Alias" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Amount"></label>
+				<input type="text" asp-for="Amount" class="form-control" autocomplete="off" />
+				<span asp-validation-for="Amount" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="UrlImage"></label>
+				<input type="text" asp-for="UrlImage" class="form-control" autocomplete="off" />
+				<span asp-validation-for="UrlImage" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Description"></label>
+				<input type="text" asp-for="Description" class="form-control" autocomplete="off" />
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="Active"></label>
+				<input type="checkbox" asp-for="Active" class="form-control" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="ManufacturerType"></label>
+				<select asp-for="ManufacturerType" class="form-control" asp-items="manufactureType"></select>
+				<span asp-validation-for="ManufacturerType" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-md-4 col-sm-6">
+			<div class="form-group">
+				<label asp-for="VendorCode"></label>
+				<input type="text" asp-for="VendorCode" class="form-control" autocomplete="off" />
+				<span asp-validation-for="VendorCode" class="text-danger"></span>
+			</div>
+		</div>
+	</div>*@
+	<div class="row">
+		<div class="mx-auto mt-3">
+			<button type="submit" class="btn btn-primary">@(exists ? "Сохранить" : "Добавить")</button>
+			<a asp-action="Index" class="btn btn-outline-secondary">Отмена</a>
+		</div>
+	</div>
+</form>
