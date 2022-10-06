@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.DbModels;
+using Entities;
 using Microsoft.AspNetCore.Identity;
 using Common.Enums;
 
@@ -48,6 +48,7 @@ namespace DAL.Mocks
 					},
 					new User()
 					{
+						Id = 22,
 						Email = "manager2@manager.ru",
 						Login = "manager2",
 						Password = "cd8c29b8deed323fe1538cfbdb46fc2a2ea61cfd67807f0629708ea2a6e13a2919def3c837c4e7f2c8e0067568e3236827defb05c9346e476b6e954440a908a7",
@@ -64,19 +65,26 @@ namespace DAL.Mocks
 
 				var vendors = new List<Vendor>()
 				{
-					new Vendor()
+					new Vendor
 					{
 						Id = 1,
 						NameOrganization = "ООО\"Понтал+\"",
+						Rating = 0,
 						Email = "vendor@vendor.ru",
 						Login = "vendor",
-						Password = "cd8c29b8deed323fe1538cfbdb46fc2a2ea61cfd67807f0629708ea2a6e13a2919def3c837c4e7f2c8e0067568e3236827defb05c9346e476b6e954440a908a7",
+						Password =
+							"cd8c29b8deed323fe1538cfbdb46fc2a2ea61cfd67807f0629708ea2a6e13a2919def3c837c4e7f2c8e0067568e3236827defb05c9346e476b6e954440a908a7",
 						ResponsibleId = 2,
+						ITN = "",
+						BIC = "",
+						PhysicalAdress = "",
+						LegalAddress = "",
 						Role = (int)UserRole.Vendor,
+						IsBlocked = false,
 						MobilePhone = "8 800 555-35-35",
 						LastName = "Иванов",
 						FirstName = "Иван",
-						MiddleName = "Иванович"
+						MiddleName = "Иванович",
 					}
 				};
 				context.Vendors.AddRange(vendors);

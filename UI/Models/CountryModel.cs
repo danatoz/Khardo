@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
-using DAL.DbModels;
 using Entities.Base;
 using System.Collections.Generic;
 using System.Linq;
+using Entities;
+
 
 namespace UI.Models
 {

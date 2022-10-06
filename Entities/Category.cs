@@ -1,4 +1,7 @@
-﻿namespace DAL.DbModels
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Entities.Base;
+
+namespace Entities
 {
 	public class Category : Entity
 	{

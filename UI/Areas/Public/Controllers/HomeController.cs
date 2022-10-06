@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
+using BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,7 +21,7 @@ namespace UI.Areas.Public.Controllers
 		}
 
 		[AllowAnonymous]
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
 			return View();
 		}

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DAL.DbModels;
+using Entities;
 using Common.Enums;
 using AutoMapper;
 

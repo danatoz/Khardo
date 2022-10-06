@@ -1,6 +1,6 @@
-﻿using Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DAL.DbModels
+namespace Entities
 {
 	public class Vendor : BaseUser
 	{

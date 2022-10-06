@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DAL;
-using DAL.DbModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,24 +41,24 @@ namespace UI.Areas.Admin.Controllers
 
 		public async Task<IActionResult> Index(CatalogFilterModel filter, int page = 1)
 		{
-			const int objectsPerPage = 30;
-			var startIndex = (page - 1) * objectsPerPage;
-			var source = _context.Categories.Where(item => item.Active);
-			var count = await source.CountAsync();
-			var items = await source.Skip(startIndex).Take(objectsPerPage).ToListAsync();
-
-			var viewModel = new SearchResultViewModel<CategoryModel, CatalogFilterModel>(CategoryModel.ConvertListFromDal(items), filter, count, 1, 1, objectsPerPage);
-			return View(viewModel);
+			//const int objectsPerPage = 30;
+			//var startIndex = (page - 1) * objectsPerPage;
+			//var source = _context.Categories.Where(item => item.Active);
+			//var count = await source.CountAsync();
+			//var items = await source.Skip(startIndex).Take(objectsPerPage).ToListAsync();
+			//
+			//var viewModel = new SearchResultViewModel<CategoryModel, CatalogFilterModel>(items, filter, count, 1, 1, objectsPerPage);
+			return View();
 		}
 
 		public async Task<IActionResult> Update(int? id)
 		{
 			await InitViewBag();
 
-			var viewModel = CategoryModel.ConvertFromDal(
-				await _context.Categories.FirstOrDefaultAsync(item => item.Id == id)) ?? new CategoryModel();
+			//var viewModel = 
+			//	await _context.Categories.FirstOrDefaultAsync(item => item.Id == id) ?? new CategoryModel();
 
-			return View(viewModel);
+			return View();
 		}
 		[HttpPost]
 		public async Task<IActionResult> Update(CategoryModel model)
@@ -68,8 +67,8 @@ namespace UI.Areas.Admin.Controllers
 			if (!ModelState.IsValid)
 				return View(model);
 
-			_context.Categories.Update(CategoryModel.ConvertToDal(model));
-			await _context.SaveChangesAsync();
+			//_context.Categories.Update(CategoryModel.ConvertToDal(model));
+			//await _context.SaveChangesAsync();
 
 			return RedirectToAction("Index", "Catalogs", new {Area = "Admin"});
 		}

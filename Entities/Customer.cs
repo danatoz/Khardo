@@ -1,6 +1,4 @@
-﻿using Entities;
-
-namespace DAL.DbModels
+﻿namespace Entities
 {
     public class Customer : BaseUser
     {

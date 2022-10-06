@@ -1,4 +1,4 @@
-﻿using DAL.DbModels;
+﻿using Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using DAL.Mocks;
@@ -6,13 +6,18 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DAL
 {
-	public class ApplicationDbContext : DbContext
+	public partial class ApplicationDbContext : DbContext
 	{
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options)
 		{
 			options = new DbContextOptionsBuilder<ApplicationDbContext>()
 				.UseInMemoryDatabase("Default").Options;
+		}
+
+		public ApplicationDbContext()
+		{
+			
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

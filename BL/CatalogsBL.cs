@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
-using DAL.DbModels;
+using Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BL

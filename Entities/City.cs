@@ -1,4 +1,6 @@
-﻿namespace DAL.DbModels
+﻿using Entities.Base;
+
+namespace Entities
 {
     public class City : Entity
     {

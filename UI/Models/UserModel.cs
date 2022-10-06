@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Common.Enums;
-using DAL.DbModels;
 using Entities;
 
 namespace UI.Models

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using DAL.DbModels;
 using Entities.Base;
+using Entities;
 
 namespace UI.Models
 {

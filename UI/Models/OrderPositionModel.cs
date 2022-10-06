@@ -1,6 +1,5 @@
-﻿
+﻿using Entities;
 using AutoMapper;
-using DAL.DbModels;
 using System.Collections.Generic;
 using System.Linq;
 

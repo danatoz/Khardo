@@ -9,9 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.DbModels;
 using UI.Models.ViewModels.FilterModel;
 using UI.Models.ViewModels;
+using Entities;
+
 
 namespace UI.Areas.Admin.Controllers
 {
@@ -43,10 +44,10 @@ namespace UI.Areas.Admin.Controllers
 
 		public async Task<IActionResult> Update(string id)
 		{
-			var viewModel = ProductTemplateModel.ConvertFromDal(
-				await _context.ProductTemplates.FirstOrDefaultAsync(item => item.VendorCode == id)) ?? new ProductTemplateModel();
+			//var viewModel = ProductTemplateModel.ConvertFromDal(
+			//	await _context.ProductTemplates.FirstOrDefaultAsync(item => item.VendorCode == id)) ?? new ProductTemplateModel();
 
-			return View(viewModel);
+			return View();
 		}
 		[HttpPost]
 		public async Task<IActionResult> Update(ProductTemplateModel model)

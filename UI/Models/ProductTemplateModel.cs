@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using System.Linq;
-using DAL.DbModels;
+using Entities;
 
 namespace UI.Models
 {

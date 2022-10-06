@@ -34,7 +34,7 @@ namespace UI.Areas.Admin.Controllers
 
 		    const int objectsPerPage = 20;
 		    var startIndex = (page - 1) * objectsPerPage;
-		    IQueryable<DAL.DbModels.Vendor> source = _context.Vendors;
+		    IQueryable<Entities.Vendor> source = _context.Vendors;
 		    if (filterModel.ResponsibleId != null)
 		    {
 			    source = _context.Vendors.Where(item => item.ResponsibleId == filterModel.ResponsibleId);
@@ -55,7 +55,7 @@ namespace UI.Areas.Admin.Controllers
 		    if (viewModel == null)
 			    return NotFound();
 
-		    return View(VendorModel.ConvertFromDal(viewModel));
+		    return View(viewModel);
 	    }
 
 	    [HttpPost]

@@ -42,19 +42,19 @@ namespace UI.Areas.Admin.Controllers
 
 		public async Task<IActionResult> Update(int? id)
 		{
-			var viewModel = ProductModel.ConvertFromDal(
-				await _context.Products.FirstOrDefaultAsync(item => item.Id == id)) ?? new ProductModel();
+			//var viewModel = ProductModel.ConvertFromDal(
+			//	await _context.Products.FirstOrDefaultAsync(item => item.Id == id)) ?? new ProductModel();
 
-			return View(viewModel);
+			return View();
 		}
 		[HttpPost]
 		public async Task<IActionResult> Update(ProductModel model)
 		{
-			if (!ModelState.IsValid)
-				return View(model);
+			//if (!ModelState.IsValid)
+			//	return View(model);
 
-			_context.Products.Update(ProductModel.ConvertToDal(model));
-			await _context.SaveChangesAsync();
+			//_context.Products.Update(ProductModel.ConvertToDal(model));
+			//await _context.SaveChangesAsync();
 
 			return RedirectToAction("Index", "Products", new { Area = "Admin" });
 		}
