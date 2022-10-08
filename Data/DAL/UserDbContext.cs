@@ -14,8 +14,8 @@ namespace DAL
 	{
 		public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
 		{
-			options = new DbContextOptionsBuilder<UserDbContext>()
-				.UseInMemoryDatabase("Default").Options;
+			//options = new DbContextOptionsBuilder<UserDbContext>()
+			//	.UseInMemoryDatabase("Default").Options;
 			
 		}
 
@@ -28,8 +28,7 @@ namespace DAL
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			base.OnModelCreating(builder);
-			builder.HasDefaultSchema("Identity");
-			builder.Entity<IdentityUser>(entity =>
+			builder.Entity<User>(entity =>
 			{
 				entity.ToTable(name: "Users");
 			});

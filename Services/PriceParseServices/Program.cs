@@ -20,7 +20,10 @@ using (var channel = connection.CreateModel())
 		var body = ea.Body.ToArray();
 		var message = Encoding.UTF8.GetString(body);
 		var result = Newtonsoft.Json.JsonConvert.DeserializeObject<MessageModel>(message);
-		await ExcelParse.Parse(result);
+		await PriceUploader.Upload(
+			await ExcelParse.Parse(result)
+			);
+
 	};
 	channel.BasicConsume(queue: "QueueForParseExcel",
 		autoAck: true,
