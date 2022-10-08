@@ -12,7 +12,7 @@ namespace Entities
 	    public int? CountryId { get; set; }
 
 		[ForeignKey("CountryId")]
-	    public Country Country { get; set; }
+		public Country Country { get; set; }
 
 	}
 }

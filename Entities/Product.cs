@@ -17,6 +17,7 @@ namespace Entities
 
 		public int Amount { get; set; }
 
+		[Column(TypeName = "money")]
 		public decimal Price { get; set; }
 
 		public bool Active { get; set; }
@@ -24,7 +25,7 @@ namespace Entities
 		[ForeignKey("VendorCode")]
 		public ProductTemplate? ProductTemplate { get; set; }
 
-		[ForeignKey("VendorId")] 
+		[ForeignKey("VendorId")]
 		public User? Vendor { get; set; }
 	}
 }

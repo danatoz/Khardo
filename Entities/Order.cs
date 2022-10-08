@@ -14,6 +14,7 @@ namespace Entities
 		public string? CustomerId { get; set; }
 
 		[ForeignKey("CustomerId")]
+		[NotMapped]
 		public Customer? Customer { get; set; }
 
 		public List<OrderPosition>? OrderPositions { get; set; }

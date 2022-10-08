@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +33,6 @@ namespace UI
 		}
 
 		public IConfiguration Configuration { get; }
-		private ApplicationDbContext _context;
 		public void ConfigureServices(IServiceCollection services)
 		{
 			var dbType = Configuration["Database"];
@@ -40,6 +40,7 @@ namespace UI
 			{
 				case "MsSql":
 					services.AddKhardoDbSqlServer(Configuration.GetConnectionString("MsSqlConnectionString"));
+					services.AddKhardoUsersDbSqlServer(Configuration.GetConnectionString("UsersConnectionString"));
 					break;
 				default:
 					services.AddDbContext<ApplicationDbContext>(options => 
@@ -51,9 +52,7 @@ namespace UI
 			services.AddMvc();
 
 			services.AddIdentity<User, IdentityRole>()
-				.AddEntityFrameworkStores<UserDbContext>();			
-
-			_context = services.BuildServiceProvider().GetService<ApplicationDbContext>();
+				.AddEntityFrameworkStores<UserDbContext>();
 
 			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			services.AddRazorPages();
@@ -64,8 +63,9 @@ namespace UI
 			services.AddDatabaseDeveloperPageExceptionFilter();
 		}
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebApplication webApplication)
 		{
+			webApplication.InitializeDb();
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();

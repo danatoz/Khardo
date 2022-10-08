@@ -18,9 +18,9 @@ namespace Entities
 
 		public string LegalAddress { get; set; }
 
-		//[ForeignKey("ResponsibleId")]
-		//public User Responsible { get; set; }
+		[ForeignKey("ResponsibleId")]
+		public User Responsible { get; set; }
 
-		//public List<Product> Products { get; set; }
+		public List<Product> Products { get; set; }
 	}
 }

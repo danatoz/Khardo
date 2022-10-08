@@ -8,9 +8,11 @@ namespace Entities
 		[Key]
 		public string VendorCode { get; set; }
 
+		public string NormalizedVendorCode { get; set; }
+
 		public string Name { get; set; }
 
-		public int CategoryId { get; set; }
+		public int? CategoryId { get; set; }
 
 		public int ManufacturerId { get; set; }
 

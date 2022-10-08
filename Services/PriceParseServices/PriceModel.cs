@@ -9,9 +9,16 @@ namespace PriceParseServices
     public class PriceModel
     {
 	    public string VendorCode { get; set; }
-	    public int Amount { get; set; }
-	    public decimal Price { get; set; }
-	    public string Manufacturer { get; set; }
+
+	    public string NormalizedVendorCode { get; set; }
+
+		public string Name { get; set; }
+	    
+		public int Amount { get; set; }
+	    
+		public decimal Price { get; set; }
+	    
+		public string Manufacturer { get; set; }
 
     }
 }
