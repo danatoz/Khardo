@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UI.Models.ViewModels.FilterModel
 {
-    public class CatalogFilterModel : BaseFilterModel
+    public class CategoryFilterModel : BaseFilterModel
     {
 	    [Display(Name = "Поисковый запрос")]
 	    public string SearchQuery { get; set; }

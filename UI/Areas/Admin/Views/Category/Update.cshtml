@@ -1,11 +1,11 @@
-﻿@model CategoryModel
+﻿@model Category
 @{
 	var exists = Model != null && Model.Id != 0;
 	ViewBag.Title = (exists ? "Редактирование" : "Создание") + " категории";
 	var catalogCategory = ViewBag.CatalogCategory as List<SelectListItem> ?? new List<SelectListItem>();
 }
 
-<form asp-area="Admin" asp-controller="Catalogs" asp-action="Update" method="post">
+<form asp-area="Admin" asp-controller="Category" asp-action="Update" method="post">
 	<div class="row">
 		<input type="hidden" asp-for="Id" />
 		<div class="col-md-4 col-sm-6">

@@ -39,9 +39,16 @@
 				</div>
 			</li>
 		</ul>
-		<form class="form-inline mt-2 mt-md-0">
-			<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <form method="post" asp-area="Vendor" asp-controller="Users" asp-action="Logout">
+                    <button type="submit" class="nav-link border-0 bg-transparent">Выход</button>
+                </form>
+            </li>
+        </ul>
 	</div>
 </nav>

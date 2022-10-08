@@ -27,50 +27,50 @@ using Tools;
 namespace UI.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Admin))]
-	public class CatalogsController : BaseController
+	[Authorize(Roles = "admin")]
+	public class CategoryController : BaseController
 	{
-		private readonly ILogger<CatalogsController> _logger;
+		private readonly ILogger<CategoryController> _logger;
 		private readonly ApplicationDbContext _context;
 
-		public CatalogsController(ILogger<CatalogsController> logger, ApplicationDbContext context)
+		public CategoryController(ILogger<CategoryController> logger, ApplicationDbContext context)
 		{
 			_logger = logger;
 			_context = context;
 		}
 
-		public async Task<IActionResult> Index(CatalogFilterModel filter, int page = 1)
+		public async Task<IActionResult> Index(CategoryFilterModel filter, int page = 1)
 		{
-			//const int objectsPerPage = 30;
-			//var startIndex = (page - 1) * objectsPerPage;
-			//var source = _context.Categories.Where(item => item.Active);
-			//var count = await source.CountAsync();
-			//var items = await source.Skip(startIndex).Take(objectsPerPage).ToListAsync();
-			//
-			//var viewModel = new SearchResultViewModel<CategoryModel, CatalogFilterModel>(items, filter, count, 1, 1, objectsPerPage);
-			return View();
+			const int objectsPerPage = 30;
+			var startIndex = (page - 1) * objectsPerPage;
+			var source = _context.Categories.Where(item => item.Active);
+			var count = await source.CountAsync();
+			var items = await source.Skip(startIndex).Take(objectsPerPage).ToListAsync();
+
+			var viewModel = new SearchResultViewModel<Category, CategoryFilterModel>(items, filter, count, startIndex, items.Count, objectsPerPage);
+			return View(viewModel);
 		}
 
 		public async Task<IActionResult> Update(int? id)
 		{
 			await InitViewBag();
 
-			//var viewModel = 
-			//	await _context.Categories.FirstOrDefaultAsync(item => item.Id == id) ?? new CategoryModel();
+			var viewModel = 
+				await _context.Categories.FirstOrDefaultAsync(item => item.Id == id) ?? new Category();
 
-			return View();
+			return View(viewModel);
 		}
 		[HttpPost]
-		public async Task<IActionResult> Update(CategoryModel model)
+		public async Task<IActionResult> Update(Category model)
 		{
 			await InitViewBag();
 			if (!ModelState.IsValid)
 				return View(model);
 
-			//_context.Categories.Update(CategoryModel.ConvertToDal(model));
-			//await _context.SaveChangesAsync();
+			_context.Categories.Update(model);
+			await _context.SaveChangesAsync();
 
-			return RedirectToAction("Index", "Catalogs", new {Area = "Admin"});
+			return RedirectToAction("Index", "Category", new { Area = "Admin" });
 		}
 
 		public async Task<IActionResult> Delete(int id)
@@ -87,7 +87,7 @@ namespace UI.Areas.Admin.Controllers
 				_logger.LogError($"{ex}");
 			}
 
-			return RedirectToAction("Index", "Catalogs", new {Area = "Admin"});
+			return RedirectToAction("Index", "Category", new { Area = "Admin" });
 		}
 		private async Task InitViewBag()
 		{

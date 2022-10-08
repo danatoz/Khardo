@@ -11,11 +11,11 @@ namespace Entities
 
 	    public DateTime CreationDate { get; set; }
 
-	    public int CustomerId { get; set; }
+		public string? CustomerId { get; set; }
 
 		[ForeignKey("CustomerId")]
-	    public Customer Customer { get; set; }
+		public Customer? Customer { get; set; }
 
-	    public List<OrderPosition> OrderPositions { get; set; }
+		public List<OrderPosition>? OrderPositions { get; set; }
 	}
 }

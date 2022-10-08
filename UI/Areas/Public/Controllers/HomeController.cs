@@ -1,16 +1,20 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Common.Enums;
+using DAL;
+using Microsoft.EntityFrameworkCore;
 using UI.Models;
+using Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace UI.Areas.Public.Controllers
 {
 	[Area("Public")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Public))]
 	public class HomeController : BaseController
 	{
 		private readonly ILogger<HomeController> _logger;

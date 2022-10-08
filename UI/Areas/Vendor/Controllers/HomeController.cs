@@ -11,7 +11,6 @@ using UI.Models;
 namespace UI.Areas.Vendor.Controllers
 {
 	[Area("Vendor")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Vendor))]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
@@ -23,6 +22,10 @@ namespace UI.Areas.Vendor.Controllers
 
 		public IActionResult Index()
 		{
+			if (!User.Identity.IsAuthenticated)
+			{
+				return RedirectToAction("Login", "Users", new { Area = "Vendor" });
+			}
 			return View();
 		}
 

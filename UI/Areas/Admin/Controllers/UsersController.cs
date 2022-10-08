@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Common;
 using DAL;
-using DAL.DbModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,20 +17,24 @@ using UI.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using UI.Other;
+using Entities;
+
 
 namespace UI.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Admin))]
+	//[Authorize(Roles = nameof(UserRole.Admin))]
 	public class UsersController : BaseController
 	{
 		private readonly ILogger<HomeController> _logger;
-		private readonly ApplicationDbContext _context;
+		private readonly SignInManager<User> _signInManager;
+		private readonly UserManager<User> _userManager;
 
-		public UsersController(ILogger<HomeController> logger, ApplicationDbContext context)
+		public UsersController(ILogger<HomeController> logger, SignInManager<User> signInManager, UserManager<User> userManager)
 		{
 			_logger = logger;
-			_context = context;
+			_signInManager = signInManager;
+			_userManager = userManager;
 		}
 
 		[AllowAnonymous]
@@ -47,38 +50,24 @@ namespace UI.Areas.Admin.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var result = _context.Users.Any(item =>
-					item.Login == model.Login &&
-					item.Password == Helpers.GetPasswordHash(model.Password));
-
-				if (result)
+				var result =
+					await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
+				if (result.Succeeded)
 				{
-					await Authenticate(model.Login);
 					return RedirectToAction("Index", "Home", new { Area = "Admin" });
 				}
 			}
-			TempData[OperationResultType.Error.ToString()] = "Неправильный логин и (или) пароль";
+			TempData[OperationResultType.Error.ToString()] = "Неверный логин и (или) пароль";
 
 			return RedirectToAction("Login", "Users", new { Area = "Admin" });
 		}
 
+		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Logout()
 		{
-			await HttpContext.SignOutAsync(nameof(AuthScheme.Admin));
+			await _signInManager.SignOutAsync();
 			return RedirectToAction("Index", "Home", new { Area = "Public" });
-		}
-
-		private async Task Authenticate(string userName)
-		{
-			// создаем один claim
-			var claims = new List<Claim>
-			{
-				new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
-			};
-			// создаем объект ClaimsIdentity
-			var id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-			// установка аутентификационных куки
-			await HttpContext.SignInAsync(nameof(AuthScheme.Admin), new ClaimsPrincipal(id));
 		}
 	}
 }

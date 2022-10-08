@@ -43,9 +43,11 @@
 		}
 
 		<ul class="navbar-nav px-3">
-			<li class="nav-item text-nowrap">
-				<a class="nav-link" asp-area="Admin" asp-controller="Users" asp-action="Logout">Выход</a>
-			</li>
+            <li class="nav-item text-nowrap">
+                <form method="post" asp-area="Admin" asp-controller="Users" asp-action="Logout">
+					<button type="submit" class="nav-link border-0 bg-transparent">Выход</button>
+                </form>
+            </li>
 		</ul>
 	</nav>
 </header>

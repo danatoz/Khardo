@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace UI.Models.ViewModels.FilterModel
 {
-	public class VendorFilterModel : BaseFilterModel
+	public class UserFilterModel : BaseFilterModel
 	{
 		[Display(Name = "Поисковый запрос")]
-		public string SearchQuery { get; set; }
+		public string? SearchQuery { get; set; }
 
 		[Display(Name = "Ответственный")]
-		public int? ResponsibleId { get; set; }
+		public string? ResponsibleId { get; set; }
 
-		public VendorFilterModel()
+		public UserFilterModel()
 		{
 			
 		}

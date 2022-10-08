@@ -9,9 +9,9 @@ namespace Entities
 		[Column(TypeName = "bigint")]
 		public long Id { get; set; }
 
-		public string VendorCode { get; set; }
+		public string? VendorCode { get; set; }
 
-		public int VendorId { get; set; }
+		public string? VendorId { get; set; }
 
 		public string Alias { get; set; }
 
@@ -22,9 +22,9 @@ namespace Entities
 		public bool Active { get; set; }
 
 		[ForeignKey("VendorCode")]
-		public ProductTemplate ProductTemplate { get; set; }
+		public ProductTemplate? ProductTemplate { get; set; }
 
 		[ForeignKey("VendorId")] 
-		public Vendor Vendor { get; set; }
+		public User? Vendor { get; set; }
 	}
 }

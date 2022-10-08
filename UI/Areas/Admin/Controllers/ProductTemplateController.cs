@@ -7,26 +7,30 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using UI.Models.ViewModels.FilterModel;
 using UI.Models.ViewModels;
 using Entities;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace UI.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Admin))]
+	[Authorize(Roles = "admin")]
 	public class ProductTemplateController : Controller
 	{
 		private readonly ILogger<ProductTemplateController> _logger;
 		private readonly ApplicationDbContext _context;
+		private readonly UserManager<User> _userManager;
 
-		public ProductTemplateController(ILogger<ProductTemplateController> logger, ApplicationDbContext context)
+		public ProductTemplateController(ILogger<ProductTemplateController> logger, ApplicationDbContext context, UserManager<User> userManager)
 		{
 			_logger = logger;
 			_context = context;
+			_userManager = userManager;
 		}
 
 		public async Task<IActionResult> Index(ProductTemplateFilterModel filter, int page = 1)

@@ -1,6 +1,7 @@
 using System;
 using DAL;
 using DAL.Mocks;
+using DAL.TestData;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,7 +24,9 @@ namespace UI
 				{
 					var services = scope.ServiceProvider;
 					var context = services.GetRequiredService<ApplicationDbContext>();
+					var usersContext = services.GetRequiredService<UserDbContext>();
 					Mocks.AddTestData(context);
+					UsersTestData.SetTestData(usersContext);
 				}
 				host.Run();
 			}

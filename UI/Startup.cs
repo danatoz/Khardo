@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using Common.Enums;
 using DAL.MsSqlServer;
+using Entities;
 using Microsoft.Net.Http.Headers;
 using Tools.RabbitMq;
 
@@ -42,18 +43,25 @@ namespace UI
 					break;
 				default:
 					services.AddDbContext<ApplicationDbContext>(options => 
-						options.UseInMemoryDatabase(databaseName: "Default"));
+						options.UseInMemoryDatabase(databaseName: "Default"));				
+					services.AddDbContext<UserDbContext>(options => 
+						options.UseInMemoryDatabase(databaseName: "KhardoUsers"));					
 					break;
 			}
 			services.AddMvc();
+
+			services.AddIdentity<User, IdentityRole>()
+				.AddEntityFrameworkStores<UserDbContext>();			
+
 			_context = services.BuildServiceProvider().GetService<ApplicationDbContext>();
-			services.AddAuthenticationConfig(_context);
+
 			services.AddControllersWithViews().AddRazorRuntimeCompilation();
 			services.AddRazorPages();
 			services.AddRouting(options => options.LowercaseUrls = true);
 			services.AddScoped<IRabbitMqService, RabbitMqService>();
 			//services.AddTransient<IBreadCrumbDataProvider, BreadCrumbDataProvider>();
 			services.AddHttpContextAccessor();
+			services.AddDatabaseDeveloperPageExceptionFilter();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,7 +69,7 @@ namespace UI
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-				app.UseDatabaseErrorPage();
+				app.UseMigrationsEndPoint();
 			}
 			else
 			{
