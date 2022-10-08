@@ -2,7 +2,7 @@
 
 namespace Entities
 {
-	public class BaseUser : Entity
+	public class BaseUser : IdentityUser
 	{
 		public string LastName { get; set; }
 
@@ -10,16 +10,5 @@ namespace Entities
 
 		public string MiddleName { get; set; }
 
-		public string MobilePhone { get; set; }
-
-		public string Email { get; set; }
-
-		public string Login { get; set; }
-
-		public string Password { get; set; }
-
-		public int Role { get; set; }
-
-		public bool IsBlocked { get; set; }
 	}
 }

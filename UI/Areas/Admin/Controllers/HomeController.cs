@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DAL;
-using DAL.DbModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +13,7 @@ using UI.Models;
 namespace UI.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Admin))]
+	[Authorize(Roles = "admin")]
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
@@ -26,12 +25,13 @@ namespace UI.Areas.Admin.Controllers
 			_context = context;
 		}
 		
+		[AllowAnonymous]
 		public async Task<IActionResult> Index()
 		{
-			//if (!User.Identity.IsAuthenticated)
-			//{
-			//	return RedirectToAction("Login", "Users", new {Area = "Admin", returnUrl = Url.Action("Index", "Home", new { Area = "Admin" })});
-			//}
+			if (!User.Identity.IsAuthenticated)
+			{
+				return RedirectToAction("Login", "Users", new { Area = "Admin" });
+			}
 			return View();
 		}
 

@@ -21,7 +21,6 @@ using UI.Other;
 namespace UI.Areas.Vendor.Controllers
 {
 	[Area("Vendor")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Vendor))]
 	public class PriceController : BaseController
 	{
 		private readonly ApplicationDbContext _context;
@@ -75,7 +74,7 @@ namespace UI.Areas.Vendor.Controllers
 					var vendorId = this.GetCurrentUserId();
 					var path = _environment.WebRootPath + "//Upload//Vendors//" + vendorId;
 					var df = new DirectoryInfo(path);
-					if(!df.Exists)
+					if (!df.Exists)
 						new DirectoryInfo(path).Create();
 
 					var saveToPath = Path.Combine(path, contentDisposition.FileName.Value);

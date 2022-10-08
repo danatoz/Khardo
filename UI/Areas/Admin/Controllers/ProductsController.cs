@@ -16,7 +16,7 @@ using UI.Models.ViewModels.FilterModel;
 namespace UI.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Admin))]
+	[Authorize(Roles = "ADMIN")]
 	public class ProductsController : BaseController
     {
 		private readonly ILogger<ProductsController> _logger;

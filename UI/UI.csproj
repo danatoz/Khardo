@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Account\AccessDenied.cshtml" />
     <Content Remove="compilerconfig.json" />
     <Content Remove="wwwroot\fonts\fontawesome-webfont.woff2" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Shared\AccessDenied.cshtml" />
     <None Include="Areas\Public\Views\Shared\Components\BreadCrumbs\Default.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
@@ -46,8 +48,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Account\" />
     <Folder Include="Areas\Admin\Views\Home\Partials\" />
     <Folder Include="Areas\Vendor\Views\Shared\Components\" />
+    <Folder Include="Controller\" />
     <Folder Include="wwwroot\css\fonts\" />
     <Folder Include="wwwroot\images\ManufacturerLogo\" />
     <Folder Include="wwwroot\images\ProductImage\" />

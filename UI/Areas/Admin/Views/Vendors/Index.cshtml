@@ -1,6 +1,10 @@
-﻿@model SearchResultViewModel<VendorModel, VendorFilterModel>
+﻿@model SearchResultViewModel<User, UserFilterModel>
 @{
-
+    var pagedList = Html.PagedList(Model.PagesInfo.ItemsCount, Model.PagesInfo.ItemsPerPage, Model.PagesInfo.CurrentPage,
+        Model.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), Model.FilterModel.Merge(new
+        {
+            page = pageNumber
+        })), new PagedListExtensions.PagedListRenderParams());
 }
 
 <div class="row">
@@ -26,5 +30,11 @@
                 }
             </table>
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @pagedList
     </div>
 </div>

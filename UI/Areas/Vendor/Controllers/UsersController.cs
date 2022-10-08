@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Common;
 using DAL;
-using DAL.DbModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,18 +21,20 @@ using UI.Other;
 namespace UI.Areas.Vendor.Controllers
 {
 	[Area("Vendor")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Vendor))]
 	public class UsersController : BaseController
     {
 		private readonly ILogger<HomeController> _logger;
 		private readonly ApplicationDbContext _context;
+		private readonly SignInManager<User> _signInManager;
 
-		public UsersController(ILogger<HomeController> logger, ApplicationDbContext context)
+		public UsersController(ILogger<HomeController> logger, ApplicationDbContext context, SignInManager<User> signInManager)
 		{
 			_logger = logger;
 			_context = context;
+			_signInManager = signInManager;
 		}
 
+		[HttpGet]
 		[AllowAnonymous]
 		public IActionResult Login(string returnUrl)
 		{
@@ -47,46 +48,25 @@ namespace UI.Areas.Vendor.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var result = _context.Vendors.Any(item => 
-					item.Login == model.Login && 
-					item.Password == Helpers.GetPasswordHash(model.Password));
+				var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
 
-				if (result)
+				if (result.Succeeded)
 				{
-					if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-					{
-						await Authenticate(model.Login);
-						return RedirectToAction("Index", "Home", new { Area = "Vendor" });
-					}
-					else
-					{
-						return RedirectToAction("Index", "Home", new { Area = "Vendor" });
-					}
+					return RedirectToAction("Index", "Home", new { Area = "Vendor" });
 				}
 			}
 
-			TempData[OperationResultType.Error.ToString()] = "Неправильный логин и (или) пароль";
+			TempData[OperationResultType.Error.ToString()] = "Неверный логин и (или) пароль";
 
 			return RedirectToAction("Login", "Home", new { Area = "Vendor" });
 		}
 
+		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Logout()
 		{
-			await HttpContext.SignOutAsync(nameof(AuthScheme.Vendor));
+			await _signInManager.SignOutAsync();
 			return RedirectToAction("Index", "Home", new { Area = "Public" });
 		}
-
-		private async Task Authenticate(string userName)
-		{
-			// создаем один claim
-			var claims = new List<Claim>
-			{
-				new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
-			};
-			// создаем объект ClaimsIdentity
-			var id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-			// установка аутентификационных куки
-			await HttpContext.SignInAsync(nameof(AuthScheme.Vendor), new ClaimsPrincipal(id));
-		}
-	}
+    }
 }

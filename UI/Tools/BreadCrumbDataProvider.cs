@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BL;
-using DAL.DbModels;
 using UI.Models;
 
 namespace UI.Tools

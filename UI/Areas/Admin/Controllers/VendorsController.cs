@@ -3,55 +3,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Enums;
+using DAL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Common.Enums;
-using DAL;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UI.Models.ViewModels;
 using UI.Models.ViewModels.FilterModel;
+using UI.Other;
 
 namespace UI.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Admin))]
 	public class VendorsController : BaseController
     {
-	    private readonly ApplicationDbContext _context;
 	    private readonly ILogger<VendorsController> _logger;
-
-	    public VendorsController(ApplicationDbContext context,ILogger<VendorsController> logger)
+		private readonly UserManager<User> _userManager;
+		private readonly RoleManager<IdentityRole> _roleManager;
+		private readonly UserDbContext _userDbContext;
+	    public VendorsController(ILogger<VendorsController> logger, UserManager<User> userManager, UserDbContext userDbContext, RoleManager<IdentityRole> roleManager)
 	    {
-		    _context = context;
 		    _logger = logger;
+		    _userManager = userManager;
+		    _userDbContext = userDbContext;
+		    _roleManager = roleManager;
 	    }
 
-	    public async Task<IActionResult> Index(VendorFilterModel filterModel, int page = 1)
+	    public async Task<IActionResult> Index(UserFilterModel filterModel, int page = 1)
 	    {
-		    if (this.GetCurrentUserRole() == UserRole.Manager)
+		    if (User.IsInRole("manager"))
 			    filterModel.ResponsibleId = this.GetCurrentUserId();
 
 		    const int objectsPerPage = 20;
 		    var startIndex = (page - 1) * objectsPerPage;
-		    IQueryable<Entities.Vendor> source = _context.Vendors;
+		    //IQueryable<User> source = _userManager.Users;
+		    var source =  await (from user in _userDbContext.Users
+			    join userRole in _userDbContext.UserRoles
+				    on user.Id equals userRole.UserId
+			    join role in _userDbContext.Roles 
+				    on userRole.RoleId equals role.Id
+			    where role.Name == "vendor"
+			    select user).ToListAsync();
 		    if (filterModel.ResponsibleId != null)
 		    {
-			    source = _context.Vendors.Where(item => item.ResponsibleId == filterModel.ResponsibleId);
-		    }
-		    var count = await source.CountAsync();
-		    var items = await source.Skip(startIndex).Take(objectsPerPage).ToListAsync();
+				source = source.Where(item => item.ResponsibleId == filterModel.ResponsibleId).ToList();
+			}
+			var count = source.Count();
+		    var items = source.Skip(startIndex).Take(objectsPerPage);
 
-		    var viewModel = new SearchResultViewModel<VendorModel, VendorFilterModel>(
-			    VendorModel.ConvertListFromDal(items), filterModel, count, startIndex, 20, objectsPerPage);
+		    var viewModel = new SearchResultViewModel<User, UserFilterModel>(
+			    items, filterModel, count, startIndex, 20, objectsPerPage);
 
 			return View(viewModel);
 	    }
 
 		[HttpGet]
-	    public async Task<IActionResult> Update(int id)
+	    public async Task<IActionResult> Update(string id)
 	    {
-		    var viewModel = await _context.Vendors.FindAsync(id);
+		    var viewModel = await _userManager.FindByIdAsync(id);
 		    if (viewModel == null)
 			    return NotFound();
 
@@ -59,11 +70,22 @@ namespace UI.Areas.Admin.Controllers
 	    }
 
 	    [HttpPost]
-		public async Task<IActionResult> Update(VendorModel model)
+		public async Task<IActionResult> Update(User model)
 		{
-			await _context.Vendors.AddAsync(VendorModel.ConvertToDal(model));
-			await _context.SaveChangesAsync();
-		    return RedirectToAction("Index", "Vendors", new { Area = "Admin" });
+			if (ModelState.IsValid)
+			{
+				var user = await _userManager.FindByIdAsync(model.Id);
+				if (user != null)
+				{
+					await _userManager.UpdateAsync(user);
+				}
+				else
+				{
+					await _userManager.CreateAsync(model);
+				}
+				TempData[nameof(OperationResultType.Success)] = "Успех!";
+			}
+			return RedirectToAction("Index", "Vendors", new { Area = "Admin" });
 	    }
 
     }

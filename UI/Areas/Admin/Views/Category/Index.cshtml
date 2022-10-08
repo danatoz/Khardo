@@ -1,8 +1,14 @@
-﻿@model SearchResultViewModel<CategoryModel, CatalogFilterModel>
+﻿@model SearchResultViewModel<Category, CategoryFilterModel>
 @{
-	ViewBag.CreationLink = Url.Action("Update", "Catalogs", new { Area = "Admin" });
+	ViewBag.CreationLink = Url.Action("Update", "Category", new { Area = "Admin" });
 
 	ViewData["Title"] = "Каталоги";
+
+    var pagedList = Html.PagedList(Model.PagesInfo.ItemsCount, Model.PagesInfo.ItemsPerPage, Model.PagesInfo.CurrentPage,
+        Model.PagesInfo.DisplayedPages, pageNumber => Url.Action(Url.GetAction(), Model.FilterModel.Merge(new
+        {
+            page = pageNumber
+        })), new PagedListExtensions.PagedListRenderParams());
 }
 
 <div class="row">
@@ -10,12 +16,10 @@
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<tr>
-
-					<th class="text-center">Название</th>
+                    <th class="text-center">Название</th>
 					<th class="text-center">Короткая ссылка</th>
 					<th class="text-center">Родительская категория</th>
-					<th class="text-center">Порядок отображения</th>
-					<th class="text-center">Действия</th>
+                    <th class="text-center">Действия</th>
 				</tr>
 				@foreach (var item in Model.Objects)
 				{
@@ -29,10 +33,7 @@
 						<td>
 							@item.ParentCategory?.Name
 						</td>
-						<td>
-							@@item.SortKey
-						</td>
-						<td class="text-center">
+                        <td class="text-center">
 							<a asp-action="Update" asp-area="Admin" asp-route-id="@item.Id">Изменить</a><br />
 							<a asp-action="Delete" asp-area="Admin" asp-route-id="@item.Id" class="delete-object-button">Удалить</a>
 						</td>
@@ -42,7 +43,11 @@
 		</div>
 	</div>
 </div>
-
+<div class="row">
+    <div class="col-md-12">
+        @pagedList
+    </div>
+</div>
 
 @section Scripts
 {
