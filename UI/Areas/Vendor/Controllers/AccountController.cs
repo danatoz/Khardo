@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using NLog;
 using UI.Other;
 
-namespace UI.Areas.Admin.Controllers
+namespace UI.Areas.Vendor.Controllers
 {
-	[Area("Admin")]
+	[Area("Vendor")]
 	public class AccountController : BaseController
     {
 		private readonly ILogger<AccountController> _logger;
@@ -43,22 +36,22 @@ namespace UI.Areas.Admin.Controllers
 	        {
 		        var user = await _userManager.FindByNameAsync(model.UserName);
 		        var roles = await _userManager.GetRolesAsync(user);
-		        if (!roles.Contains("admin"))
+		        if (!roles.Contains("vendor"))
 		        {
 					TempData[OperationResultType.Error.ToString()] = "В доступе отказано!";
-					return RedirectToAction("Login", "Account", new { Area = "Admin" });
+					return RedirectToAction("Login", "Account", new { Area = "Vendor" });
 				}
 
 				var result =
 			        await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
 		        if (result.Succeeded)
 		        {
-			        return RedirectToAction("Index", "Home", new { Area = "Admin" });
+			        return RedirectToAction("Index", "Home", new { Area = "Vendor" });
 		        }
 	        }
 	        TempData[OperationResultType.Error.ToString()] = "Неверный логин и (или) пароль";
 
-	        return RedirectToAction("Login", "Account", new { Area = "Admin" });
+	        return RedirectToAction("Login", "Account", new { Area = "Vendor" });
         }
 
         [HttpPost]

@@ -1,12 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using DAL;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Common.Enums;
-using UI.Models;
 
 namespace UI.Areas.Vendor.Controllers
 {
@@ -24,7 +19,7 @@ namespace UI.Areas.Vendor.Controllers
 		{
 			if (!User.Identity.IsAuthenticated)
 			{
-				return RedirectToAction("Login", "Users", new { Area = "Vendor" });
+				return RedirectToAction("Login", "Account", new { Area = "Vendor" });
 			}
 			return View();
 		}

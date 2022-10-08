@@ -21,7 +21,7 @@ namespace UI.Models
 
 	    public string LegalAddress { get; set; }
 
-	    public UserModel Responsible { get; set; }
+	    //public UserModel Responsible { get; set; }
 
 	    public List<ProductModel> Products { get; set; }
 

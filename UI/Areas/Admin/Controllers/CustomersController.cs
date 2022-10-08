@@ -11,7 +11,6 @@ using Common.Enums;
 namespace UI.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(AuthenticationSchemes = nameof(AuthScheme.Admin))]
     public class CustomersController : BaseController
     {
 	    private readonly ILogger<CustomersController> _logger;

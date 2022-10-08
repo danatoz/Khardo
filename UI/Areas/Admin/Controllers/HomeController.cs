@@ -30,7 +30,7 @@ namespace UI.Areas.Admin.Controllers
 		{
 			if (!User.Identity.IsAuthenticated)
 			{
-				return RedirectToAction("Login", "Users", new { Area = "Admin" });
+				return RedirectToAction("Login", "Account", new { Area = "Admin" });
 			}
 			return View();
 		}

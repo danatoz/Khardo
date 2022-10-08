@@ -22,12 +22,12 @@ namespace UI.Areas.Admin.Controllers
 	    private readonly ILogger<VendorsController> _logger;
 		private readonly UserManager<User> _userManager;
 		private readonly RoleManager<IdentityRole> _roleManager;
-		private readonly UserDbContext _userDbContext;
-	    public VendorsController(ILogger<VendorsController> logger, UserManager<User> userManager, UserDbContext userDbContext, RoleManager<IdentityRole> roleManager)
+		private readonly ApplicationDbContext _context;
+	    public VendorsController(ILogger<VendorsController> logger, UserManager<User> userManager, ApplicationDbContext context, RoleManager<IdentityRole> roleManager)
 	    {
 		    _logger = logger;
 		    _userManager = userManager;
-		    _userDbContext = userDbContext;
+		    _context = context;
 		    _roleManager = roleManager;
 	    }
 
@@ -38,11 +38,10 @@ namespace UI.Areas.Admin.Controllers
 
 		    const int objectsPerPage = 20;
 		    var startIndex = (page - 1) * objectsPerPage;
-		    //IQueryable<User> source = _userManager.Users;
-		    var source =  await (from user in _userDbContext.Users
-			    join userRole in _userDbContext.UserRoles
+		    var source =  await (from user in _context.Users
+			    join userRole in _context.UserRoles
 				    on user.Id equals userRole.UserId
-			    join role in _userDbContext.Roles 
+			    join role in _context.Roles 
 				    on userRole.RoleId equals role.Id
 			    where role.Name == "vendor"
 			    select user).ToListAsync();

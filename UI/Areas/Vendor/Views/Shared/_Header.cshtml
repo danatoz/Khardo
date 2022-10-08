@@ -45,7 +45,7 @@
         </form>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <form method="post" asp-area="Vendor" asp-controller="Users" asp-action="Logout">
+                <form method="post" asp-area="Vendor" asp-controller="Account" asp-action="Logout" asp-antiforgery="true">
                     <button type="submit" class="nav-link border-0 bg-transparent">Выход</button>
                 </form>
             </li>

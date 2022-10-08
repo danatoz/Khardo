@@ -1,4 +1,6 @@
-﻿namespace Entities
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Entities
 {
     public class User : BaseUser
 	{
@@ -29,9 +31,7 @@
 		[NotMapped]
 		public List<User>? Vendors { get; set; }
 
-
 		public List<Order>? Orders { get; set; }
-
 
 		public List<Product>? Products { get; set; }
 	}

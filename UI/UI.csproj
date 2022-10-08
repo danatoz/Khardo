@@ -48,10 +48,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Account\" />
     <Folder Include="Areas\Admin\Views\Home\Partials\" />
     <Folder Include="Areas\Vendor\Views\Shared\Components\" />
-    <Folder Include="Controller\" />
     <Folder Include="wwwroot\css\fonts\" />
     <Folder Include="wwwroot\images\ManufacturerLogo\" />
     <Folder Include="wwwroot\images\ProductImage\" />
