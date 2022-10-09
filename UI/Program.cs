@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Tools.RabbitMq;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Routing;
+using UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,13 +28,10 @@ switch (dbType)
 {
 	case "MsSql":
 		services.AddKhardoDbSqlServer(configuration.GetConnectionString("MsSqlConnectionString"));
-		//services.AddKhardoUsersDbSqlServer(configuration.GetConnectionString("UsersConnectionString"));
 		break;
 	default:
 		services.AddDbContext<ApplicationDbContext>(options =>
 			options.UseInMemoryDatabase(databaseName: "Default"));
-		services.AddDbContext<UserDbContext>(options =>
-			options.UseInMemoryDatabase(databaseName: "KhardoUsers"));
 		break;
 }
 services.AddMvc();
@@ -49,6 +47,7 @@ services.AddScoped<IRabbitMqService, RabbitMqService>();
 //services.AddTransient<IBreadCrumbDataProvider, BreadCrumbDataProvider>();
 services.AddHttpContextAccessor();
 services.AddDatabaseDeveloperPageExceptionFilter();
+services.AddHostedService<RabbitMqListener>();
 
 #endregion
 
