@@ -8,7 +8,7 @@ namespace PriceParseServices
 {
     public class MessageModel
     {
-	    public string VendorId { get; set; }
+	    public Guid PriceId { get; set; }
 	    public string SaveToPath { get; set; }
     }
 }

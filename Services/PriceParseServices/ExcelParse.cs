@@ -49,13 +49,13 @@
 					priceModels.Add(priceModel);
 				}
 			}
-			catch (Exception e)
+			catch (Exception ex)
 			{
-				Console.WriteLine(e);
+				Console.WriteLine(ex.Message);
+				Console.WriteLine(ex.StackTrace);
 			}
 
-
-			return new UploadedModel() { Price = priceModels, VendorId = model.VendorId };
+			return new UploadedModel() { Price = priceModels, PriceId = model.PriceId };
 		}
 	}
 }

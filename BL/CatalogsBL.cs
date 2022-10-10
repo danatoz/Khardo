@@ -20,7 +20,7 @@ namespace BL
 	    public CatalogsBL()
 	    {
 	    }
-	    public async Task<IEnumerable<Category>> GetParentCatalogs(int parentId)
+	    public async Task<IEnumerable<Category>> GetParentCatalogs(Guid parentId)
 	    {
 		    var list = new List<Category>();
 		    var catalog = _context.Categories;
@@ -43,7 +43,7 @@ namespace BL
 		    return list;
 	    }
 
-		public async Task<string> GenerateFullUrl(int categoryId)
+		public async Task<string> GenerateFullUrl(Guid categoryId)
 		{
 			var categories = await GetParentCatalogs(categoryId);
 			var builder = new StringBuilder();

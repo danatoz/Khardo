@@ -10,6 +10,7 @@ using DAL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
@@ -27,13 +28,15 @@ namespace UI.Areas.Vendor.Controllers
 		private readonly ILogger<PriceController> _logger;
 		private readonly IWebHostEnvironment _environment;
 		private readonly IRabbitMqService _mqService;
+		private readonly UserManager<User> _userManager;
 
-		public PriceController(ApplicationDbContext context, ILogger<PriceController> logger, IWebHostEnvironment environment, IRabbitMqService mqService)
+		public PriceController(ApplicationDbContext context, ILogger<PriceController> logger, IWebHostEnvironment environment, IRabbitMqService mqService, UserManager<User> userManager)
 		{
 			_context = context;
 			_logger = logger;
 			_environment = environment;
 			_mqService = mqService;
+			_userManager = userManager;
 		}
 
 		public async Task<IActionResult> Index()
@@ -71,7 +74,8 @@ namespace UI.Areas.Vendor.Controllers
 					!string.IsNullOrEmpty(contentDisposition.FileName.Value))
 				{
 
-					var vendorId = this.GetCurrentUserId();
+					var currentUser = await _userManager.GetUserAsync(User);
+					var vendorId = currentUser.Id;
 					var path = _environment.WebRootPath + "//Upload//Vendors//" + vendorId;
 					var df = new DirectoryInfo(path);
 					if (!df.Exists)
@@ -84,9 +88,19 @@ namespace UI.Areas.Vendor.Controllers
 						await section.Body.CopyToAsync(targetStream);
 					}
 
+					var priceList = new PriceList()
+					{
+						UserId = vendorId,
+						CreationDate = DateTime.Now,
+						PriceStatus = PriceStatus.InProcessing,
+						IsPublicate = false,
+					};
+					await _context.Prices.AddAsync(priceList);
+					await _context.SaveChangesAsync();
+					var priceId = priceList.Id;
 					_mqService.SendMessage(new
 					{
-						vendorId,
+						priceId,
 						saveToPath
 					});
 

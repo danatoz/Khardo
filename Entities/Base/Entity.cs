@@ -19,10 +19,10 @@ namespace Entities.Base
 		protected Entity(TKey Id) => this.Id = Id;
 	}
 
-	public abstract class Entity : Entity<int>, IEntity
+	public abstract class Entity : Entity<Guid>, IEntity
 	{
 		protected Entity() { }
 
-		protected Entity(int Id) : base(Id) { }
+		protected Entity(Guid Id) : base(Id) { }
 	}
 }

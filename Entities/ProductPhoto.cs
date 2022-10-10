@@ -5,7 +5,7 @@ namespace Entities
 {
     public class ProductPhoto : Entity
     {
-		public string ProductTemplateId { get; set; }
+		public Guid ProductTemplateId { get; set; }
 
 	    public string UrlImage { get; set; }
 

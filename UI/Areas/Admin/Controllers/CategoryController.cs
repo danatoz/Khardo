@@ -51,7 +51,7 @@ namespace UI.Areas.Admin.Controllers
 			return View(viewModel);
 		}
 
-		public async Task<IActionResult> Update(int? id)
+		public async Task<IActionResult> Update(Guid? id)
 		{
 			await InitViewBag();
 
@@ -73,7 +73,7 @@ namespace UI.Areas.Admin.Controllers
 			return RedirectToAction("Index", "Category", new { Area = "Admin" });
 		}
 
-		public async Task<IActionResult> Delete(int id)
+		public async Task<IActionResult> Delete(Guid id)
 		{
 			try
 			{

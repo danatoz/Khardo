@@ -1,6 +1,6 @@
 ﻿@model Category
 @{
-	var exists = Model != null && Model.Id != 0;
+	var exists = Model != null && Model.Id != Guid.Empty;
 	ViewBag.Title = (exists ? "Редактирование" : "Создание") + " категории";
 	var catalogCategory = ViewBag.CatalogCategory as List<SelectListItem> ?? new List<SelectListItem>();
 }

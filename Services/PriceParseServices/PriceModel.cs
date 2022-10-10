@@ -12,6 +12,8 @@ namespace PriceParseServices
 
 	    public string NormalizedVendorCode { get; set; }
 
+	    public Guid ProductTemplateId { get; set; }
+
 		public string Name { get; set; }
 	    
 		public int Amount { get; set; }

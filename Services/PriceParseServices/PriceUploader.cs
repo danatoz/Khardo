@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Enums;
 using DAL;
 using Entities;
 using Microsoft.EntityFrameworkCore;
@@ -17,60 +18,72 @@ namespace PriceParseServices
 			foreach (var priceModel in model.Price)
 			{
 				//проверить существует ли подобный артикул в шаблонах
-				var exists = await db.ProductTemplates.AnyAsync(item => 
+				var productTemplate = await db.ProductTemplates.FirstOrDefaultAsync(item => 
 					item.VendorCode == priceModel.VendorCode || 
-					item.NormalizedVendorCode == priceModel.NormalizedVendorCode);
+					item.NormalizedVendorCode == priceModel.VendorCode.Replace("-", string.Empty));
 
 				//если существует в шаблонах добавить продукт в прайс с ссылкой на шаблон
-				if (exists)
+				if (productTemplate != null)
 				{
 					await db.Products.AddAsync(new Product()
 					{
 						Price = priceModel.Price,
 						Amount = priceModel.Amount,
-						VendorCode = priceModel.VendorCode,
-						VendorId = model.VendorId
+						ProductTemplateId = productTemplate.Id,
+						PriceId = model.PriceId
 					});
 					await db.SaveChangesAsync();
 				}
 				//если отсутствует добавить в шаблоны 
 				else
 				{
-					var newManufacturer = new Manufacturer();
-					var manufacturerExists = await db.Manufacturers.FirstOrDefaultAsync(item => item.Name == priceModel.Manufacturer);
-					if (manufacturerExists == null)
+					var manufacturer = 
+						await db.Manufacturers.FirstOrDefaultAsync(item => item.Name == priceModel.Manufacturer) ?? 
+						new Manufacturer();
+					var newProductTemplate = new ProductTemplate()
 					{
-						newManufacturer = new Manufacturer()
+						VendorCode = priceModel.VendorCode,
+						NormalizedVendorCode = priceModel.NormalizedVendorCode,
+						Name = priceModel.Name,
+					};
+					if (manufacturer.Id == Guid.Empty)
+					{
+						manufacturer = new Manufacturer()
 						{
 							Name = priceModel.Manufacturer,
 							UrlLogo = "",
 						};
-						await db.Manufacturers.AddAsync(newManufacturer);
+						await db.Manufacturers.AddAsync(manufacturer);
 						await db.SaveChangesAsync();
 
-						await db.ProductTemplates.AddAsync(new ProductTemplate()
-						{
-							VendorCode = priceModel.VendorCode,
-							NormalizedVendorCode = priceModel.NormalizedVendorCode,
-							Name = priceModel.Name,
-							ManufacturerId = newManufacturer.Id,
+						newProductTemplate.ManufacturerId = manufacturer.Id;
 
-						});
+						await db.ProductTemplates.AddAsync(newProductTemplate);
 						await db.SaveChangesAsync();
 					}
 					else
 					{
-						await db.ProductTemplates.AddAsync(new ProductTemplate()
-						{
-							VendorCode = priceModel.VendorCode,
-							NormalizedVendorCode = priceModel.NormalizedVendorCode,
-							Name = priceModel.Name,
-							ManufacturerId = manufacturerExists.Id,
-							
-						});
+						newProductTemplate.ManufacturerId = manufacturer.Id;
+						await db.ProductTemplates.AddAsync(newProductTemplate);
 						await db.SaveChangesAsync();
 					}
+					await db.Products.AddAsync(new Product()
+					{
+						Price = priceModel.Price,
+						Amount = priceModel.Amount,
+						ProductTemplateId = newProductTemplate.Id,
+						PriceId = model.PriceId
+					});
+					await db.SaveChangesAsync();
 				}
+			}
+
+			var priceList = await db.Prices.FindAsync(model.PriceId);
+			if (priceList != null)
+			{
+				priceList.PriceStatus = PriceStatus.Moderation;
+				db.Prices.Update(priceList);
+				await db.SaveChangesAsync();
 			}
 		}
 	}

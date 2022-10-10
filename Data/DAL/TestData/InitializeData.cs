@@ -24,19 +24,19 @@ namespace DAL.TestData
 						Description = "",Name = "Технические жидкости", Alias = "techshidkosti", IconUrl = "", ParentId = null, Active = true  },
                     new Category() { 
 						//Id = 4 ,
-						Description = "",Name = "Масла", Alias = "maslo", IconUrl = "", ParentId = 3, Active = true  },
+						Description = "",Name = "Масла", Alias = "maslo", IconUrl = "", ParentId = null, Active = true  },
                     new Category() { 
 						//Id = 5 ,
-						Description = "",Name = "Масло моторное", Alias = "motornye-masla", IconUrl = "", ParentId = 4, Active = true  },
+						Description = "",Name = "Масло моторное", Alias = "motornye-masla", IconUrl = "", ParentId = null, Active = true  },
                     new Category() { 
 						//Id = 6 ,
 						Description = "",Name = "Свечи зажигания", Alias = "plug", IconUrl = "", ParentId = null, Active = true  },
                     new Category() { 
 						//Id = 7 ,
-						Description = "",Name = "Охлаждающие жидкости", Alias = "ohlashdaushieshidkosti", IconUrl = "", ParentId = 3, Active = true  },
+						Description = "",Name = "Охлаждающие жидкости", Alias = "ohlashdaushieshidkosti", IconUrl = "", ParentId = null, Active = true  },
                     new Category() { 
 						//Id = 8 ,
-						Description = "", Name = "Трансмиссионные масла", Alias = "transmissionnye-masla-i-gur", IconUrl = "", ParentId = 4, Active = true  },
+						Description = "", Name = "Трансмиссионные масла", Alias = "transmissionnye-masla-i-gur", IconUrl = "", ParentId = null, Active = true  },
                     new Category() { 
 						//Id = 9 ,
 						Description = "", Name = "Коврики", Alias = "kovriki", IconUrl = "", ParentId = null, Active = true  },
@@ -85,22 +85,6 @@ namespace DAL.TestData
                 };
         }
 
-        public static IEnumerable<ProductTemplate> ProductTemplateInitialize()
-        {
-            return new List<ProductTemplate>()
-            {
-                new ProductTemplate()
-                {
-                    VendorCode = "4300xs-R18",
-                    Name = "Шина R18/215 65",
-                    CategoryId = 2,
-                    Description = "Шина классная, резиновая",
-                    ManufacturerId = 1,
-                    Active = true
-                },
-            };
-        }
-
         public static IEnumerable<Country> CountryInitialize()
         {
             return new List<Country>()
@@ -112,25 +96,6 @@ namespace DAL.TestData
                 new Country()
                 {
                     Name = "Германия"
-                }
-            };
-        }
-
-        public static IEnumerable<Manufacturer> ManufactureInitialize()
-        {
-            return new List<Manufacturer>()
-            {
-                new Manufacturer()
-                {
-                    Name = "Nissan",
-                    UrlLogo = "",
-                    CountryId = 1
-                },
-                new Manufacturer()
-                {
-                    Name = "Volkswagen",
-                    UrlLogo = "",
-                    CountryId = 2
                 }
             };
         }

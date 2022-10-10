@@ -1,20 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Entities.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
-	public class ProductTemplate
+	public class ProductTemplate : Entity
 	{
-		[Key]
 		public string VendorCode { get; set; }
 
 		public string NormalizedVendorCode { get; set; }
 
 		public string Name { get; set; }
 
-		public int? CategoryId { get; set; }
+		public Guid? CategoryId { get; set; }
 
-		public int ManufacturerId { get; set; }
+		public Guid ManufacturerId { get; set; }
 
 		public string Description { get; set; }
 

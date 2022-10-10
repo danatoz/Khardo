@@ -26,7 +26,7 @@ namespace UI.Models
 		public string IconUrl { get; set; }
 
 		[Display(Name = "Родительская категория")]
-		public int? ParentId { get; set; }
+		public Guid? ParentId { get; set; }
 
 		[Display(Name = "Активна")]
 		public bool Active { get; set; }

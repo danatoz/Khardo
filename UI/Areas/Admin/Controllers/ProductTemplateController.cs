@@ -37,29 +37,31 @@ namespace UI.Areas.Admin.Controllers
 		{
 			const int objectsPerPage = 30;
 			var startIndex = (page - 1) * objectsPerPage;
-			IQueryable<ProductTemplate> source = _context.ProductTemplates;
-			source = source.Where(item => item.Active);
+			IQueryable<ProductTemplate> source = _context.ProductTemplates
+				.Include(item => item.Manufacturer)
+				.Include(item => item.Category);
+			//source = source.Where(item => item.Active);
 			var count = await source.CountAsync();
 			var items = await source.Skip(startIndex).Take(objectsPerPage).ToListAsync();
 
-			var viewModel = new SearchResultViewModel<ProductTemplateModel, ProductTemplateFilterModel>(ProductTemplateModel.ConvertListFromDal(items), filter, count, 1, 1, objectsPerPage);
+			var viewModel = new SearchResultViewModel<ProductTemplate, ProductTemplateFilterModel>(items, filter, count, startIndex, items.Count, objectsPerPage);
 			return View(viewModel);
 		}
 
 		public async Task<IActionResult> Update(string id)
 		{
-			//var viewModel = ProductTemplateModel.ConvertFromDal(
-			//	await _context.ProductTemplates.FirstOrDefaultAsync(item => item.VendorCode == id)) ?? new ProductTemplateModel();
+			var viewModel = 
+				await _context.ProductTemplates.FirstOrDefaultAsync(item => item.VendorCode == id);
 
-			return View();
+			return View(viewModel);
 		}
 		[HttpPost]
-		public async Task<IActionResult> Update(ProductTemplateModel model)
+		public async Task<IActionResult> Update(ProductTemplate model)
 		{
 			if (!ModelState.IsValid)
 				return View(model);
 
-			_context.ProductTemplates.Update(ProductTemplateModel.ConvertToDal(model));
+			_context.ProductTemplates.Update(model);
 			await _context.SaveChangesAsync();
 
 			return RedirectToAction("Index", "Products", new { Area = "Admin" });

@@ -9,7 +9,7 @@ namespace Entities
 
 	    public string UrlLogo { get; set; }
 
-	    public int? CountryId { get; set; }
+	    public Guid? CountryId { get; set; }
 
 		[ForeignKey("CountryId")]
 		public Country Country { get; set; }

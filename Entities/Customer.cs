@@ -1,6 +1,6 @@
 ﻿namespace Entities
 {
-    public class Customer : BaseUser
+    public class Customer
 	{
 	    //public List<Order> Orders { get; set; }
     }

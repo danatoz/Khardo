@@ -10,23 +10,23 @@ namespace BL
 {
 	public class CategoryBl
 	{
-		public async Task<int> AddOrUpdateAsync(Category entity)
+		public async Task<Guid> AddOrUpdateAsync(Category entity)
 		{
 			entity.Id = await new CategoryDal().AddOrUpdateAsync(entity);
 			return entity.Id;
 		}
 
-		public Task<bool> ExistsAsync(int id)
+		public Task<bool> ExistsAsync(Guid id)
 		{
 			return new CategoryDal().ExistsAsync(id);
 		}
 
-		public Task<Category> GetAsync(int id)
+		public Task<Category> GetAsync(Guid id)
 		{
 			return new CategoryDal().GetAsync(id);
 		}
 
-		public Task<bool> DeleteHardAsync(int id)
+		public Task<bool> DeleteHardAsync(Guid id)
 		{
 			return new CategoryDal().DeleteHardAsync(id);
 		}

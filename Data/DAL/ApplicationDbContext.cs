@@ -73,6 +73,7 @@ namespace DAL
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<Country> Countries { get; set; }
 		public DbSet<OrderPosition> OrderPositions { get; set; }
+		public DbSet<PriceList> Prices { get; set; }
 
 
 	}

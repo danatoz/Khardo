@@ -1,17 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Entities.Base;
 
 namespace Entities
 {
-	public class Product
+	public class Product : Entity
 	{
-		[Key]
-		[Column(TypeName = "bigint")]
-		public long Id { get; set; }
+		public Guid ProductTemplateId { get; set; }
 
-		public string? VendorCode { get; set; }
-
-		public string? VendorId { get; set; }
+		public Guid PriceId { get; set; }
 
 		public string Alias { get; set; }
 
@@ -22,10 +19,12 @@ namespace Entities
 
 		public bool Active { get; set; }
 
-		[ForeignKey("VendorCode")]
-		public ProductTemplate? ProductTemplate { get; set; }
+		[ForeignKey("ProductTemplateId")]
+		[NotMapped]
+		public ProductTemplate ProductTemplate { get; set; }
 
-		[ForeignKey("VendorId")]
-		public User? Vendor { get; set; }
+		[ForeignKey("PriceId")]
+		[NotMapped]
+		public PriceList PriceList { get; set; }
 	}
 }

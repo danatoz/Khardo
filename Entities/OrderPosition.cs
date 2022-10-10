@@ -1,24 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Entities.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
-	public class OrderPosition
+	public class OrderPosition : Entity
 	{
-		[Key]
-		[Column(TypeName = "bigint")]
-		public long Id { get; set; }
+		public Guid OrderId { get; set; }
 
-		[Column(TypeName = "bigint")]
-		public long OrderId { get; set; }
-
-		[Column(TypeName = "bigint")]
-		public long ProductId { get; set; }
+		public Guid ProductId { get; set; }
 
 		[ForeignKey("ProductId")]
-		public Product? Product { get; set; }
+		public Product Product { get; set; }
 
 		[ForeignKey("OrderId")]
-		public Order? Order { get; set; }
+		public Order Order { get; set; }
 	}
 }

@@ -10,7 +10,7 @@ namespace Entities
 
 		public int? Rating { get; set; }
 
-		public string? ResponsibleId { get; set; }
+		public string ResponsibleId { get; set; }
 
 		public string ITN { get; set; }
 
@@ -21,18 +21,17 @@ namespace Entities
 		public string LegalAddress { get; set; }
 
 		[ForeignKey("ResponsibleId")]
-		public User? Responsible { get; set; }
+		public User Responsible { get; set; }
 
-		public int? CityId { get; set; }
+		public Guid? CityId { get; set; }
 
 		[ForeignKey("CityId")]
-		public City? City { get; set; }
+		public City City { get; set; }
 
-		[NotMapped]
-		public List<User>? Vendors { get; set; }
+		public List<User> Vendors { get; set; }
 
-		public List<Order>? Orders { get; set; }
+		public List<Order> Orders { get; set; }
 
-		public List<Product>? Products { get; set; }
+		public List<PriceList> PriceLists { get; set; }
 	}
 }

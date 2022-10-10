@@ -74,8 +74,6 @@ namespace DAL.MsSqlServer
 
 			_db.Categories.AddRange(InitializeData.CategoryInitialize());
 			_db.Countries.AddRange(InitializeData.CountryInitialize());
-			_db.Manufacturers.AddRange(InitializeData.ManufactureInitialize());
-			_db.ProductTemplates.AddRange(InitializeData.ProductTemplateInitialize());
 			await _db.SaveChangesAsync(Cancel);
 
 			var users = InitializeData.UsersInitialize();

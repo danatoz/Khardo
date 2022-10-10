@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.MsSqlServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221008175554_initial")]
+    [Migration("20221010125138_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,9 @@ namespace DAL.MsSqlServer.Migrations
 
             modelBuilder.Entity("Entities.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
@@ -50,8 +48,8 @@ namespace DAL.MsSqlServer.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -62,11 +60,9 @@ namespace DAL.MsSqlServer.Migrations
 
             modelBuilder.Entity("Entities.City", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -78,11 +74,9 @@ namespace DAL.MsSqlServer.Migrations
 
             modelBuilder.Entity("Entities.Country", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -94,14 +88,12 @@ namespace DAL.MsSqlServer.Migrations
 
             modelBuilder.Entity("Entities.Manufacturer", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CountryId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CountryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -118,11 +110,9 @@ namespace DAL.MsSqlServer.Migrations
 
             modelBuilder.Entity("Entities.News", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
@@ -143,17 +133,12 @@ namespace DAL.MsSqlServer.Migrations
 
             modelBuilder.Entity("Entities.Order", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -167,17 +152,15 @@ namespace DAL.MsSqlServer.Migrations
 
             modelBuilder.Entity("Entities.OrderPosition", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("OrderId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("ProductId")
-                        .HasColumnType("bigint");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -188,13 +171,36 @@ namespace DAL.MsSqlServer.Migrations
                     b.ToTable("OrderPositions");
                 });
 
+            modelBuilder.Entity("Entities.PriceList", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPublicate")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PriceStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Prices");
+                });
+
             modelBuilder.Entity("Entities.Product", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
@@ -208,31 +214,25 @@ namespace DAL.MsSqlServer.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
 
-                    b.Property<string>("VendorCode")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("PriceId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("VendorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ProductTemplateId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("VendorCode");
-
-                    b.HasIndex("VendorId");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Entities.ProductPhoto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ProductTemplateId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ProductTemplateId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UrlImage")
                         .HasColumnType("nvarchar(max)");
@@ -246,20 +246,21 @@ namespace DAL.MsSqlServer.Migrations
 
             modelBuilder.Entity("Entities.ProductTemplate", b =>
                 {
-                    b.Property<string>("VendorCode")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ManufacturerId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ManufacturerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ManufacturerType")
                         .HasColumnType("int");
@@ -270,7 +271,10 @@ namespace DAL.MsSqlServer.Migrations
                     b.Property<string>("NormalizedVendorCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("VendorCode");
+                    b.Property<string>("VendorCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
@@ -290,8 +294,8 @@ namespace DAL.MsSqlServer.Migrations
                     b.Property<string>("BIC")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CityId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CityId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -537,9 +541,11 @@ namespace DAL.MsSqlServer.Migrations
 
             modelBuilder.Entity("Entities.Order", b =>
                 {
-                    b.HasOne("Entities.User", null)
+                    b.HasOne("Entities.User", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Entities.OrderPosition", b =>
@@ -561,17 +567,11 @@ namespace DAL.MsSqlServer.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Entities.Product", b =>
+            modelBuilder.Entity("Entities.PriceList", b =>
                 {
-                    b.HasOne("Entities.ProductTemplate", "ProductTemplate")
-                        .WithMany()
-                        .HasForeignKey("VendorCode");
-
                     b.HasOne("Entities.User", "Vendor")
-                        .WithMany("Products")
-                        .HasForeignKey("VendorId");
-
-                    b.Navigation("ProductTemplate");
+                        .WithMany("PriceLists")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Vendor");
                 });
@@ -580,7 +580,9 @@ namespace DAL.MsSqlServer.Migrations
                 {
                     b.HasOne("Entities.ProductTemplate", "ProductTemplate")
                         .WithMany("Photos")
-                        .HasForeignKey("ProductTemplateId");
+                        .HasForeignKey("ProductTemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ProductTemplate");
                 });
@@ -609,7 +611,7 @@ namespace DAL.MsSqlServer.Migrations
                         .HasForeignKey("CityId");
 
                     b.HasOne("Entities.User", "Responsible")
-                        .WithMany()
+                        .WithMany("Vendors")
                         .HasForeignKey("ResponsibleId");
 
                     b.Navigation("City");
@@ -687,7 +689,9 @@ namespace DAL.MsSqlServer.Migrations
                 {
                     b.Navigation("Orders");
 
-                    b.Navigation("Products");
+                    b.Navigation("PriceLists");
+
+                    b.Navigation("Vendors");
                 });
 #pragma warning restore 612, 618
         }

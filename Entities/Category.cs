@@ -5,7 +5,6 @@ namespace Entities
 {
 	public class Category : Entity
 	{
-
 		public string Name { get; set; }
 
 		public string Description { get; set; }
@@ -14,7 +13,7 @@ namespace Entities
 
 		public string IconUrl { get; set; }
 
-		public int? ParentId { get; set; }
+		public Guid? ParentId { get; set; }
 
 		public bool Active { get; set; }
 

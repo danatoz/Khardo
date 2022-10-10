@@ -8,7 +8,7 @@ using Entities;
 
 namespace DAL
 {
-	public class CategoryDal : BaseDal<ApplicationDbContext, Category, int>
+	public class CategoryDal : BaseDal<ApplicationDbContext, Category, Guid>
 	{
 		public CategoryDal()
 		{
@@ -19,7 +19,7 @@ namespace DAL
 			
 		}
 
-		protected override Expression<Func<Category, int>> GetIdByDbObjectExpression()
+		protected override Expression<Func<Category, Guid>> GetIdByDbObjectExpression()
 		{
 			return item => item.Id;
 		}

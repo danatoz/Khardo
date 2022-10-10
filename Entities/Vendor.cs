@@ -2,7 +2,7 @@
 
 namespace Entities
 {
-	public class Vendor : BaseUser
+	public class Vendor
 	{
 		public string NameOrganization { get; set; }
 

@@ -11,5 +11,9 @@ namespace UI.Models.ViewModels.FilterModel
     {
 	    [Display(Name = "Поисковый запрос")]
 	    public string SearchQuery { get; set; }
+
+        [Display(Name = "Активен")] 
+        public bool? Active { get; set; }
+
     }
 }

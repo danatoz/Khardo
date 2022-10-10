@@ -8,7 +8,7 @@ namespace PriceParseServices
 {
 	public class UploadedModel
 	{
-		public string VendorId { get; set; }
+		public Guid PriceId { get; set; }
 		public List<PriceModel> Price { get; set; }
 	}
 }

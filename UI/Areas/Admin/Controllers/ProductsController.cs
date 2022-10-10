@@ -59,7 +59,7 @@ namespace UI.Areas.Admin.Controllers
 			return RedirectToAction("Index", "Products", new { Area = "Admin" });
 		}
 
-		public async Task<IActionResult> Delete(int id)
+		public async Task<IActionResult> Delete(Guid id)
 		{
 			try
 			{
