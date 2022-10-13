@@ -3,6 +3,7 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,9 +22,19 @@ namespace BL
 			return new OrderDal().ExistsAsync(id);
 		}
 
-		public Task<Order> GetAsync(Guid id)
+		public async Task<Order> GetAsync(Guid id)
 		{
-			return new OrderDal().GetAsync(id);
+			return await new OrderDal().GetAsync(id);
+		}
+
+		public async Task<List<Order>> GetAsync()
+		{
+			return await new OrderDal().GetAsync();
+		}
+
+		public async Task<List<Order>> GetAsync(Expression<Func<Order, bool>> predicate)
+		{
+			return await new OrderDal().GetAsync(predicate);
 		}
 
 		public Task<bool> DeleteHardAsync(Guid id)

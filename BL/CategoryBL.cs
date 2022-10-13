@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
@@ -21,9 +22,19 @@ namespace BL
 			return new CategoryDal().ExistsAsync(id);
 		}
 
-		public Task<Category> GetAsync(Guid id)
+		public async Task<Category> GetAsync(Guid id)
 		{
-			return new CategoryDal().GetAsync(id);
+			return await new CategoryDal().GetAsync(id);
+		}
+
+		public async Task<List<Category>> GetAsync()
+		{
+			return await new CategoryDal().GetAsync();
+		}
+
+		public async Task<List<Category>> GetAsync(Expression<Func<Category, bool>> predicate)
+		{
+			return await new CategoryDal().GetAsync(predicate);
 		}
 
 		public Task<bool> DeleteHardAsync(Guid id)

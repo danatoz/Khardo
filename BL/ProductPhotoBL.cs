@@ -3,6 +3,7 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,9 +22,19 @@ namespace BL
 			return new ProductPhotoDal().ExistsAsync(id);
 		}
 
-		public Task<ProductPhoto> GetAsync(Guid id)
+		public async Task<ProductPhoto> GetAsync(Guid id)
 		{
-			return new ProductPhotoDal().GetAsync(id);
+			return await new ProductPhotoDal().GetAsync(id);
+		}
+
+		public async Task<List<ProductPhoto>> GetAsync()
+		{
+			return await new ProductPhotoDal().GetAsync();
+		}
+
+		public async Task<List<ProductPhoto>> GetAsync(Expression<Func<ProductPhoto, bool>> predicate)
+		{
+			return await new ProductPhotoDal().GetAsync(predicate);
 		}
 
 		public Task<bool> DeleteHardAsync(Guid id)

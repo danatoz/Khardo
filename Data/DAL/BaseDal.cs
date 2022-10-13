@@ -33,7 +33,36 @@ namespace DAL
 			{
 				throw;
 			}
-			finally { }
+			finally
+			{
+				await this.DisposeContextAsync(data);
+			}
+		}
+
+		public virtual async Task<List<TEntity>> GetAsync()
+		{
+			var data = GetContext();
+			try
+			{
+				return await data.Set<TEntity>().ToListAsync();
+			}
+			catch (Exception e)
+			{
+				throw;
+			}
+		}
+
+		public virtual async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
+		{
+			var data = GetContext();
+			try
+			{
+				return await data.Set<TEntity>().Where(predicate).ToListAsync();
+			}
+			catch (Exception e)
+			{
+				throw;
+			}
 		}
 
 		public virtual async Task<TPrimaryKey > AddOrUpdateAsync(TEntity entity)
@@ -51,6 +80,7 @@ namespace DAL
 						await data.Set<TEntity>().AddAsync(entity);
 						break;
 				}
+
 				await data.SaveChangesAsync();
 				return GetIdByDbObject(entity);
 			}
@@ -58,7 +88,10 @@ namespace DAL
 			{
 				throw;
 			}
-			finally{}
+			finally
+			{
+				await this.DisposeContextAsync(data);
+			}
 		}
 
 		public virtual async Task AddOrUpdateAsync(IList<TEntity> entities)

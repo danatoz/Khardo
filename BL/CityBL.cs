@@ -1,6 +1,8 @@
 ﻿using DAL;
 using Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace BL
@@ -18,9 +20,19 @@ namespace BL
 			return new CityDal().ExistsAsync(id);
 		}
 
-		public Task<City> GetAsync(Guid id)
+		public async Task<City> GetAsync(Guid id)
 		{
-			return new CityDal().GetAsync(id);
+			return await new CityDal().GetAsync(id);
+		}
+
+		public async Task<List<City>> GetAsync()
+		{
+			return await new CityDal().GetAsync();
+		}
+
+		public async Task<List<City>> GetAsync(Expression<Func<City, bool>> predicate)
+		{
+			return await new CityDal().GetAsync(predicate);
 		}
 
 		public Task<bool> DeleteHardAsync(Guid id)

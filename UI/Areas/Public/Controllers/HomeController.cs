@@ -1,19 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
-using AutoMapper;
-using BL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Common.Enums;
-using DAL;
-using Microsoft.EntityFrameworkCore;
-using UI.Models;
-using Entities;
-using Microsoft.AspNetCore.Identity;
-using NLog.Web.LayoutRenderers;
 
 namespace UI.Areas.Public.Controllers
 {
