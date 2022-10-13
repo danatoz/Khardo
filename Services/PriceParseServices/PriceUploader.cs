@@ -14,7 +14,7 @@ namespace PriceParseServices
 	{
 		public static async Task Upload(UploadedModel model)
 		{
-			await using var db = new ApplicationDbContext();
+			await using var db = new AppDbContext();
 			foreach (var priceModel in model.Price)
 			{
 				//проверить существует ли подобный артикул в шаблонах

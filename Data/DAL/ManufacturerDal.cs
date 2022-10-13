@@ -8,18 +8,19 @@ using Entities;
 
 namespace DAL
 {
-	public class CategoryDal : BaseDal<AppDbContext, Category, Guid>
+	public class ManufacturerDal : BaseDal<AppDbContext, Manufacturer, Guid>
 	{
-		public CategoryDal()
-		{
-			
-		}
-		public CategoryDal(AppDbContext context) : base(context)
+		public ManufacturerDal()
 		{
 			
 		}
 
-		protected override Expression<Func<Category, Guid>> GetIdByDbObjectExpression()
+		public ManufacturerDal(AppDbContext context) : base(context)
+		{
+			
+		}
+
+		protected override Expression<Func<Manufacturer, Guid>> GetIdByDbObjectExpression()
 		{
 			return item => item.Id;
 		}

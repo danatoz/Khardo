@@ -8,6 +8,13 @@
 
     <div class="row">
         <input type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="ConcurrencyStamp"/>
+        <input type="hidden" asp-for="AccessFailedCount"/>
+        <input type="hidden" asp-for="Rating"/>
+        <input type="hidden" asp-for="LockoutEnabled"/>
+        <input type="hidden" asp-for="EmailConfirmed"/>
+        <input type="hidden" asp-for="LockoutEnd"/>
+
         <div class="col-md-4 col-sm-6">
             <div class="form-group">
                 <label asp-for="UserName"></label>

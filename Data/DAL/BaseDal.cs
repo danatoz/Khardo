@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace DAL
 {
@@ -21,7 +22,7 @@ namespace DAL
 			_context = context;
 		}
 
-		public virtual async Task<TEntity> GetAsync(TPrimaryKey  id)
+		public virtual async Task<TEntity> GetAsync(TPrimaryKey id)
 		{
 			var data = GetContext();
 			try
@@ -44,7 +45,7 @@ namespace DAL
 				switch (exists)
 				{
 					case true:
-						data.Set<TEntity>().Update(entity);
+						data.Set<TEntity>().Update(entity).State = EntityState.Modified;
 						break;
 					default:
 						await data.Set<TEntity>().AddAsync(entity);

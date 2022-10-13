@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using UI.Other;
 using Entities;
+using UI.Models.ViewModels;
 
 
 namespace UI.Areas.Admin.Controllers
@@ -40,13 +41,13 @@ namespace UI.Areas.Admin.Controllers
 		[AllowAnonymous]
 		public IActionResult Login(string returnUrl)
 		{
-			return View(new LoginModel { ReturnUrl = returnUrl });
+			return View(new LoginViewModel { ReturnUrl = returnUrl });
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[AllowAnonymous]
-		public async Task<IActionResult> Login(LoginModel model)
+		public async Task<IActionResult> Login(LoginViewModel model)
 		{
 			if (ModelState.IsValid)
 			{

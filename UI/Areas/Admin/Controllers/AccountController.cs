@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using DAL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using NLog;
+using UI.Models.ViewModels;
 using UI.Other;
 
 namespace UI.Areas.Admin.Controllers
@@ -20,30 +16,32 @@ namespace UI.Areas.Admin.Controllers
 		private readonly ILogger<AccountController> _logger;
 		private readonly SignInManager<User> _signInManager;
 		private readonly UserManager<User> _userManager;
+		private readonly List<string> _roles;
 
 		public AccountController(ILogger<AccountController> logger, SignInManager<User> signInManager, UserManager<User> userManager)
 		{
 			_logger = logger;
 			_signInManager = signInManager;
 			_userManager = userManager;
+			_roles = new List<string>() { "admin", "manager" };
 		}
 
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
-	        return View(new LoginModel { ReturnUrl = returnUrl });
+	        return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
 	        if (ModelState.IsValid)
 	        {
 		        var user = await _userManager.FindByNameAsync(model.UserName);
 		        var roles = await _userManager.GetRolesAsync(user);
-		        if (!roles.Contains("admin"))
+		        if (!roles.Any(item => _roles.Contains(item)))
 		        {
 					TempData[OperationResultType.Error.ToString()] = "В доступе отказано!";
 					return RedirectToAction("Login", "Account", new { Area = "Admin" });

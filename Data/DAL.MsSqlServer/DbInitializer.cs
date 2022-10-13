@@ -15,12 +15,12 @@ namespace DAL.MsSqlServer
 {
 	public class DbInitializer
 	{
-		private readonly ApplicationDbContext _db;
+		private readonly AppDbContext _db;
 		private readonly ILogger<DbInitializer> _logger;
 		private readonly UserManager<User> _userManager;
 		private readonly RoleManager<IdentityRole> _roleManager;
 
-		public DbInitializer(ApplicationDbContext db, ILogger<DbInitializer> logger, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+		public DbInitializer(AppDbContext db, ILogger<DbInitializer> logger, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
 		{
 			_db = db;
 			_logger = logger;

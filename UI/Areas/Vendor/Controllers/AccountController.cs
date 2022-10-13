@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using UI.Models.ViewModels;
 using UI.Other;
 
 namespace UI.Areas.Vendor.Controllers
@@ -24,13 +25,13 @@ namespace UI.Areas.Vendor.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
-	        return View(new LoginModel { ReturnUrl = returnUrl });
+	        return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
 	        if (ModelState.IsValid)
 	        {

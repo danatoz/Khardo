@@ -31,9 +31,9 @@ namespace UI.Areas.Admin.Controllers
 	public class CategoryController : BaseController
 	{
 		private readonly ILogger<CategoryController> _logger;
-		private readonly ApplicationDbContext _context;
+		private readonly AppDbContext _context;
 
-		public CategoryController(ILogger<CategoryController> logger, ApplicationDbContext context)
+		public CategoryController(ILogger<CategoryController> logger, AppDbContext context)
 		{
 			_logger = logger;
 			_context = context;

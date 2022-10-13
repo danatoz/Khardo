@@ -17,9 +17,9 @@ namespace UI.Areas.Public.Controllers
 	public class NewsController : BaseController
     {
 		private readonly ILogger<NewsController> _logger;
-		private readonly ApplicationDbContext _context;
+		private readonly AppDbContext _context;
 
-		public NewsController(ILogger<NewsController> logger, ApplicationDbContext context)
+		public NewsController(ILogger<NewsController> logger, AppDbContext context)
 		{
 			_logger = logger;
 			_context = context;

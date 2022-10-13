@@ -15,14 +15,5 @@ namespace UI
 			var claim = claimsIdentity?.FindFirst(ClaimTypes.NameIdentifier);
 			return claim?.Value;
 		}
-		//public static string? GetCurrentUserId(this Controller controller)
-		//{
-		//	return (controller.User.Identity as CustomUserIdentity)?.Id;
-		//}
-
-		//public static UserRole? GetCurrentUserRole(this Controller controller)
-		//{
-		//	return (controller.User.Identity as CustomUserIdentity)?.Role;
-		//}
 	}
 }

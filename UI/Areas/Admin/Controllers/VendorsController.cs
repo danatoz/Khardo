@@ -22,8 +22,8 @@ namespace UI.Areas.Admin.Controllers
 	    private readonly ILogger<VendorsController> _logger;
 		private readonly UserManager<User> _userManager;
 		private readonly RoleManager<IdentityRole> _roleManager;
-		private readonly ApplicationDbContext _context;
-	    public VendorsController(ILogger<VendorsController> logger, UserManager<User> userManager, ApplicationDbContext context, RoleManager<IdentityRole> roleManager)
+		private readonly AppDbContext _context;
+	    public VendorsController(ILogger<VendorsController> logger, UserManager<User> userManager, AppDbContext context, RoleManager<IdentityRole> roleManager)
 	    {
 		    _logger = logger;
 		    _userManager = userManager;
@@ -35,7 +35,6 @@ namespace UI.Areas.Admin.Controllers
 	    {
 		    if (User.IsInRole("manager"))
 			    filterModel.ResponsibleId = this.GetCurrentUserId();
-
 		    const int objectsPerPage = 20;
 		    var startIndex = (page - 1) * objectsPerPage;
 		    var source =  await (from user in _context.Users
@@ -76,7 +75,7 @@ namespace UI.Areas.Admin.Controllers
 				var user = await _userManager.FindByIdAsync(model.Id);
 				if (user != null)
 				{
-					await _userManager.UpdateAsync(user);
+					await _userManager.UpdateAsync(model);
 				}
 				else
 				{

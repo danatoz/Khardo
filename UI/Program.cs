@@ -30,14 +30,14 @@ switch (dbType)
 		services.AddKhardoDbSqlServer(configuration.GetConnectionString("MsSqlConnectionString"));
 		break;
 	default:
-		services.AddDbContext<ApplicationDbContext>(options =>
+		services.AddDbContext<AppDbContext>(options =>
 			options.UseInMemoryDatabase(databaseName: "Default"));
 		break;
 }
 services.AddMvc();
 
 services.AddIdentity<User, IdentityRole>()
-	.AddEntityFrameworkStores<ApplicationDbContext>();
+	.AddEntityFrameworkStores<AppDbContext>();
 
 services.AddControllersWithViews().AddRazorRuntimeCompilation();
 services.AddRazorPages();

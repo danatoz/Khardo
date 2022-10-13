@@ -24,13 +24,13 @@ namespace UI.Areas.Vendor.Controllers
 	[Area("Vendor")]
 	public class PriceController : BaseController
 	{
-		private readonly ApplicationDbContext _context;
+		private readonly AppDbContext _context;
 		private readonly ILogger<PriceController> _logger;
 		private readonly IWebHostEnvironment _environment;
 		private readonly IRabbitMqService _mqService;
 		private readonly UserManager<User> _userManager;
 
-		public PriceController(ApplicationDbContext context, ILogger<PriceController> logger, IWebHostEnvironment environment, IRabbitMqService mqService, UserManager<User> userManager)
+		public PriceController(AppDbContext context, ILogger<PriceController> logger, IWebHostEnvironment environment, IRabbitMqService mqService, UserManager<User> userManager)
 		{
 			_context = context;
 			_logger = logger;

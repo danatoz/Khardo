@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DAL
 {
-	public partial class ApplicationDbContext : IdentityDbContext<User, IdentityRole, string>
+	public partial class AppDbContext : IdentityDbContext<User, IdentityRole, string>
 	{
-		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+		public AppDbContext(DbContextOptions<AppDbContext> options)
 			: base(options)
 		{
 			//options = new DbContextOptionsBuilder<ApplicationDbContext>()
 			//	.UseInMemoryDatabase("Default").Options;
 		}
 
-		public ApplicationDbContext()
+		public AppDbContext()
 		{
 			
 		}

@@ -12,4 +12,8 @@
     <PackageReference Include="EPPlus" Version="6.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\DAL\DAL.csproj" />
+  </ItemGroup>
+
 </Project>

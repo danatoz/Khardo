@@ -13,7 +13,7 @@ namespace UI.Models
 
 	    public int CustomerId { get; set; }
 
-	    public CustomerModel Customer { get; set; }
+	    public UserModel Customer { get; set; }
 
 	    public List<OrderPositionModel> OrderPositions { get; set; }
 

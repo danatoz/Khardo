@@ -7,6 +7,8 @@ namespace Entities
     {
 	    public string Name { get; set; }
 
+	    public string NormalizeName { get; set; }
+
 	    public string UrlLogo { get; set; }
 
 	    public Guid? CountryId { get; set; }

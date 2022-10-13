@@ -17,9 +17,9 @@ namespace UI.Areas.Admin.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
-		private ApplicationDbContext _context;
+		private AppDbContext _context;
 
-		public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+		public HomeController(ILogger<HomeController> logger, AppDbContext context)
 		{
 			_logger = logger;
 			_context = context;

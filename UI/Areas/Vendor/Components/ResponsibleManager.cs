@@ -13,7 +13,7 @@ namespace UI.Areas.Vendor.Components
     public class ResponsibleManager : ViewComponent
     {
 	    //private readonly ApplicationDbContext _context;
-	    public ResponsibleManager(ApplicationDbContext context)
+	    public ResponsibleManager(AppDbContext context)
 	    {
 		    //_context = context;
 	    }

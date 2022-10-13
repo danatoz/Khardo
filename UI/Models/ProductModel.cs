@@ -24,7 +24,7 @@ namespace UI.Models
 
 	    public ProductTemplateModel ProductTemplate { get; set; }
 
-	    public VendorModel Vendor { get; set; }
+	    public UserModel Vendor { get; set; }
 
 		public static Product ConvertToDal(ProductModel obj)
 		{

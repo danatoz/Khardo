@@ -30,6 +30,5 @@ namespace BL
 		{
 			return new CategoryDal().DeleteHardAsync(id);
 		}
-
 	}
 }

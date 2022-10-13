@@ -20,9 +20,9 @@ namespace UI.Areas.Admin.Controllers
 	public class ProductsController : BaseController
     {
 		private readonly ILogger<ProductsController> _logger;
-		private readonly ApplicationDbContext _context;
+		private readonly AppDbContext _context;
 
-		public ProductsController(ILogger<ProductsController> logger, ApplicationDbContext context)
+		public ProductsController(ILogger<ProductsController> logger, AppDbContext context)
 		{
 			_logger = logger;
 			_context = context;

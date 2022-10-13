@@ -23,10 +23,10 @@ namespace UI.Areas.Admin.Controllers
 	public class ProductTemplateController : Controller
 	{
 		private readonly ILogger<ProductTemplateController> _logger;
-		private readonly ApplicationDbContext _context;
+		private readonly AppDbContext _context;
 		private readonly UserManager<User> _userManager;
 
-		public ProductTemplateController(ILogger<ProductTemplateController> logger, ApplicationDbContext context, UserManager<User> userManager)
+		public ProductTemplateController(ILogger<ProductTemplateController> logger, AppDbContext context, UserManager<User> userManager)
 		{
 			_logger = logger;
 			_context = context;

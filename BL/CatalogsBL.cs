@@ -11,8 +11,8 @@ namespace BL
 {
     public class CatalogsBL
     {
-	    public readonly ApplicationDbContext _context;
-	    public CatalogsBL(ApplicationDbContext context)
+	    public readonly AppDbContext _context;
+	    public CatalogsBL(AppDbContext context)
 	    {
 		    _context = context;
 	    }
