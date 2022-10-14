@@ -2,6 +2,7 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -33,6 +34,11 @@ namespace BL
 		public async Task<List<News>> GetAsync(Expression<Func<News, bool>> predicate)
 		{
 			return await new NewsDal().GetAsync(predicate);
+		}
+
+		public async Task<List<News>> GetAsync(Expression<Func<News, bool>> filter = null, Func<IQueryable<News>, IOrderedQueryable<News>> orderBy = null, params Expression<Func<News, object>>[] includes)
+		{
+			return await new NewsDal().GetAsync(filter, orderBy, includes);
 		}
 
 		public Task<bool> DeleteHardAsync(Guid id)

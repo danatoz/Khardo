@@ -2,6 +2,7 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -33,6 +34,11 @@ namespace BL
 		public async Task<List<City>> GetAsync(Expression<Func<City, bool>> predicate)
 		{
 			return await new CityDal().GetAsync(predicate);
+		}
+
+		public async Task<List<City>> GetAsync(Expression<Func<City, bool>> filter = null, Func<IQueryable<City>, IOrderedQueryable<City>> orderBy = null, params Expression<Func<City, object>>[] includes)
+		{
+			return await new CityDal().GetAsync(filter, orderBy, includes);
 		}
 
 		public Task<bool> DeleteHardAsync(Guid id)

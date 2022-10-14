@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DAL;
@@ -53,6 +54,11 @@ namespace BL
 	    public async Task<List<Product>> GetAsync(Expression<Func<Product, bool>> predicate)
 	    {
 		    return await new ProductDal().GetAsync(predicate);
+	    }
+
+	    public async Task<List<Product>> GetAsync(Expression<Func<Product, bool>> filter = null, Func<IQueryable<Product>, IOrderedQueryable<Product>> orderBy = null, params Expression<Func<Product, object>>[] includes)
+	    {
+		    return await new ProductDal().GetAsync(filter, orderBy, includes);
 	    }
 
 		public Task<bool> DeleteHardAsync(Guid id)

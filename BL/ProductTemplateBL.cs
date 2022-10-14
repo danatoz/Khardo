@@ -37,6 +37,11 @@ namespace BL
 			return await new ProductTemplateDal().GetAsync(predicate);
 		}
 
+		public async Task<List<ProductTemplate>> GetAsync(Expression<Func<ProductTemplate, bool>> filter = null, Func<IQueryable<ProductTemplate>, IOrderedQueryable<ProductTemplate>> orderBy = null, params Expression<Func<ProductTemplate, object>>[] includes)
+		{
+			return await new ProductTemplateDal().GetAsync(filter, orderBy, includes);
+		}
+
 		public Task<bool> DeleteHardAsync(Guid id)
 		{
 			return new ProductTemplateDal().DeleteHardAsync(id);

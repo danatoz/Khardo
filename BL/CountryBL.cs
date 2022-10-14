@@ -37,6 +37,11 @@ namespace BL
 			return await new CountryDal().GetAsync(predicate);
 		}
 
+		public async Task<List<Country>> GetAsync(Expression<Func<Country, bool>> filter = null, Func<IQueryable<Country>, IOrderedQueryable<Country>> orderBy = null, params Expression<Func<Country, object>>[] includes)
+		{
+			return await new CountryDal().GetAsync(filter, orderBy, includes);
+		}
+
 		public Task<bool> DeleteHardAsync(Guid id)
 		{
 			return new CountryDal().DeleteHardAsync(id);

@@ -37,6 +37,11 @@ namespace BL
 			return await new ManufacturerDal().GetAsync(predicate);
 		}
 
+		public async Task<List<Manufacturer>> GetAsync(Expression<Func<Manufacturer, bool>> filter = null, Func<IQueryable<Manufacturer>, IOrderedQueryable<Manufacturer>> orderBy = null, params Expression<Func<Manufacturer, object>>[] includes)
+		{
+			return await new ManufacturerDal().GetAsync(filter, orderBy, includes);
+		}
+
 		public Task<bool> DeleteHardAsync(Guid id)
 		{
 			return new ManufacturerDal().DeleteHardAsync(id);

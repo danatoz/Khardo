@@ -37,6 +37,11 @@ namespace BL
 			return await new OrderPositionDal().GetAsync(predicate);
 		}
 
+		public async Task<List<OrderPosition>> GetAsync(Expression<Func<OrderPosition, bool>> filter = null, Func<IQueryable<OrderPosition>, IOrderedQueryable<OrderPosition>> orderBy = null, params Expression<Func<OrderPosition, object>>[] includes)
+		{
+			return await new OrderPositionDal().GetAsync(filter, orderBy, includes);
+		}
+
 		public Task<bool> DeleteHardAsync(Guid id)
 		{
 			return new OrderPositionDal().DeleteHardAsync(id);
