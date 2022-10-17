@@ -12,12 +12,8 @@
       ]
     },
     {
-      "library": "d3-hierarchy@1.1.5",
-      "destination": "wwwroot/d3-hierarchy/"
-    },
-    {
-      "library": "jstree@3.3.12",
-      "destination": "wwwroot/lib/jstree/"
+      "library": "typeahead.js@0.11.1",
+      "destination": "wwwroot/lib/typeahead.js/"
     }
   ]
 }

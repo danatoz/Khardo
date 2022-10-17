@@ -31,7 +31,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PriceParseServices", "Servi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Parsers", "Parsers", "{EDC02F10-C893-40CB-801C-BF2C04FC8489}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParseManufacturer", "Parsers\PerseManufacturer\ParseManufacturer.csproj", "{E7CB16E2-6BF6-48FB-BB26-FAB95F704ADD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParseManufacturer", "Parsers\PerseManufacturer\ParseManufacturer.csproj", "{E7CB16E2-6BF6-48FB-BB26-FAB95F704ADD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{472F2962-C025-48B9-BE10-9037BDA1B6C1}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
