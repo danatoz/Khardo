@@ -1,33 +1,35 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - Khardo</title>
-	@*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
-	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-	<link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Khardo</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
 </head>
 <body>
-	<partial name="_Header" />
+    <partial name="_Header" />
 
-	<partial name="_LoginPartial" />
+    <partial name="_LoginPartial" />
 
-	<partial name="_SelectRegionModal" />
+    <partial name="_SelectRegionModal" />
 
-	<div class="tpl23-container">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
-	</div>
+    <div class="tpl23-container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
-	<partial name="_Footer" />
-	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-	<script src="~/js/application_system.js" asp-append-version="true"></script>
-	<script src="~/js/script.js" asp-append-version="true"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/site.js" asp-append-version="true"></script>
-	<script src="lib/vue/vue.runtime.global.min.js" asp-append-version="true"></script>
-	@RenderSection("Scripts", required: false)
+    <partial name="_Footer" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/application_system.js" asp-append-version="true"></script>
+    <script src="~/js/script.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/vue/vue.runtime.global.min.js" asp-append-version="true"></script>
+    <script src="~/lib/typeahead.js/bloodhound.min.js"></script>
+    <script src="~/lib/typeahead.js/typeahead.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

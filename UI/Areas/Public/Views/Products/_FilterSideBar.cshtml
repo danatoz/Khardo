@@ -1,0 +1,254 @@
+﻿<div class="b-nep-filter-mob-toggler v2-search-container">
+    <button class="b-nep-filter-mob-toggler-btn" data-toggle="collapse" data-target="#cNepFilter"
+            aria-expanded="false" aria-controls="cNepFilter">
+        Фильтр
+    </button>
+</div>
+<div class="b-nep-filters collapse v2-search-container" id="cNepFilter"
+     style="display: block; overflow: auto; position: static; top: auto; left: auto; width: auto;"
+     role="all-filters-content">
+    <ul class="b-nep-filters-list">
+        <li class="b-item">
+            <div class="dropdown">
+                <button class="b-nep-filter-btn" id="dNEPFilter1" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" role="brand-filter-popup-btn">
+                    Бренд
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dNEPFilter1" role="brand-filter-container">
+                    <div class="b-nep-filter-inner">
+                        <div class="b-nep-main-brands">
+                            <div class="b-nep-dd-head">
+                                Бренды
+                                &nbsp;&nbsp;
+                                <small>
+
+
+                                    <input type="checkbox" name="sort_brands_by_price"
+                                           id="sort_brands_by_price" value="1">
+
+                                    <label for="sort_brands_by_price">Сортировать по цене</label>
+                                </small>
+                            </div>
+                            <input type="text" id="inputFilterBrand" class="b-brand-filter-input"
+                                   autofocus="">
+                            <form method="post" action="">
+                                <div class="b-nep-mnbr-container">
+                                    <ul class="b-nep-fch-list">
+                                        <li>
+                                            <input type="checkbox" id="option_brand0"
+                                                   data-filter-type="brand" data-value-name="AYWIPARTS ">
+                                            <label for="option_brand0">
+                                                <span class="price-item-filter-brand-label">
+                                                    AYWIPARTS
+                                                </span> <i>-</i> <span class="price-item-filter-brand-summ">
+                                                    2 308.00 р.
+                                                </span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="option_brand1"
+                                                   data-filter-type="brand" data-value-name="FEBEST ">
+                                            <label for="option_brand1">
+                                                <span class="price-item-filter-brand-label">FEBEST </span>
+                                                <i>-</i> <span class="price-item-filter-brand-summ">
+                                                    3
+                                                    492.00 р.
+                                                </span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="option_brand2"
+                                                   data-filter-type="brand" data-value-name="GKN "> <label for="option_brand2">
+                                                <span class="price-item-filter-brand-label">GKN </span>
+                                                <i>-</i> <span class="price-item-filter-brand-summ">
+                                                    7
+                                                    790.00 р.
+                                                </span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="option_brand3"
+                                                   data-filter-type="brand" data-value-name="INKO "> <label for="option_brand3">
+                                                <span class="price-item-filter-brand-label">INKO </span>
+                                                <i>-</i> <span class="price-item-filter-brand-summ">
+                                                    1
+                                                    945.00 р.
+                                                </span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="option_brand4"
+                                                   data-filter-type="brand" data-value-name="LYNXAUTO ">
+                                            <label for="option_brand4">
+                                                <span class="price-item-filter-brand-label">
+                                                    LYNXAUTO
+                                                </span> <i>-</i> <span class="price-item-filter-brand-summ">
+                                                    2 540.00 р.
+                                                </span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="option_brand5"
+                                                   data-filter-type="brand" data-value-name="METELLI ">
+                                            <label for="option_brand5">
+                                                <span class="price-item-filter-brand-label">
+                                                    METELLI
+                                                </span> <i>-</i> <span class="price-item-filter-brand-summ">
+                                                    4 463.00 р.
+                                                </span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="option_brand6"
+                                                   data-filter-type="brand" data-value-name="ZEKKERT ">
+                                            <label for="option_brand6">
+                                                <span class="price-item-filter-brand-label">
+                                                    ZEKKERT
+                                                </span> <i>-</i> <span class="price-item-filter-brand-summ">
+                                                    3 960.00 р.
+                                                </span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="b-item" role="stat-filter">
+            <div class="dropdown">
+                <button class="b-nep-filter-btn" id="dNEPFilter2" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" role="stat-filter-popup-btn">
+                    статистика
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dNEPFilter2" role="stat-filter-container">
+                    <div class="b-nep-filter-inner">
+                        <div class="b-nep-pstatistic">
+                            <div class="b-nep-dd-head">
+                                Выберите статистику
+                            </div>
+                            <form method="post" action="#">
+                                <ul class="b-nep-fch-list">
+
+                                    <li>
+                                        <input type="checkbox" data-filter-type="stat"
+                                               data-value-name="1" id="option_stat2"><label for="option_stat2">
+                                            Отлично
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" data-filter-type="stat"
+                                               data-value-name="2" id="option_stat3"><label for="option_stat3">
+                                            Хорошо
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" data-filter-type="stat"
+                                               data-value-name="3" id="option_stat4"><label for="option_stat4">
+                                            Плохо
+                                        </label>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="b-item" role="delivery-date-filter-item">
+            <div class="dropdown">
+                <button class="b-nep-filter-btn" id="dNEPFilter2" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" role="delivery-date-filter-popup-btn">
+                    срок доставки
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dNEPFilter2"
+                     role="delivery-date-filter-container">
+                    <div class="b-nep-filter-inner">
+                        <div class="b-nep-est-dtime">
+                            <div class="b-nep-dd-head">
+                                Укажите срок доставки
+                            </div>
+                            <div class="b-nep-form-item">
+                                <div class="bootstrap-layer">
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="b-nep-mnbr-container">
+                                <ul class="b-nep-fch-list">
+                                    <li>
+                                        <input type="checkbox" data-value-name="-1"
+                                               id="option_delivery_"
+                                               data-filter-type="delivery-date"><label for="option_delivery_">Любой</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="option_delivery0"
+                                               data-filter-type="delivery-date" data-value-name="0"><label for="option_delivery0">до 0 дн</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="option_delivery1"
+                                               data-filter-type="delivery-date" data-value-name="1"><label for="option_delivery1">до 1 дн</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="option_delivery2"
+                                               data-filter-type="delivery-date" data-value-name="2"><label for="option_delivery2">до 2 дн</label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="option_delivery3"
+                                               data-filter-type="delivery-date" data-value-name="3"><label for="option_delivery3">до 3 дн</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="b-item" role="qnt-filter-item">
+            <div class="dropdown">
+                <button class="b-nep-filter-btn" id="dNEPFilter2" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" role="qnt-filter-popup-btn">
+                    Доступное количество
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dNEPFilter2" role="qnt-filter-container">
+                    <div class="b-nep-filter-inner">
+                        <div class="b-new-avail-quant">
+                            <div class="b-nep-dd-head">
+                                Выберите необходимое количество
+                            </div>
+                            <form method="post" action="#">
+                                <ul class="b-nep-filter-itb">
+                                    <li class="b-item">
+                                        <div class="bootstrap-layer">
+                                            <input type="text"
+                                                   class="form-control" value="" placeholder="Не указано"
+                                                   name="qnt-from">
+                                        </div>
+                                    </li>
+                                    <li class="b-item"><label>-</label></li>
+                                    <li class="b-item">
+                                        <div class="bootstrap-layer">
+                                            <input type="text"
+                                                   class="form-control" value="7" name="qnt-to">
+                                        </div>
+                                    </li>
+                                </ul>
+                                <button class="b-nep-btn-filter" data-filter-name="qnt">
+                                    Применить
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+
+        <li class="b-item">
+            <button class="b-nep-filter-reset-btn" role="filter-reset-btn">
+                Сбросить
+            </button>
+        </li>
+    </ul>
+</div><!-- /.b-nep-filters -->
