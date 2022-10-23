@@ -36,6 +36,11 @@ namespace BL
 			return await new NewsDal().GetAsync(predicate);
 		}
 
+		public async Task<List<News>> GetAsync(Expression<Func<News, bool>> filter = null, params Expression<Func<News, object>>[] includes)
+		{
+			return await new NewsDal().GetAsync(filter, includes);
+		}
+
 		public async Task<List<News>> GetAsync(Expression<Func<News, bool>> filter = null, Func<IQueryable<News>, IOrderedQueryable<News>> orderBy = null, params Expression<Func<News, object>>[] includes)
 		{
 			return await new NewsDal().GetAsync(filter, orderBy, includes);

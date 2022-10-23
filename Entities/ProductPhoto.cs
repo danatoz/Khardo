@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Entities.Base;
+﻿using Entities.Base;
 
 namespace Entities
 {
@@ -8,6 +7,8 @@ namespace Entities
 		public Guid ProductTemplateId { get; set; }
 
 	    public string UrlImage { get; set; }
+
+	    public bool Default { get; set; }
 
 	    [ForeignKey("ProductTemplateId")]
 		public ProductTemplate ProductTemplate { get; set; }

@@ -36,6 +36,11 @@ namespace BL
 			return await new PriceListDal().GetAsync(predicate);
 		}
 
+		public async Task<List<PriceList>> GetAsync(Expression<Func<PriceList, bool>> filter = null, params Expression<Func<PriceList, object>>[] includes)
+		{
+			return await new PriceListDal().GetAsync(filter, includes);
+		}
+
 		public async Task<List<PriceList>> GetAsync(Expression<Func<PriceList, bool>> filter = null, Func<IQueryable<PriceList>, IOrderedQueryable<PriceList>> orderBy = null, params Expression<Func<PriceList, object>>[] includes)
 		{
 			return await new PriceListDal().GetAsync(filter, orderBy, includes);

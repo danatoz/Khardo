@@ -36,6 +36,11 @@ namespace BL
 			return await new CityDal().GetAsync(predicate);
 		}
 
+		public async Task<List<City>> GetAsync(Expression<Func<City, bool>> filter = null, params Expression<Func<City, object>>[] includes)
+		{
+			return await new CityDal().GetAsync(filter, includes);
+		}
+
 		public async Task<List<City>> GetAsync(Expression<Func<City, bool>> filter = null, Func<IQueryable<City>, IOrderedQueryable<City>> orderBy = null, params Expression<Func<City, object>>[] includes)
 		{
 			return await new CityDal().GetAsync(filter, orderBy, includes);

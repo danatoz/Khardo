@@ -37,6 +37,11 @@ namespace BL
 			return await new OrderDal().GetAsync(predicate);
 		}
 
+		public async Task<List<Order>> GetAsync(Expression<Func<Order, bool>> filter = null, params Expression<Func<Order, object>>[] includes)
+		{
+			return await new OrderDal().GetAsync(filter, includes);
+		}
+
 		public async Task<List<Order>> GetAsync(Expression<Func<Order, bool>> filter = null, Func<IQueryable<Order>, IOrderedQueryable<Order>> orderBy = null, params Expression<Func<Order, object>>[] includes)
 		{
 			return await new OrderDal().GetAsync(filter, orderBy, includes);

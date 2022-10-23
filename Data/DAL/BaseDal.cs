@@ -87,6 +87,26 @@ namespace DAL
 			}
 		}
 
+		public virtual async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes)
+		{
+			var data = GetContext();
+			try
+			{
+				IQueryable<TEntity> query = data.Set<TEntity>();
+
+				query = includes.Aggregate(query, (current, include) => current.Include(include));
+
+				if (filter != null)
+					query = query.Where(filter);
+
+				return await query.ToListAsync();
+			}
+			catch (Exception e)
+			{
+				throw;
+			}
+		}
+
 		public virtual async Task<TPrimaryKey > AddOrUpdateAsync(TEntity entity)
 		{
 			var data = GetContext();

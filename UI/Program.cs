@@ -106,19 +106,19 @@ void ConfigureEndPoints(IEndpointRouteBuilder endpoints)
 
 	#region Custom Constrains
 
-	endpoints.MapControllerRoute(
-		name: "ProductDetails",
-		pattern: @"{**alias}",
-		defaults: new { area = "Public", controller = "Products", action = "Details", },
-		constraints: new { alias = new ProductRouteConstraint() }
-	);
+	//endpoints.MapControllerRoute(
+	//	name: "ProductDetails",
+	//	pattern: @"{**alias}",
+	//	defaults: new { area = "Public", controller = "Products", action = "Details", },
+	//	constraints: new { alias = new ProductRouteConstraint() }
+	//);
 
-	endpoints.MapControllerRoute(
-		name: "SubCatalog",
-		pattern: @"{**alias}",
-		defaults: new { area = "Public", controller = "Catalogs", action = "SubCategoryList" },
-		constraints: new { alias = new CategoryRouteConstraint() }
-	);
+	//endpoints.MapControllerRoute(
+	//	name: "SubCatalog",
+	//	pattern: @"{**alias}",
+	//	defaults: new { area = "Public", controller = "Catalogs", action = "SubCategoryList" },
+	//	constraints: new { alias = new CategoryRouteConstraint() }
+	//);
 	#endregion
 
 	endpoints.MapControllerRoute(

@@ -375,7 +375,8 @@ namespace DAL.MsSqlServer.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductTemplateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UrlImage = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UrlImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Default = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

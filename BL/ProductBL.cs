@@ -10,11 +10,6 @@ namespace BL
 {
     public class ProductBL
     {
-	    public ProductBL()
-	    {
-		    
-	    }
-
 	    public async Task<Guid> AddOrUpdateAsync(Product entity)
 	    {
 		    entity.Id = await new ProductDal().AddOrUpdateAsync(entity);
@@ -41,7 +36,12 @@ namespace BL
 		    return await new ProductDal().GetAsync(predicate);
 	    }
 
-	    public async Task<List<Product>> GetAsync(Expression<Func<Product, bool>> filter = null, Func<IQueryable<Product>, IOrderedQueryable<Product>> orderBy = null, params Expression<Func<Product, object>>[] includes)
+	    public async Task<List<Product>> GetAsync(Expression<Func<Product, bool>> filter = null, params Expression<Func<Product, object>>[] includes)
+	    {
+		    return await new ProductDal().GetAsync(filter, includes);
+	    }
+
+		public async Task<List<Product>> GetAsync(Expression<Func<Product, bool>> filter = null, Func<IQueryable<Product>, IOrderedQueryable<Product>> orderBy = null, params Expression<Func<Product, object>>[] includes)
 	    {
 		    return await new ProductDal().GetAsync(filter, orderBy, includes);
 	    }

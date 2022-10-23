@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common;
+﻿using Common;
 using Common.Enums;
 using DAL;
 using Entities;
@@ -87,6 +82,11 @@ namespace PriceParseServices
 				db.Prices.Update(priceList);
 				await db.SaveChangesAsync();
 			}
+
+			IQueryable<PriceList> queryAsync = db.Prices.Include(item => item.Vendor);
+			var currentPrice = await queryAsync.FirstOrDefaultAsync(item => item.Id == model.PriceId);
+			
+			Console.WriteLine($"Загружен прайс: {currentPrice?.Vendor.NameOrganization} {DateTime.Now.ToString("dd-MM-yy HH:mm")}");
 		}
 	}
 }

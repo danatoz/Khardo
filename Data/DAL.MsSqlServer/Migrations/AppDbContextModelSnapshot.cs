@@ -232,6 +232,9 @@ namespace DAL.MsSqlServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("Default")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("ProductTemplateId")
                         .HasColumnType("uniqueidentifier");
 

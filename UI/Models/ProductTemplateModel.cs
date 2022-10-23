@@ -29,6 +29,14 @@ namespace UI.Models
 
 		public string ManufacturerName { get; set; }
 
+		private string PhotoUrl { get; set; }
+
+		public string DefaultPhotoUrl
+		{
+			get { return PhotoUrl ??= "/images/serviceImages/No_image_available.svg"; }
+			set => PhotoUrl = value;
+		}
+
 		public CategoryModel Category { get; set; }
 
 		public List<ProductPhotoModel> Photos { get; set; }
@@ -40,8 +48,8 @@ namespace UI.Models
 				cfg.CreateMap<ProductTemplateModel, ProductTemplate>()
 					.ForSourceMember(source => source.Category,
 						opt => opt.DoNotValidate())
-					.ForSourceMember(source => source.Photos,
-						opt => opt.DoNotValidate())
+					.ForMember(src => src.Photos, cfg =>
+						cfg.MapFrom(opt => opt.PhotoUrl))
 					.ForMember(src => src.Manufacturer, cfg => 
 						cfg.MapFrom(opt => opt.ManufacturerName)));
 			var mapper = new Mapper(config);
@@ -57,8 +65,8 @@ namespace UI.Models
 						opt.DoNotValidate())
 					.ForSourceMember(source => source.Category,
 						opt => opt.DoNotValidate())
-					.ForSourceMember(source => source.Photos,
-						opt => opt.DoNotValidate()));
+					.ForMember(src => src.Photos, cfg =>
+						cfg.MapFrom(opt => opt.Photos)));
 			var mapper = new Mapper(config);
 			return mapper.Map<ProductTemplate, ProductTemplateModel>(obj);
 		}

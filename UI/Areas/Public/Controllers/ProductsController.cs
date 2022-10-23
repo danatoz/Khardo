@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using BL;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.Logging;
 using UI.Models.ViewModels;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -25,7 +28,9 @@ namespace UI.Areas.Public.Controllers
 		{
 			if (string.IsNullOrEmpty(query)) return NotFound();
 
-			var productTemplate = await new ProductTemplateBL().GetAsync(item => item.Name.Contains(query) || item.VendorCode.Contains(query) || item.NormalizedVendorCode.Contains(query), includes: item => item.Manufacturer);
+			var productTemplate = await new ProductTemplateBL().GetAsync(
+				filter: item => item.Name.Contains(query) || item.VendorCode.Contains(query) || item.NormalizedVendorCode.Contains(query),
+				pt => pt.Manufacturer, pt => pt.Photos);
 
 			var productModel = await new ProductBL().GetAsync(item =>
 				item.ProductTemplateId == productTemplate.FirstOrDefault().Id);

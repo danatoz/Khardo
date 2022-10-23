@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.MsSqlServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221023092259_initial")]
+    [Migration("20221023140653_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -233,6 +233,9 @@ namespace DAL.MsSqlServer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Default")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("ProductTemplateId")
                         .HasColumnType("uniqueidentifier");

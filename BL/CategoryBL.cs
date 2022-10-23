@@ -39,6 +39,11 @@ namespace BL
 			return await new CategoryDal().GetAsync(predicate);
 		}
 
+		public async Task<List<Category>> GetAsync(Expression<Func<Category, bool>> filter = null, params Expression<Func<Category, object>>[] includes)
+		{
+			return await new CategoryDal().GetAsync(filter, includes);
+		}
+
 		public async Task<List<Category>> GetAsync(Expression<Func<Category, bool>> filter = null, Func<IQueryable<Category>, IOrderedQueryable<Category>> orderBy = null, params Expression<Func<Category, object>>[] includes)
 		{
 			return await new CategoryDal().GetAsync(filter, orderBy, includes);
