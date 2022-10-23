@@ -31,7 +31,7 @@ $('#search_product-text').typeahead(
         source: engine,
         display: function (item) {
             console.log(item);
-            return `${item.vendorCode} ${item.name}`;
+            return `${item.vendorCode}`;
         },
         limit: 5,
         templates: {

@@ -1,23 +1,31 @@
 ﻿@model IEnumerable<BreadCrumbModel>
 @if (Model.Any())
 {
-    <section class="broad">
-        <div class="broad__container container">
-            <div class="broad__block">
-                <a class="broad__block-text broad__block-last" asp-area="Public" asp-action="Index" asp-controller="Home">Главная</a>
-                @foreach (var item in Model)
-                {
-                    if (item.IsActive)
-                    {
-                        <span class="broad__block-text broad__block-active">@item.Name</span>
-                    }
-                    else
-                    {
-                        <a class="broad__block-text broad__block-last" href="@Url.Content($"~/{item.Url}") ">@item.Name</a>
-                    }
-
-                }
-            </div>
-        </div>
-    </section>
+    <ul class="path" >
+        <li >
+            <a asp-area="Public" asp-action="Index" asp-controller="Home" title="Главная">
+                <span>Главная</span>
+                <meta content="0">
+            </a> /
+        </li>
+        @foreach (var item in Model)
+        {
+            if (item.IsActive)
+            {
+                <li itemprop="itemListElement" itemscope="itemscope">
+                    <span itemprop="name">@item.Name</span>
+                    <meta itemprop="position" content="3">
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="@Url.Content($"~/{item.Url}")" title="@item.Name">
+                        <span>@item.Name</span>
+                        <meta content="2">
+                    </a> /
+                </li>
+            }
+        }
+    </ul>
 }

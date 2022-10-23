@@ -1,6 +1,4 @@
 ﻿using Entities.Base;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
@@ -19,6 +17,8 @@ namespace Entities
 		public string Description { get; set; }
 
 		public int ManufacturerType { get; set; }
+
+		public string Alias { get; set; }
 
 		public bool Active { get; set; }
 

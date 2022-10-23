@@ -12,17 +12,16 @@ namespace UI.Areas.Public.Components
 {
 	public class BreadCrumbs : ViewComponent
 	{
-		//private readonly IBreadCrumbDataProvider _dataProvider;
+		private readonly IBreadCrumbDataProvider _dataProvider;
 
 		public BreadCrumbs(IBreadCrumbDataProvider dataProvider)
 		{
-			//_dataProvider = dataProvider;
+			_dataProvider = dataProvider;
 		}
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			//return View(await _dataProvider.GetDataAsync(ViewContext.ViewBag.Title));
-			return View();
+			return View(await _dataProvider.GetDataAsync(ViewContext.ViewBag.Title));
 		}
     }
 }

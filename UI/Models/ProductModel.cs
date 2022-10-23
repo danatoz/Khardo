@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Entities;
 using Common.Enums;
 using AutoMapper;
+using Entities.Base;
 
 namespace UI.Models
 {
-    public class ProductModel
+    public class ProductModel : Entity
     {
-	    public long Id { get; set; }
+	    public Guid ProductTemplateId { get; set; }
 
-	    public string VendorCode { get; set; }
-
-	    public int VendorId { get; set; }
+	    public Guid PriceId { get; set; }
 
 	    public string Alias { get; set; }
 
@@ -22,11 +23,7 @@ namespace UI.Models
 
 	    public bool Active { get; set; }
 
-	    public ProductTemplateModel ProductTemplate { get; set; }
-
-	    public UserModel Vendor { get; set; }
-
-		public static Product ConvertToDal(ProductModel obj)
+	    public static Product ConvertToDal(ProductModel obj)
 		{
 			var config = new MapperConfiguration(cfg => 
 				cfg.CreateMap<ProductModel, Product>());

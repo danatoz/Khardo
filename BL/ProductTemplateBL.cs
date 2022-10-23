@@ -11,6 +11,13 @@ namespace BL
 {
 	public class ProductTemplateBL
 	{
+		public async Task<IEnumerable<ProductTemplate>> GetSimpleByAliasAsync(string alias)
+		{
+			return await new ProductTemplateBL().GetAsync(item =>
+					item.Alias == alias &&
+					item.Category != null, includes: item => item.Category);
+		}
+
 		public async Task<Guid> AddOrUpdateAsync(ProductTemplate entity)
 		{
 			entity.Id = await new ProductTemplateDal().AddOrUpdateAsync(entity);

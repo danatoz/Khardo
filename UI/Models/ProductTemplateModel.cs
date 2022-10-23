@@ -27,25 +27,23 @@ namespace UI.Models
 
 		public bool Active { get; set; }
 
-		[ForeignKey("ManufacturerId")]
-		public Manufacturer Manufacturer { get; set; }
+		public string ManufacturerName { get; set; }
 
-		[ForeignKey("CategoryId")]
-		public Category Category { get; set; }
+		public CategoryModel Category { get; set; }
 
-		public List<ProductPhoto> Photos { get; set; }
+		public List<ProductPhotoModel> Photos { get; set; }
 
 
 		public static ProductTemplate ConvertToEntity(ProductTemplateModel obj)
 		{
 			var config = new MapperConfiguration(cfg =>
 				cfg.CreateMap<ProductTemplateModel, ProductTemplate>()
-					.ForSourceMember(source => source.Manufacturer, 
-						opt => opt.DoNotValidate())
 					.ForSourceMember(source => source.Category,
 						opt => opt.DoNotValidate())
 					.ForSourceMember(source => source.Photos,
-						opt => opt.DoNotValidate()));
+						opt => opt.DoNotValidate())
+					.ForMember(src => src.Manufacturer, cfg => 
+						cfg.MapFrom(opt => opt.ManufacturerName)));
 			var mapper = new Mapper(config);
 			return mapper.Map<ProductTemplateModel, ProductTemplate>(obj);
 		}

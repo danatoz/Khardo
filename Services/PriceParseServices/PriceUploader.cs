@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 using Common.Enums;
 using DAL;
 using Entities;
@@ -45,6 +46,7 @@ namespace PriceParseServices
 						VendorCode = priceModel.VendorCode,
 						NormalizedVendorCode = priceModel.NormalizedVendorCode,
 						Name = priceModel.Name,
+						Alias = priceModel.Name.Translit()
 					};
 					if (manufacturer.Id == Guid.Empty)
 					{

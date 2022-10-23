@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace Tools
+namespace Common
 {
 	public static class Transliteration
 	{
@@ -148,7 +145,7 @@ namespace Tools
 			};
 		}
 
-		public static string Translit(string text, string missingCharactersReplacer = "")
+		public static string Translit(this string text, string missingCharactersReplacer = "")
 		{
 			if (text == null)
 				return string.Empty;

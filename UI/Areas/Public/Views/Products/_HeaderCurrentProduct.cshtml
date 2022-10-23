@@ -1,6 +1,8 @@
-﻿
+﻿@model ProductTemplateModel
 @{
-
+    var productPhotoUrl = Model.Photos?.FirstOrDefault()?.UrlImage != null ? 
+        Model.Photos?.FirstOrDefault()?.UrlImage : 
+        Url.Content("~/images/serviceImages/No_image_available.svg");
 }
 <div class="b-nep-prodch-container v2-search-container">
 
@@ -12,9 +14,9 @@
 
                     <div class="b-tb">
                         <div class="b-td">
-                            <a class="lightbox fancybox" rel="pgallery" title="Наименование товара"
+                            <a class="lightbox fancybox" rel="pgallery" title="@Model.Name"
                                href="#">
-                                <img src="~/images/serviceImages/No_image_available.svg"
+                                <img src="@productPhotoUrl"
                                      width="235" height="235" alt="">
                             </a>
                         </div>

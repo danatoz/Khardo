@@ -10,8 +10,6 @@ namespace Entities
 
 		public Guid PriceId { get; set; }
 
-		public string Alias { get; set; }
-
 		public int Amount { get; set; }
 
 		[Column(TypeName = "money")]

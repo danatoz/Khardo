@@ -10,25 +10,10 @@ namespace BL
 {
     public class ProductBL
     {
-	    private readonly AppDbContext _context;
-	    public ProductBL(AppDbContext context)
-	    {
-		    _context = context;
-	    }
-
 	    public ProductBL()
 	    {
 		    
 	    }
-	    //public async Task<IEnumerable<Product>> GetSimpleByAliasAsync(string alias)
-	    //{
-		   // //return await _context.Products.Where(item => item.Alias == alias && item.Catalog != null).ToListAsync();
-	    //}
-
-	    //public async Task GetAsync(string alias)
-	    //{
-
-	    //}
 
 	    public async Task<Guid> AddOrUpdateAsync(Product entity)
 	    {

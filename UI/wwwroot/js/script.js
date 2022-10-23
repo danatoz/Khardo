@@ -10,14 +10,14 @@ $(document).ready((function () {
 				 }))
 		 }
 	}
-	$(".b-ths-search").each((
-			function(t) {
-				t.stopPropagation,
-					$(this).is(":visible") ? ($(this).attr("id", "oem_search"),
-					$(this).find(".b-input-search").attr("id", "oem"),
-					$(this).find(".b-input-search").attr("name", "oem")) : ($(this).attr("id", ""), $(this).find(".b-input-search").attr("id", ""),
-						$(this).find(".b-input-search").attr("name", ""))
-		})),
+	//$(".b-ths-search").each((
+	//		function(t) {
+	//			t.stopPropagation,
+	//				$(this).is(":visible") ? ($(this).attr("id", "oem_search"),
+	//				$(this).find(".b-input-search").attr("id", "oem"),
+	//				$(this).find(".b-input-search").attr("name", "oem")) : ($(this).attr("id", ""), $(this).find(".b-input-search").attr("id", ""),
+	//					$(this).find(".b-input-search").attr("name", ""))
+	//	})),
 		$(".search-history").on("click", (function() {
 				 $(".search-history-popup").addClass("show")
 			})), $(".tpl23-header-mobile-menu").on("click", (function() {
@@ -93,11 +93,11 @@ $(document).ready((function () {
 			arrows: !0,
 			nextArrow: '<div class="slick-next slick-arrow"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="50" rx="25" fill="white"/><path d="M24 30L27.8462 25L24 20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>', prevArrow: '<div class="slick-prev slick-arrow"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="50" rx="25" fill="white"/><path d="M27 20L23.1538 25L27 30" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>', responsive: [{ breakpoint: 1920, settings: { slidesToShow: 6 } }, { breakpoint: 1199, settings: { slidesToShow: 4 } }, { breakpoint: 767, settings: { slidesToShow: 3 } }, { breakpoint: 576, settings: { slidesToShow: 2 } }]
 		}), t(), $(window).on("resize", (function () {
-			$(".b-ths-search").each((function (t) {
-				t.stopPropagation, $(this).is(":visible") ? ($(this).attr("id", "oem_search"),
-					$(this).find(".b-input-search").attr("id", "oem"),
-					$(this).find(".b-input-search").attr("name", "oem")) : ($(this).attr("id", ""), $(this).find(".b-input-search").attr("id", ""), $(this).find(".b-input-search").attr("name", ""))
-			})),
+			//$(".b-ths-search").each((function (t) {
+			//	t.stopPropagation, $(this).is(":visible") ? ($(this).attr("id", "oem_search"),
+			//		$(this).find(".b-input-search").attr("id", "oem"),
+			//		$(this).find(".b-input-search").attr("name", "oem")) : ($(this).attr("id", ""), $(this).find(".b-input-search").attr("id", ""), $(this).find(".b-input-search").attr("name", ""))
+			//})),
 				$("[data-tpl23-cat-block]").removeClass("active"),
 				$("[data-tpl23-cat-name]").removeClass("active"),
 				$(".tpl23-catalog-dropdown").removeClass("show-catalog"),

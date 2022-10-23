@@ -172,10 +172,10 @@
                         <div class="b-col-search">
                             <div class="b-ths-search tpl23-b-search">
 
-                                <form asp-antiforgery="true" asp-area="Public" asp-controller="Home" asp-action="Find"
-                                      class="b-ths-search-ins">
+                                <form asp-area="Public" asp-controller="Products" asp-action="Details"
+                                      class="b-ths-search-ins" method="get">
                                     <div class="b-ths-search-wrap">
-                                        <input type="text" class="b-input-search" name="query" id="search_product-text" name="search"
+                                        <input type="text" class="b-input-search" name="query" id="search_product-text"
                                                placeholder="Введите номер детали, название или VIN" autocomplete="off">
                                     </div>
                                     <button class="b-btn-search"></button>

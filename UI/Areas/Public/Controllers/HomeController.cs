@@ -57,7 +57,7 @@ namespace UI.Areas.Public.Controllers
 					item.VendorCode,
 					item.Name,
 					item.Active
-				}).Take(5));
+				}));
 		}
 
 		public async Task<IActionResult> TypeaheadPrefetch()

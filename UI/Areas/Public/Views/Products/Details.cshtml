@@ -1,44 +1,18 @@
-﻿
+﻿@model ProductViewModel
 @{
-
+    ViewBag.Title = Model.ProductTemplateModel.Name;
 }
 <div class="content clearfix">
 
     <div class="tpl23-container">
 
-        <!--TODO Bread crumbs-->
-        <ul class="path" >
-            <li >
-                <a href="#" title="Главная">
-                    <span>Главная</span>
-                    <meta content="0">
-                </a> /
-            </li>
-            <li>
-                <a href="#"
-                   title="Бренды">
-                    <span itemprop="name">Бренды</span>
-                    <meta itemprop="position" content="1">
-                </a> /
-            </li>
-            <li>
-                <a href="#" title="Aywiparts">
-                    <span>Наименование бренда</span>
-                    <meta content="2">
-                </a> /
-            </li>
-            <li itemprop="itemListElement" itemscope="itemscope">
-                <span itemprop="name">Наименование товара</span>
-                <meta itemprop="position" content="3">
-            </li>
-        </ul>
-        <!--******************************-->
+        @*<vc:bread-crumbs></vc:bread-crumbs>*@
 
-        <h1 class="main-title">Наименование товара</h1>
+        <h1 class="main-title">@Model.ProductTemplateModel.Name</h1>
         <div class="clearfix">
             <div class="v2-search-make-names" id="v2-search-make-names"></div>
 
-            <partial name="_HeaderCurrentProduct" />
+            <partial name="_HeaderCurrentProduct" model="@Model.ProductTemplateModel" />
 
             <partial name="_ProductBestOffers" />
 
@@ -49,58 +23,60 @@
                 <div class="b-nep-tbres price-data-content v2-search-container">
                     <table class="cost-asc-v2 image-with-group " role="price-data-content-result-table">
                         <tbody>
-                            <tr class="b-nep-tr-mobemp">
-                                <th style="padding: 0"></th>
-                                <th class="b-nep-msth-1">
-                                    <ul class="b-nep-tbres-list-views">
-                                        <li class="active">
-                                            <a class="b-nep-tbres-view-v1" href=""
-                                               role="search_mode_btn" data-search-mode="with"></a>
-                                        </li>
-                                        <li>
-                                            <a class="b-nep-tbres-view-v2" href="" role="search_mode_btn"
-                                               data-search-mode="without"></a>
-                                        </li>
-                                    </ul>
-                                </th>
-                                <th class="b-nep-msth-2" colspan="3">Деталь</th>
-                                <th class="b-nep-msth-3">Склад</th>
-                                <th class="b-nep-msth-4">Стат.</th>
-                                <th class="b-nep-msth-4-1"> </th>
-                                <th class="b-nep-msth-5 sortable-v2 sort-qnt-v2" data-sortable="qnt">
-                                    <a class="b-nep-link-sort" href="">Кол.</a>
-                                </th>
-                                <th class="b-nep-msth-6 sortable-v2 sort-min_delivery_day-v2"
-                                    data-sortable="min_delivery_day">
-                                    <a class="b-nep-link-sort" href="">Доставка</a>
-                                </th>
-                                <th class="b-nep-msth-7 sortable-v2 sort-cost-v2" data-sortable="cost">
-                                    <a class="b-nep-link-sort" href="">Цена</a>
-                                </th>
-                                <th class="b-nep-msth-8"></th>
-                            </tr>
+                        <tr class="b-nep-tr-mobemp">
+                            <th style="padding: 0"></th>
+                            <th class="b-nep-msth-1">
+                                <ul class="b-nep-tbres-list-views">
+                                    <li class="active">
+                                        <a class="b-nep-tbres-view-v1" href=""
+                                           role="search_mode_btn" data-search-mode="with"></a>
+                                    </li>
+                                    <li>
+                                        <a class="b-nep-tbres-view-v2" href="" role="search_mode_btn"
+                                           data-search-mode="without"></a>
+                                    </li>
+                                </ul>
+                            </th>
+                            <th class="b-nep-msth-2" colspan="3">Деталь</th>
+                            <th class="b-nep-msth-3">Склад</th>
+                            <th class="b-nep-msth-4">Стат.</th>
+                            <th class="b-nep-msth-4-1"> </th>
+                            <th class="b-nep-msth-5 sortable-v2 sort-qnt-v2" data-sortable="qnt">
+                                <a class="b-nep-link-sort" href="">Кол.</a>
+                            </th>
+                            <th class="b-nep-msth-6 sortable-v2 sort-min_delivery_day-v2"
+                                data-sortable="min_delivery_day">
+                                <a class="b-nep-link-sort" href="">Доставка</a>
+                            </th>
+                            <th class="b-nep-msth-7 sortable-v2 sort-cost-v2" data-sortable="cost">
+                                <a class="b-nep-link-sort" href="">Цена</a>
+                            </th>
+                            <th class="b-nep-msth-8"></th>
+                        </tr>
 
-                            <tr class="b-nep-tr-mobemp">
-                                <td class="b-nep-tbres-td-full" colspan="12">
-                                    <div class="b-nep-tbres-tr-head">
-                                        Искомый номер <span class="search-group-comment">
-                                        </span>
-                                    </div>
-                                </td>
+                        <tr class="b-nep-tr-mobemp">
+                            <td class="b-nep-tbres-td-full" colspan="12">
+                                <div class="b-nep-tbres-tr-head">
+                                    Искомый номер <span class="search-group-comment">
+                                    </span>
+                                </div>
+                            </td>
 
-                            </tr>
-                            <partial name="_CurrentProductLine" />
+                        </tr>
 
-                            <tr class="b-nep-tr-mobemp">
-                                <td class="b-nep-tbres-td-full" colspan="12">
-                                    <div class="b-nep-tbres-tr-head">
-                                        Аналоги <span class="search-group-comment">
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
+                        <partial name="_CurrentProductLine" model="Model"/>
+                        
 
-                            <partial name="_AnalogueProduct" />
+                        <tr class="b-nep-tr-mobemp">
+                            <td class="b-nep-tbres-td-full" colspan="12">
+                                <div class="b-nep-tbres-tr-head">
+                                    Аналоги <span class="search-group-comment">
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <partial name="_AnalogueProduct" />
 
                         </tbody>
                     </table>
@@ -112,3 +88,8 @@
     </div>
 
 </div>
+
+@section Scripts
+{
+    
+}

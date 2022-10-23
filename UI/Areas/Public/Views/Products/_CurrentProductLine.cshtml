@@ -1,8 +1,10 @@
-﻿@model ProductModel
+﻿@model ProductViewModel
 @{
 
 }
-<tr class=" b-nep-tbres-tr-original " id="ключ"
+@foreach (var product in Model.ProductModels)
+{
+    <tr class=" b-nep-tbres-tr-original " id="@product.Id"
     data-price-add-break-line="false" data-parent-group-guid="" style="">
     <td style="padding: 0"></td>
     <td class="b-nep-mstd-1-w2" style="background-color: white; " data-not-selectable="">
@@ -18,28 +20,29 @@
                    role="goods-info-fancybox-link"></a>
             </li>
             <li>
-                <a href="#"
+                    <a href="https://www.google.ru/search?q=@Model.ProductTemplateModel.VendorCode @Model.ProductTemplateModel.ManufacturerName&tbm=isch"
                    class="b-nep-mstd-link-g" target="_blank"></a>
             </li>
         </ul>
     </td>
-    <td class="b-nep-mstd-3" style="" data-make-name="производитель товара">
+        <td class="b-nep-mstd-3" style="" data-make-name="@Model.ProductTemplateModel.ManufacturerName">
         <div class="b-nep-mstd-nmcontainer">
             <div class="b-nep-mstd-pname-wrapper">
                 <a class="b-nep-mstd-pname c-minfo-link-v2" href="#c-minfo"
                    data-href="make_name_description" style="">
-                    производитель товара
+                    @Model.ProductTemplateModel.ManufacturerName
                 </a>
-            </div> <a href="/products/AYWIPARTS/AW1510739.html"
-                      target="_blank" class="b-nep-mstd-oem" style="">код товара</a>
+            </div>
+            <a asp-action="Details" asp-area="Public" asp-controller="Products" asp-route-query="@Model.ProductTemplateModel.VendorCode"
+                      target="_blank" class="b-nep-mstd-oem" style="">@Model.ProductTemplateModel.VendorCode</a>
         </div>
-        <div class="b-nep-mstd-sdescript search-detail-name-crop" title="ШРУС" style="">
-            ШРУС
+        <div class="b-nep-mstd-sdescript search-detail-name-crop" title="@Model.ProductTemplateModel.Name" style="">
+                @Model.ProductTemplateModel.Name
         </div>
     </td>
     <td class="b-nep-mstd-4">
-        <div class="b-nep-mstd-sdescript search-detail-name-crop" title="ШРУС" style="">
-            ШРУС
+            <div class="b-nep-mstd-sdescript search-detail-name-crop" title="@Model.ProductTemplateModel.Name" style="">
+                @Model.ProductTemplateModel.Name
         </div>
     </td>
     <td class="b-nep-mstd-5" style="">
@@ -50,7 +53,7 @@
                    role="goods-info-fancybox-link"></a>
             </li>
             <li>
-                <a href="#"
+                    <a href="https://www.google.ru/search?q=@Model.ProductTemplateModel.VendorCode @Model.ProductTemplateModel.ManufacturerName&tbm=isch"
                    class="b-nep-mstd-link-g" target="_blank"></a>
             </li>
             <!--<li><a class="b-nep-mstd-link-note" href=""></a></li>-->
@@ -76,7 +79,7 @@
     <td class="b-nep-mstd-weight" style=""></td>
     <td class="b-nep-mstd-8" style="">
         <div class="b-nep-mstd-mob-th">Кол.</div>
-        <div class="b-nep-mstd-amount" style=""> 2 </div>
+        <div class="b-nep-mstd-amount" style=""> @product.Amount </div>
     </td>
     <td class="b-nep-mstd-9" style="">
         <div class="b-nep-mstd-mob-th">Доставка</div>
@@ -86,7 +89,7 @@
         <div class="b-nep-mstd-mob-th">Цена</div>
         <div class="b-nep-mstd-price">
             <span class="sale-price-content" style="">
-                цена товара
+                @product.Price.ToString("N")
                 <i>р.</i>
             </span>
         </div>
@@ -97,3 +100,4 @@
            rel="#basket-form-dialog-v2" title="">В корзину</a>
     </td>
 </tr>
+}

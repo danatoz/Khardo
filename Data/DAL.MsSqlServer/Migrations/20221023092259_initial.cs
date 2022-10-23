@@ -79,7 +79,6 @@ namespace DAL.MsSqlServer.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductTemplateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PriceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Alias = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Amount = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "money", nullable: false),
                     Active = table.Column<bool>(type: "bit", nullable: false)
@@ -326,6 +325,7 @@ namespace DAL.MsSqlServer.Migrations
                     ManufacturerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ManufacturerType = table.Column<int>(type: "int", nullable: false),
+                    Alias = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Active = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
