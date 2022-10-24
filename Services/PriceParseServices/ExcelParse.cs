@@ -1,4 +1,6 @@
-﻿namespace PriceParseServices
+﻿using Common;
+
+namespace PriceParseServices
 {
 	public class ExcelParse
 	{
@@ -39,7 +41,7 @@
 					var priceModel = new PriceModel
 					{
 						VendorCode = vendorCode,
-						NormalizedVendorCode = vendorCode.Replace("-", string.Empty),
+						NormalizedVendorCode = vendorCode.CleanVendorCode(),
 						Name = name,
 						Manufacturer = manufacturer,
 						Amount = safeAmount,

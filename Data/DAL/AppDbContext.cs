@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DAL
 {
-	public partial class AppDbContext : IdentityDbContext<User, IdentityRole, string>
+	public class AppDbContext : IdentityDbContext<User, IdentityRole, string>
 	{
 		public AppDbContext(DbContextOptions<AppDbContext> options)
 			: base(options)

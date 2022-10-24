@@ -1,7 +1,9 @@
 ﻿using Entities.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace Entities
 {
+	[Index(nameof(NormalizedVendorCode), nameof(Name))]
 	public class ProductTemplate : Entity
 	{
 		public string VendorCode { get; set; }

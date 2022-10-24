@@ -319,8 +319,8 @@ namespace DAL.MsSqlServer.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     VendorCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedVendorCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedVendorCode = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ManufacturerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -433,6 +433,11 @@ namespace DAL.MsSqlServer.Migrations
                 name: "IX_ProductTemplates_ManufacturerId",
                 table: "ProductTemplates",
                 column: "ManufacturerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductTemplates_NormalizedVendorCode_Name",
+                table: "ProductTemplates",
+                columns: new[] { "NormalizedVendorCode", "Name" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",

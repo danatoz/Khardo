@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using BL;
+using Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.InMemory.Query.Internal;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -29,7 +30,7 @@ namespace UI.Areas.Public.Controllers
 			if (string.IsNullOrEmpty(query)) return NotFound();
 
 			var productTemplate = await new ProductTemplateBL().GetAsync(
-				filter: item => item.Name.Contains(query) || item.VendorCode.Contains(query) || item.NormalizedVendorCode.Contains(query),
+				filter: item => item.NormalizedVendorCode.Contains(query.CleanVendorCode()) || item.Name.Contains(query),
 				pt => pt.Manufacturer, pt => pt.Photos);
 
 			var productModel = await new ProductBL().GetAsync(item =>

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.MsSqlServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221023140653_initial")]
+    [Migration("20221023192614_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -275,10 +275,10 @@ namespace DAL.MsSqlServer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("NormalizedVendorCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("VendorCode")
                         .HasColumnType("nvarchar(max)");
@@ -288,6 +288,8 @@ namespace DAL.MsSqlServer.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("ManufacturerId");
+
+                    b.HasIndex("NormalizedVendorCode", "Name");
 
                     b.ToTable("ProductTemplates");
                 });

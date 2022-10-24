@@ -2,11 +2,12 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using Troschuetz.Random.Generators;
 
 namespace Common
 {
-	public class Helpers
+	public static class Helpers
 	{
 		private static readonly AbstractGenerator RandomGenerator = new StandardGenerator();
 
@@ -35,6 +36,14 @@ namespace Common
 			using var hashAlgorithm = SHA512.Create();
 			var hash = hashAlgorithm.ComputeHash(Encoding.Unicode.GetBytes(s));
 			return string.Concat(hash.Select(item => item.ToString("x2")));
+		}
+
+		public static string CleanVendorCode(this string input)
+		{
+			var regex = new Regex(@"[\(\s!@\#\$%\^&\*\(\)_\+=\-'\\:\|/`~\.,\{}\)]+",
+				RegexOptions.IgnoreCase);
+			var result = regex.Replace(input, "");
+			return result.ToUpper();
 		}
 	}
 }

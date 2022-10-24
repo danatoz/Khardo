@@ -273,10 +273,10 @@ namespace DAL.MsSqlServer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("NormalizedVendorCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("VendorCode")
                         .HasColumnType("nvarchar(max)");
@@ -286,6 +286,8 @@ namespace DAL.MsSqlServer.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("ManufacturerId");
+
+                    b.HasIndex("NormalizedVendorCode", "Name");
 
                     b.ToTable("ProductTemplates");
                 });

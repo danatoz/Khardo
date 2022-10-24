@@ -49,6 +49,10 @@ namespace DAL
 			{
 				throw;
 			}
+			finally
+			{
+				await this.DisposeContextAsync(data);
+			}
 		}
 
 		public virtual async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate)
@@ -61,6 +65,10 @@ namespace DAL
 			catch (Exception e)
 			{
 				throw;
+			}
+			finally
+			{
+				await this.DisposeContextAsync(data);
 			}
 		}
 
@@ -85,6 +93,10 @@ namespace DAL
 			{
 				throw;
 			}
+			finally
+			{
+				await this.DisposeContextAsync(data);
+			}
 		}
 
 		public virtual async Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includes)
@@ -104,6 +116,10 @@ namespace DAL
 			catch (Exception e)
 			{
 				throw;
+			}
+			finally
+			{
+				await this.DisposeContextAsync(data);
 			}
 		}
 

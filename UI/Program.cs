@@ -44,7 +44,7 @@ services.AddRazorPages();
 services.AddRouting(options => options.LowercaseUrls = true);
 services.AddTransient<DbInitializer>();
 services.AddScoped<IRabbitMqService, RabbitMqService>();
-services.AddTransient<IBreadCrumbDataProvider, BreadCrumbDataProvider>();
+//services.AddTransient<IBreadCrumbDataProvider, BreadCrumbDataProvider>();
 services.AddHttpContextAccessor();
 services.AddDatabaseDeveloperPageExceptionFilter();
 services.AddHostedService<RabbitMqListener>();
