@@ -60,7 +60,13 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-	app.UseExceptionHandler("/Home/Error");
+	app.UseExceptionHandler(applicationBuilder =>
+	{
+		applicationBuilder.Run(async context =>
+		{
+			context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+		});
+	});
 	app.UseHsts();
 }
 app.UseHttpsRedirection();

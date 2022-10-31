@@ -20,12 +20,10 @@ namespace UI.Areas.Public.Controllers
 	public class NewsController : BaseController
     {
 		private readonly ILogger<NewsController> _logger;
-		private readonly AppDbContext _context;
 
-		public NewsController(ILogger<NewsController> logger, AppDbContext context)
+		public NewsController(ILogger<NewsController> logger)
 		{
 			_logger = logger;
-			_context = context;
 		}
 
 		public async Task<IActionResult> Index(int page = 1)
