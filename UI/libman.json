@@ -7,6 +7,7 @@
       "destination": "wwwroot/lib/vue/",
       "files": [
         "vue.global.js",
+        "vue.global.min.js",
         "vue.runtime.global.min.js",
         "vue.runtime.global.prod.js"
       ]

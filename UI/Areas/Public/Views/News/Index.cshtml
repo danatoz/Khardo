@@ -2,8 +2,29 @@
 @{
 
 }
-
+<h1 class="main-title">Все новости</h1>
+<form class="form-inline">
+    <input type="text" class="form-control col-md-8" name="search[title_or_body_contains]" placeholder="Например: подбор запчастей по каталогу">
+  
+    <select class="form-control col-md-2" name="search[news_type_eq]">
+        <option value=""></option>
+      
+    </select>
+  
+    <button type="submit" class="btn btn-primary col-md-2">Найти</button>
+</form>
 @foreach (var item in Model.Objects)
 {
-
+    <article class="text col-xs-12 news-text">
+        <h2>
+            @item.Title
+            <br>
+            <small>@item.PublicationDate</small>
+        </h2>
+        <p>
+            @item.Content
+        </p>
+    
+        <a asp-controller="News" asp-action="Details" asp-area="Public" asp-route-id="@item.Id" class="btn btn-light">Читать далее...</a>
+    </article>
 }

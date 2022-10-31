@@ -1,83 +1,28 @@
 ﻿<div class="tpl23-news">
-	<div class="tpl23-container">
+    <div class="tpl23-container">
 
+        <div class="tpl23-box-title-link">
+            <h2 class="tpl23-box-title">Новости и акции</h2>
+            <a asp-controller="News" asp-action="Index" asp-area="Public">Смотреть все</a>
+        </div>
 
-		<div class="tpl23-box-title-link">
-			<h2 class="tpl23-box-title">Новости и акции</h2>
-			<a href="/news.html">Смотреть все</a>
-		</div>
+        <div class="tpl23-news-wrapper" id="app">
+            <div class="row" >
 
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3" v-for="item in news" v-bind:key="item.id">
+                    <div class="tpl23-news-item">
+                        <div class="tpl23-news-date">{{item.publicationDate}}</div>
+                        <div class="tpl23-news-title">{{item.title}}</div>
+                        <div class="tpl23-news-content">
+                            {{item.content}}
+                        </div>
+                        <a class="tpl23-news-more" v-bind:href="'news/details/' + item.id">Подробнее</a>
+                    </div>
+                </div>
 
-		<div class="tpl23-news-wrapper">
-			<div class="row">
+            </div>
+        </div>
 
-				<div class="col-12 col-sm-6 col-md-6 col-lg-3">
-					<div class="tpl23-news-item">
-						<div class="tpl23-news-date">2020-07-14</div>
-						<div class="tpl23-news-title">Новые поступления</div>
-						<div class="tpl23-news-content">
-							Новые поступления на наш склад.
-							В ассортименте продукция MAHLE, ATE, MINTEX, BOSCH. Ждем ваших
-							покупок!
-						</div>
-						<a class="tpl23-news-more" href="/news/novye-postupleniya.html">Подробнее</a>
-					</div>
-				</div>
-
-				<div class="col-12 col-sm-6 col-md-6 col-lg-3">
-					<div class="tpl23-news-item">
-						<div class="tpl23-news-date">2020-07-14</div>
-						<div class="tpl23-news-title">
-							Volkswagen Crafter назвали лучшим
-							фургоном 2017 года
-						</div>
-						<div class="tpl23-news-content">
-							На проходящей в Ганновере
-							выставке коммерческого транспорта IAA-2016 объявили победителя
-							международного конкурса «Фургон года 2017».
-						</div>
-						<a class="tpl23-news-more"
-						   href="/news/volkswagen-crafter-nazvali-luchshim-furgonom-2017-goda.html">Подробнее</a>
-					</div>
-				</div>
-
-				<div class="col-12 col-sm-6 col-md-6 col-lg-3">
-					<div class="tpl23-news-item">
-						<div class="tpl23-news-date">2020-07-14</div>
-						<div class="tpl23-news-title">
-							Hella представила новые ксеноновые
-							лампы
-						</div>
-						<div class="tpl23-news-content">
-							Ксеноновые лампы Hella D1S
-							позволяют лучше освещать дорогу и вместе с этим – экономить
-							электроэнергию
-						</div>
-						<a class="tpl23-news-more"
-						   href="/news/hella-predstavila-novye-ksenonovye-lampy.html">Подробнее</a>
-					</div>
-				</div>
-
-				<div class="col-12 col-sm-6 col-md-6 col-lg-3">
-					<div class="tpl23-news-item">
-						<div class="tpl23-news-date">2020-07-14</div>
-						<div class="tpl23-news-title">
-							Рестайлинг дошёл и до универсала
-							Skoda Superb Outdoor
-						</div>
-						<div class="tpl23-news-content">
-							<p>
-								Рестайлинг дошёл и до
-								универсала Skoda Superb Outdoor
-							</p>
-						</div>
-						<a class="tpl23-news-more"
-						   href="/news/restailing-doshyol-i-do-universala-skoda-superb-outdoor.html">Подробнее</a>
-					</div>
-				</div>
-
-			</div>
-		</div>
-
-	</div>
+    </div>
 </div>
+

@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Интернет магазин авто запчастей - ";
 }
-<div class="content clearfix border-dark">
+@*<div class="content clearfix border-dark">
     <partial name="Partials/_Carousel" />
 
     <partial name="Partials/_SearchVin" />
@@ -10,6 +10,42 @@
 </div>
 <partial name="Partials/_PopularCategories" />
 
-<partial name="Partials/_SpecialOffers" />
+<partial name="Partials/_SpecialOffers" />*@
 
 <partial name="Partials/_NewsAndPromotions" />
+
+
+@section Scripts
+{
+    <script>
+
+        var url = '@Url.Action("GetLastNews", "News", new { Area = "Public" }, Context.Request.Scheme)';
+        async function request() {
+            var data = {};
+            await fetch(url)
+                .then((response) => response.json())
+                .then((result) => {
+                    data = result;
+                })
+            return data;
+        }
+        async function getNews(data) {
+            const ViewModel = {
+                data() {
+                    data.news = data.news || [];
+                    console.log(data);
+                    return data;
+                },
+                methods: {
+
+                }
+            }
+            Vue.createApp(ViewModel).mount("#app");        
+        }
+        (async () => {
+            var data = await request();
+            await getNews(data);
+        })();
+    
+    </script>
+}

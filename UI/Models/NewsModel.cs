@@ -15,7 +15,7 @@ namespace UI.Models
 		public string Url { get; set; }
 		public string Content { get; set; }
 		public DateTime CreationDate { get; set; }
-
+		public string PublicationDate => CreationDate.ToString("dd-MM-yyyy");
 		public static News ConvertToDal(NewsModel obj)
 		{
 			var config = new MapperConfiguration(cfg =>
